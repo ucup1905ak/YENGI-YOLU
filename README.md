@@ -1,12 +1,11 @@
 # YENGI-YOLU
+---
+Halo, ini Yengi Yolu. Dalam bahasa Turki, 'Yengi Yolu' berarti 'Jalan Kemenangan'. Semangat ya, kita pasti bisa. Ini bukan tentang hadiahnya, tetapi tentang prosesnya. Kita usahakan yang terbaik yak!!  
 
-
-
-Halo ini Farel. Ini cara pakenya tinggal di connect aja ya pakai codespace github.
-Atau bisa pakai Live Share nya Microsoft
-
--
--
+## Cara Pakai 
+- Connect aja pake github extention di VS Code nya.
+nanti Kita bakal main pake push dan pull request.
+- Atau bisa pakai Live Share nya Microsoft kalo lagi ngerjain bareng.
 
 
 # OUTLINE
