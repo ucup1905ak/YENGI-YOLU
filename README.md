@@ -15,3 +15,8 @@ kalo gak salah nanti materinya ada Array 2D.
 
 dan mungkin nanti harus pake struct kita.
 aman kah?
+
+
+
+# JANGAN PAKE CODESPACE!!
+Bayar ternyata T_T
