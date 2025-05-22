@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/workspaces/YENGI-YOLU",
-      "program": "/workspaces/YENGI-YOLU/build/Debug/outDebug",
+      "program": "/workspaces/YENGI-YOLU/build/Release/outRelease",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

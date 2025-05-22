@@ -1,6 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 
 int main(){
-    printf("pp");
+
+
+
     return 0;
 }
