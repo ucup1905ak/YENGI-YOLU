@@ -4,7 +4,8 @@
 typedef int **matrix; //define matrix
 typedef int *intArray; //harus di Calloc yak!!
 
-matrix createMatrix();
+
+matrix createMatrix(int row, int col);
 
 /* CONTOH AJA
 
