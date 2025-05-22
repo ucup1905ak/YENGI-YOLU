@@ -19,3 +19,8 @@ aman kah?
 
 # JANGAN PAKE CODESPACE!!
 Bayar ternyata T_T
+
+
+# Kalau mau pake makefile 
+1. Install mingw32-make
+2. tinggal di run 'mingw32-make'
