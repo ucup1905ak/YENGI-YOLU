@@ -7,6 +7,8 @@ int main(){
     bool authentication = false;
     int percobaan = 3;
     string username, password , captcha;
+
+    
     while(!authentication){
         system("cls");
         loginDisplay(&percobaan, &authentication, username, password);
@@ -44,7 +46,7 @@ int main(){
     }while(strcmp(captcha,inputString)!= 0);
 
 
-    
+
     return 0;
 }
 
