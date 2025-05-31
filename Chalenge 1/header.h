@@ -6,23 +6,19 @@
 typedef char string[100];
 
 
-char randomKapital();
-char randomKonsonan();
-char randomDigit();
-void appendChar(char* string, char c);
-void delay(int milisec);
 
-void generateCaptcha(string captcha);
-void settoBlueLogin(int percobaan, string username, string password);
-void generateCaptcha(string captcha);
-void delay(int milisec);
+//Utility
+void delay(int milisec); //utility Delay
+void flushKeyBoard();
+
+//Captha
+void generateCaptcha(string captcha); //Captcha
+
+//Menu & Login
 void menuDisplay(string username, int hari, int bulan, int tahun);
 void loginDisplay(bool *auth, char *username, char *password);
 void loadingDisplay();
-char randomKapital();
-char randomKonsonan();
-char randomDigit();
 
+//Input Tanggal
 void inputTanggal(int * hari, int * bulan, int *tahun);
 int stdDate(int hari,int bulan, int tahun);
-void flushKeyBoard();
