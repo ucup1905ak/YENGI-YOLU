@@ -62,7 +62,8 @@
     "stdlib.h": "c",
     "source.c": "c",
     "time.h": "c",
-    "inputtanggal.h": "c"
+    "inputtanggal.h": "c",
+    "string.h": "c"
   },
   "makefile.makefilePath": ""
 }
