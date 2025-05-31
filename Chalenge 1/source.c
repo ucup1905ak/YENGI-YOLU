@@ -180,7 +180,7 @@ void inputTanggal(int * hari, int * bulan, int * tahun){
     int temp;
     printf("\n\r\e[s");
     do{
-        printf("\e[u\e[0J");
+        printf("\e[u\e[0J\e[0m");
         printf("\nMasukkan hari [dd-mm-yyyy] :");
     
         temp = scanf("%d - %d - %d", hari,bulan,tahun);
