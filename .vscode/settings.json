@@ -64,7 +64,8 @@
     "time.h": "c",
     "inputtanggal.h": "c",
     "string.h": "c",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "conio.h": "c"
   },
   "makefile.makefilePath": ""
 }

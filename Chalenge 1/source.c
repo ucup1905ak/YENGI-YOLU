@@ -1,6 +1,6 @@
 #include "header.h"
 #include <time.h>
-
+#include <conio.h>
 char randomKapital(){
     return (char)(rand() % 26 +65);
 }
