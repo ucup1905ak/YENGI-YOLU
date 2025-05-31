@@ -80,7 +80,7 @@ void menuDisplay(string username, int hari, int bulan, int tahun){
     printf("\n\n[8] Cetak Nota (BONUS)");
     printf("\n>>> ");
 }
-/*
+
 
 void loginDisplay(int *percobaan, bool *auth, char *username, char *password){
     int temp = *percobaan;
