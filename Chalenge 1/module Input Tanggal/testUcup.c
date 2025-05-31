@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "header.h"
+#include "../header.h"
 #include "inputTanggal.h"
 #include <conio.h>
 int main(){

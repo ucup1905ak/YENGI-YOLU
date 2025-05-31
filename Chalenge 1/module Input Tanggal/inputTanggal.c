@@ -1,13 +1,8 @@
 #include "inputTanggal.h"
-#include "header.h"
 #include <conio.h>
 void clearLine(int i){
     if(i>0){
         for(;i>0;i--)printf("\e[2K\e[1A"); 
-        /*
-        \e[2K >> delete line
-        \e[1A >> Gerak 1 line ke atas
-        */
     }
 }
 
