@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/workspaces/YENGI-YOLU",
-      "program": "/workspaces/YENGI-YOLU/build/Release/outRelease",
+      "externalConsole": true,
+      "cwd": "c:/Users/alexa/Documents/FAREL/PNC/YENGI-YOLU/Chalenge 1",
+      "program": "c:/Users/alexa/Documents/FAREL/PNC/YENGI-YOLU/Chalenge 1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
