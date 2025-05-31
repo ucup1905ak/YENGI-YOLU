@@ -63,7 +63,8 @@
     "source.c": "c",
     "time.h": "c",
     "inputtanggal.h": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "stdbool.h": "c"
   },
   "makefile.makefilePath": ""
 }

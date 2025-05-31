@@ -1,5 +1,6 @@
-#include <stdio.h>
+
 #include "header.h"
+
 int main(){
     bool authentication = false;
     int percobaan = 3;
