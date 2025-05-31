@@ -67,10 +67,6 @@ void generateCaptcha(string captcha){
     }
 }
 
-
-
-
-
 void menuDisplay(string username, int hari, int bulan, int tahun){
     printf("/t/t--===[ CHALLENGE 1 PNC 2025 ]===--");
     printf("\nSelamat Datang, %s!", username);
