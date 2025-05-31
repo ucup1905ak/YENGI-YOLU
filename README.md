@@ -24,3 +24,6 @@ Bayar ternyata T_T
 # Kalau mau pake makefile 
 1. Install mingw32-make
 2. tinggal di run 'mingw32-make'
+
+# Refrensi
+https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#escape
