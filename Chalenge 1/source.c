@@ -176,17 +176,17 @@ int cekTanggal(int hari, int bulan, int tahun) {
       return 0;
     }
   if (bulan == 2 && tahun % 4 == 0 && hari > 29) {
-    printf("Bulan 2 pada tahun %d, hanya memiliki 29 hari", tahun);
+    printf("\n\t[!] Bulan 2 pada tahun %d, hanya memiliki 29 hari", tahun);
     return 0;
   }
   if (bulan == 2 && tahun % 4 != 0 && hari > 28) {
-    printf("Bulan 2 pada tahun %d, hanya memiliki 28 hari", tahun);
+    printf("\n\t[!] Bulan 2 pada tahun %d, hanya memiliki 28 hari", tahun);
     return 0;
   }
 
   if (stdDate(hari, bulan, tahun) <= 738932 &&
       stdDate(hari, bulan, tahun) >= 738910) {
-    printf("\n\t[!]Sedang libur antara tanggal 30 Mei - 21 Juni 2025 karena "
+    printf("\n\t[!] Sedang libur antara tanggal 30 Mei - 21 Juni 2025 karena "
            "sedang ada PNC 2025");
     return 0;
   }
