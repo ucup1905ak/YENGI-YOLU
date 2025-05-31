@@ -67,10 +67,6 @@ void generateCaptcha(string captcha){
     }
 }
 
-
-
-
-
 void menuDisplay(string username, int hari, int bulan, int tahun){
     printf("/t/t--===[ CHALLENGE 1 PNC 2025 ]===--");
     printf("\nSelamat Datang, %s!", username);
@@ -85,17 +81,34 @@ void menuDisplay(string username, int hari, int bulan, int tahun){
     printf("\n>>> ");
 }
 
-void loginDisplay(int *percobaan, bool *auth){
+void loginDisplay(int *percobaan, bool *auth, char *username, char *password){
     int temp = *percobaan;
-    string username, password;
+    string user, pass;
     printf("Sisa Percobaan : [%d]\n\n", temp);
-    printf("Username : ");fflush(stdin);gets(username);
-    printf("Password : ");fflush(stdin);gets(password);
-    if(confirmLogin(username, password)) *auth = true;
-    else{
-        printf("\n\t[!] Username atau Password Salah [!]");
-        *percobaan--;
+    printf("Username : ");fflush(stdin);gets(user);
+    printf("Password : ");fflush(stdin);gets(pass);
+    if(strcmp(user,"YengiYolu") == 0 && strcmp(pass,"YengiYoluPNC") == 0){
+        *auth = true;
+        strcpy(username, user);
+        strcpy(password, pass);
     }
+    
+    else{
+        printf("\n\t\033[1;31m[!] Username atau Password Salah [!]");
+        temp--;
+        *percobaan = temp;
+    }
+    if (temp <= 1){
+        printf("\n\tSalah 3x\n\nLOGIN GAGAL\n\nPress any key to continue . . .");
+        getch();
+        exit(0);
+    }
+}
+
+void settoBlueLogin(int percobaan, string username, string password){
+    printf("\033[1;34mSisa Percobaan : [%d]\n", percobaan);
+    printf("\033[1;34mUsername : %s\n", username);
+    printf("\033[1;34mPassword : %s\n", password);
 }
 
 
@@ -129,7 +142,7 @@ void loginDisplay(int *percobaan, bool *auth){
  [23] >>
  [24] >>
  [25] >>
- [26] >> ␦
+ [26] >> ?
  [27] >>
 
 28] >>
@@ -262,7 +275,7 @@ void loginDisplay(int *percobaan, bool *auth){
  [155] >> ¢
  [156] >> £
  [157] >> ¥
- [158] >> ₧
+ [158] >> P
  [159] >> ƒ
  [160] >> á
  [161] >> í
@@ -273,90 +286,90 @@ void loginDisplay(int *percobaan, bool *auth){
  [166] >> ª
  [167] >> º
  [168] >> ¿
- [169] >> ⌐
+ [169] >> ¬
  [170] >> ¬
  [171] >> ½
  [172] >> ¼
  [173] >> ¡
  [174] >> «
  [175] >> »
- [176] >> ░
- [177] >> ▒
- [178] >> ▓
- [179] >> │
- [180] >> ┤
- [181] >> ╡
- [182] >> ╢
- [183] >> ╖
- [184] >> ╕
- [185] >> ╣
- [186] >> ║
- [187] >> ╗
- [188] >> ╝
- [189] >> ╜
- [190] >> ╛
- [191] >> ┐
- [192] >> └
- [193] >> ┴
- [194] >> ┬
- [195] >> ├
- [196] >> ─
- [197] >> ┼
- [198] >> ╞
- [199] >> ╟
- [200] >> ╚
- [201] >> ╔
- [202] >> ╩
- [203] >> ╦
- [204] >> ╠
- [205] >> ═
- [206] >> ╬
- [207] >> ╧
- [208] >> ╨
- [209] >> ╤
- [210] >> ╥
- [211] >> ╙
- [212] >> ╘
- [213] >> ╒
- [214] >> ╓
- [215] >> ╫
- [216] >> ╪
- [217] >> ┘
- [218] >> ┌
- [219] >> █
- [220] >> ▄
- [221] >> ▌
- [222] >> ▐
- [223] >> ▀
- [224] >> α
+ [176] >> ¦
+ [177] >> ¦
+ [178] >> ¦
+ [179] >> ¦
+ [180] >> ¦
+ [181] >> ¦
+ [182] >> ¦
+ [183] >> +
+ [184] >> +
+ [185] >> ¦
+ [186] >> ¦
+ [187] >> +
+ [188] >> +
+ [189] >> +
+ [190] >> +
+ [191] >> +
+ [192] >> +
+ [193] >> -
+ [194] >> -
+ [195] >> +
+ [196] >> -
+ [197] >> +
+ [198] >> ¦
+ [199] >> ¦
+ [200] >> +
+ [201] >> +
+ [202] >> -
+ [203] >> -
+ [204] >> ¦
+ [205] >> -
+ [206] >> +
+ [207] >> -
+ [208] >> -
+ [209] >> -
+ [210] >> -
+ [211] >> +
+ [212] >> +
+ [213] >> +
+ [214] >> +
+ [215] >> +
+ [216] >> +
+ [217] >> +
+ [218] >> +
+ [219] >> ¦
+ [220] >> _
+ [221] >> ¦
+ [222] >> ¦
+ [223] >> ¯
+ [224] >> a
  [225] >> ß
- [226] >> Γ
- [227] >> π
- [228] >> Σ
- [229] >> σ
+ [226] >> G
+ [227] >> p
+ [228] >> S
+ [229] >> s
  [230] >> µ
- [231] >> τ
- [232] >> Φ
- [233] >> Θ
- [234] >> Ω
- [235] >> δ
- [236] >> ∞
- [237] >> φ
- [238] >> ε
- [239] >> ∩
- [240] >> ≡
+ [231] >> t
+ [232] >> F
+ [233] >> T
+ [234] >> O
+ [235] >> d
+ [236] >> 8
+ [237] >> f
+ [238] >> e
+ [239] >> n
+ [240] >> =
  [241] >> ±
- [242] >> ≥
- [243] >> ≤
- [244] >> ⌠
- [245] >> ⌡
+ [242] >> =
+ [243] >> =
+ [244] >> (
+ [245] >> )
  [246] >> ÷
- [247] >> ≈
+ [247] >> ˜
  [248] >> °
- [249] >> ∙
+ [249] >> ·
  [250] >> ·
- [251] >> √
- [252] >> ⁿ
+ [251] >> v
+ [252] >> n
  [253] >> ²
- [254] >> ■
+ [254] >> ¦
  */
