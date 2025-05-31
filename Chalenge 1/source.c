@@ -1,25 +1,26 @@
 #include "header.h"
 #include <conio.h>
 #include <time.h>
-char randomKapital() { return (char)(rand() % 26 + 65); }
+#define USERNAME "YengiYolu"
+#define PASSWORD "YengiYoluPNC"
+char randomKapital() {
+	return (char)(rand() % 26 + 65);
+	}
 char randomKonsonan() {
   return (char)(rand() % 26 + 97); //- 1 huruf kecil (a-z)
 }
-char randomDigit() { return (char)(rand() % 10 + 48); }
+char randomDigit() {
+	return (char)(rand() % 10 + 48);
+}
 
 void appendChar(char *string, char c) {
-
-  while (*string++)
-    ;
-
+  while (*string++);
   *(string - 1) = c;
-
   *string = '\0';
 }
 void delay(int milisec) {
   clock_t start = clock();
-  while (clock() < start + milisec)
-    ;
+  while (clock() < start + milisec);
 }
 
 void generateCaptcha(string captcha) {
@@ -86,17 +87,18 @@ void menuDisplay(string username, int hari, int bulan, int tahun) {
   printf("\n>>> ");
 }
 
-void loginDisplay(int *percobaan, bool *auth, char *username, char *password) {
-  int temp = *percobaan;
+void loginDisplay(bool *auth, char *username, char *password) {
+  printf("\e[0m");
   string user, pass;
-  printf("Sisa Percobaan : [%d]\n\n", temp);
   printf("Username : ");
+  printf("\e[s\e[38;5;240m%s \e[u\e[0m",USERNAME);
   fflush(stdin);
   gets(user);
   printf("Password : ");
+   printf("\e[s\e[38;5;240m%s \e[u\e[0m",PASSWORD);
   fflush(stdin);
   gets(pass);
-  if (strcmp(user, "YengiYolu") == 0 && strcmp(pass, "YengiYoluPNC") == 0) {
+  if (strcmp(user, USERNAME) == 0 && strcmp(pass, PASSWORD) == 0) {
     *auth = true;
     strcpy(username, user);
     strcpy(password, pass);
@@ -104,21 +106,11 @@ void loginDisplay(int *percobaan, bool *auth, char *username, char *password) {
 
   else {
     printf("\n\t\033[1;31m[!] Username atau Password Salah [!]");
-    temp--;
-    *percobaan = temp;
   }
-  if (temp <= 1) {
-    printf("\n\tSalah 3x\n\nLOGIN GAGAL\n\nPress any key to continue . . .");
-    getch();
-    exit(0);
-  }
+
+  
 }
 
-void settoBlueLogin(int percobaan, string username, string password) {
-  printf("\033[1;34mSisa Percobaan : [%d]\n", percobaan);
-  printf("\033[1;34mUsername : %s\n", username);
-  printf("\033[1;34mPassword : %s\n", password);
-}
 
 // input tanggal
 
