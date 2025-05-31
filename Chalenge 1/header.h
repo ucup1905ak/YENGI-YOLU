@@ -4,3 +4,4 @@
 #include <stdbool.h>
 
 char * generateChapta();
+void delay(int milisec);

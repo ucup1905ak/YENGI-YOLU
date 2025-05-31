@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "header.h"
 int main(){
-    printf("Captha: %s", generateChapta());
+    while(1) {
+        printf("\nCaptha: %s", generateChapta());
+        delay(1000);
+    }
     return 0;
 }

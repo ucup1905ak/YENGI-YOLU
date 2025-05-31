@@ -13,10 +13,10 @@ char * generateChapta(){
     char Kapital = rand()% 26 +65;
     char Kecil = rand()% 26 + 97;
     char angka = rand()% 10 + 48;
-    printf("\rRANDOM: %c%c%c",Kapital,Kecil,angka);
+    char* captha;
+    sprintf(captha,"%c%c%c",Kapital,Kecil,angka);
 
-
-    return "Halo";
+    return captha;
 }
 
 /*
