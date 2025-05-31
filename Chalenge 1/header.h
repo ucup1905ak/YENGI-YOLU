@@ -13,11 +13,11 @@ void appendChar(char* string, char c);
 void delay(int milisec);
 
 void generateCaptcha(string captcha);
-
+void settoBlueLogin(int percobaan, char *username, char *password);
 void generateChapta();
 void delay(int milisec);
-void menuDisplay(string username,  int hari, int bulan, int tahun);
-void loginDisplay(int *percobaan, bool *auth);
+void menuDisplay(char *username,  int hari, int bulan, int tahun);
+void loginDisplay(int *percobaan, bool *auth, char *username, char *password);
 void loadingDisplay();
 char randomKapital();
 char randomKonsonan();

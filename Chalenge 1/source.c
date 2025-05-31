@@ -82,18 +82,33 @@ void menuDisplay(string username, int hari, int bulan, int tahun){
 }
 /*
 
-void loginDisplay(int *percobaan, bool *auth){
+void loginDisplay(int *percobaan, bool *auth, char *username, char *password){
     int temp = *percobaan;
-    string username, password;
+    string user, pass;
     printf("Sisa Percobaan : [%d]\n\n", temp);
-    printf("Username : ");fflush(stdin);gets(username);
-    printf("Password : ");fflush(stdin);gets(password);
-    if(1) *auth = true;
+    printf("Username : ");fflush(stdin);gets(user);
+    printf("Password : ");fflush(stdin);gets(pass);
+    if(strcmp(user,"YengiYolu") == 0 && strcmp(pass,"YengiYoluPNC") == 0){
+        *auth = true;
+        strcpy(username, user);
+        strcpy(password, pass);
+    }
+    
     else{
-        printf("\n\t[!] Username atau Password Salah [!]");
-        *percobaan--;
+        printf("\n\t\033[1;31m[!] Username atau Password Salah [!]");
+        temp--;
+        *percobaan = temp;
+    }
+    if (temp <= 1){
+        printf("\n\tSalah 3x\n\nLOGIN GAGAL\n\nPress any key to continue . . .");
+        getch();
+        exit(0);
     }
 }
-    */
 
+void settoBlueLogin(int percobaan, string username, string password){
+    printf("\033[1;34mSisa Percobaan : [%d]\n", percobaan);
+    printf("\033[1;34mUsername : %s\n", username);
+    printf("\033[1;34mPassword : %s\n", password);
+}
 
