@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/alexa/Documents/FAREL/PNC/YENGI-YOLU/Chalenge 1/module Input Tanggal",
-      "program": "c:/Users/alexa/Documents/FAREL/PNC/YENGI-YOLU/Chalenge 1/module Input Tanggal/build/Debug/outDebug",
+      "cwd": "c:/Users/alexa/Documents/FAREL/PNC/YENGI-YOLU/Chalenge 1",
+      "program": "c:/Users/alexa/Documents/FAREL/PNC/YENGI-YOLU/Chalenge 1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

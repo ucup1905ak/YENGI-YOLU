@@ -22,3 +22,7 @@ void loadingDisplay();
 char randomKapital();
 char randomKonsonan();
 char randomDigit();
+
+void inputTanggal(int * hari, int * bulan, int *tahun);
+int stdDate(int hari,int bulan, int tahun);
+void flushKeyBoard();

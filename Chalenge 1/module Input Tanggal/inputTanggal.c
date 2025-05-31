@@ -5,7 +5,6 @@ void clearLine(int i){
         for(;i>0;i--)printf("\e[2K\e[1A"); 
     }
 }
-
 void flushKeyBoard()
 {
     int ch; 
