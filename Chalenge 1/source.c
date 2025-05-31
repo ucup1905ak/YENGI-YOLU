@@ -80,6 +80,7 @@ void menuDisplay(string username, int hari, int bulan, int tahun){
     printf("\n\n[8] Cetak Nota (BONUS)");
     printf("\n>>> ");
 }
+/*
 
 void loginDisplay(int *percobaan, bool *auth){
     int temp = *percobaan;
@@ -87,11 +88,12 @@ void loginDisplay(int *percobaan, bool *auth){
     printf("Sisa Percobaan : [%d]\n\n", temp);
     printf("Username : ");fflush(stdin);gets(username);
     printf("Password : ");fflush(stdin);gets(password);
-    if(confirmLogin(username, password)) *auth = true;
+    if(1) *auth = true;
     else{
         printf("\n\t[!] Username atau Password Salah [!]");
         *percobaan--;
     }
 }
+    */
 
 
