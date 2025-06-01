@@ -28,6 +28,7 @@ int main(){
     float ongkir;
     float berat;
     string orderID;
+    int OrderIDAttempt = 3;
 
 
     //LOGIN
@@ -102,19 +103,37 @@ int main(){
                 harga = hargaIkan(jenisIkan, berat, kedalaman);
                 ongkir = ongkosKirim(berat);
                 HargaTotal = totalHarga(ongkir, harga, diskon);
-
-
-
+                // printf("\n[%s][%s][%d][%.2f]\n", jenisIkan, namaIkan, kedalaman, berat);
+                // printf("\n[%.2f][%.2f][%.2f][%.2f]\n", ongkir, harga, diskon, HargaTotal);
+                system("cls");
+                resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
                 //GENERATE ORDER ID
                 generateOrderID(orderID);
-                printf("\n\nORDER ID : %s\n", orderID);
-                printf("\n[%s][%s][%d][%.2f]\n", jenisIkan, namaIkan, kedalaman, berat);
-                printf("\n[%.2f][%.2f][%.2f][%.2f]\n", ongkir, harga, diskon, HargaTotal);
-                //TINGGAL BUAT DISPLAY RESI
-                
-                getch();
-                // resiDisplay(nama, nomor, alamat, kodepos,
-                            // hari, bulan, tahun, harga, diskon, ongkir, HargaTotal);
+                printf("\n ORDER ID : %s\n", orderID);
+                printf("\x1b[s");
+                do{
+                    printf(" Order ID : ");  
+                    scanf("%s", inputString);
+                    if(strcmp(orderID, inputString) != 0){
+                        printf("\n [!] Order ID Salah [!]");
+                        OrderIDAttempt--;
+                        getch();
+                        printf("\x1b[u"); printf("\x1b[0J");
+                    }else{
+                        printf("\n [+] Order ID Benar [+]");
+                        printf("\n\n Press Any Key to Continue . . . ");
+                        getch();
+                        printf("\x1b[0m");
+                        printf("\x1b[u"); printf("\x1b[0J");
+                    }
+                }while(strcmp(orderID, inputString) != 0 && OrderIDAttempt > 0);
+                if(OrderIDAttempt <= 0){
+                    printf("\n [!] Order ID Salah 3x [!]");
+                    printf("\n\n Press Any Key to Continue . . . ");
+                    initializeUserData(username, password, &hari, &bulan, &tahun);
+                    initializeIkanData(jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal);
+                    getch();
+                }
                 break;
             case 50:
                 break;

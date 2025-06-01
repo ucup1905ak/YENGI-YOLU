@@ -438,13 +438,64 @@ float totalHarga(float ongkir, float hargaIkan, float diskon) {
   }
   return total;
 }
+/*
+         _________________________________
+        |           .                     |
+        |          ':'                    |
+        |        ___:____     |'\/'|      |
+        |      ,'        `.    \ /        |
+        |      |  O        \___/ |        |
+        |    ~^~^~^~^~^~^~^~^~^~^~^~^~    |
+         _________________________________
+         Nama           : asdfhasd
+         Alamat         : dsaf
+         No Telepon     : 123456789
+         Kode Pos       : 46155
+         _________________________________
+         Jenis Ikan     : Omnivora
+         Nama Ikan      : Hiu Paus
+         Kedalaman      : 500
+         Berat Ikan     : 15.47 kg
+         Ongkir         : Rp 525000.00
+         Harga Ikan     : Rp 1933778.75
+         Total          : Rp 2458778.75
+         Diskon         : 20.00%
+         Total Harga    : Rp 1967023.00
+        ___________________________________
 
+        ID              : 5Z1V
+
+        Confirm ID      :
+*/
 //Nampilkan Order ID MASIH ERORRR
 void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
-                 string jenisIkan, string namaIkan, int kedalaman,
+                 string jenisIkan, string namaIkan, int kedalaman,float berat,
                  float harga, float diskon, float ongkir, float HargaTotal) {
-
-  getch();
+  printf("\n  _________________________________");
+  printf("\n |           .                     |");
+  printf("\n |          ':'                    |");
+  printf("\n |        ___:____     |'\/'|      |");
+  printf("\n |      ,'        `.    \ /        |");
+  printf("\n |      |  O        \___/ |        |");
+  printf("\n |    ~^~^~^~^~^~^~^~^~^~^~^~^~    |");
+  printf("\n  _________________________________");
+  printf("\n Nama           : %s", nama);
+  printf("\n Alamat         : %s", alamat);
+  printf("\n No Telepon     : %lld", nomor);
+  printf("\n Kode Pos       : %d", kodepos);
+  printf("\n _________________________________");
+  printf("\n Jenis Ikan     : %s", jenisIkan);
+  printf("\n Nama Ikan      : %s", namaIkan);
+  printf("\n Kedalaman      : %d", kedalaman);
+  printf("\n Berat Ikan     : %.2f kg", berat);
+  printf("\n Ongkir         : Rp %.2f", ongkir);
+  printf("\n Harga Ikan     : Rp %.2f", harga);
+  printf("\n Total          : Rp %.2f", ongkir + harga);
+  printf("\n Diskon         : %.2f%%", diskon);
+  printf("\n Total Harga    : Rp %.2f", HargaTotal);
+  printf("\n _________________________________");
+  // printf("\nID              : 5Z1V");
+  // printf("\nConfirm ID      :");
 }
 
 
@@ -467,4 +518,23 @@ void generateOrderID(char * orderID){
       break;
     }}
   }while(countKapital > 0 || countDigit > 0);
+}
+
+
+void initializeUserData(string username, string password, int *hari, int *bulan, int *tahun){
+  strcpy(username, "");
+  strcpy(password, "");
+  *hari = 0;
+  *bulan = 0;
+  *tahun = 0;
+}
+void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal){
+  strcpy(jenisIkan, "");
+  strcpy(namaIkan, "");
+  *kedalaman = 0;
+  *berat = 0.0;
+  *harga = 0.0;
+  *diskon = 0.0;
+  *ongkir = 0.0;
+  *HargaTotal = 0.0;
 }
