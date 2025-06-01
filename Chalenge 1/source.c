@@ -223,7 +223,7 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
   getch();
 }    
 
-void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
+void dataInput(char *nama, unsigned long long int *nomor, char *alamat, int *kodepos){
   string tempStr;
 
   printf("\x1b[0m");
@@ -434,7 +434,7 @@ float totalHarga(float ongkir, float hargaIkan, float diskon) {
 }
 
 //Nampilkan Order ID MASIH ERORRR
-void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+void resiDisplay(string nama, unsigned long long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
                  float harga, float diskon, float ongkir, float HargaTotal, float berat) {
   printf("\n\t    _________________________________\n");
@@ -447,7 +447,7 @@ void resiDisplay(string nama, long long int nomor, string alamat, int kodepos ,
   printf("\t   _________________________________\n");
   printf("\t   Nama         : %s\n", nama);
   printf("\t   Alamat       : %s\n", alamat);
-  printf("\t   No Telepon   : %lld\n", nomor);
+  printf("\t   No Telepon   : %llu\n", nomor);
   printf("\t   Kode Pos     : %d\n", kodepos);
   printf("\t   _________________________________\n");
   printf("\t   Jenis Ikan   : %s\n", jenisIkan);
@@ -516,7 +516,7 @@ void idAuth(char *orderID, int *percobaan){
   }
 }
 
-void initializeDataPembeli(string nama, long long int *nomor, string alamat, int *kodepos){
+void initializeDataPembeli(string nama, unsigned long long int *nomor, string alamat, int *kodepos){
   strcpy(nama, "");
   *nomor = 0;
   strcpy(alamat, "");
@@ -577,49 +577,31 @@ void drawVoidLineWithText(int length, string text) {
     }
 }
 
-void PembayaranDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+void PembayaranDisplay(string nama, unsigned long long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,float berat,
                  float harga, float diskon, float ongkir, float HargaTotal){
-
-                 
     system("cls");
     system("color F0");
     printf("\n%c", 201);drawDoubleLine(64);printf("%c", 187); 
     printf("\n%c", 186);drawVoid(64); printf("%c", 186);
     printf("\n%c", 186);drawVoidLineWithText(64, "CHALLENGE 1 PNC");printf("%c", 186);
+    printf("\n%c", 186);drawVoid(64); printf("%c", 186);
     printf("\n%c", 186);drawVoidLineWithText(64, "YengiYoluPNC");printf("%c", 186);
-    // printf("\n%c", 186);drawVoid(22); printf("CHALLENGE 1 PNC 2025");drawVoid(22);printf("%c", 186);
-    // printf("\n%c", 186);drawVoid(22); printf("YengiYoluPNC");drawVoid(22);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(64); printf("%c", 186);
     printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 185); 
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %17s", 186 , nama);printf("%c", 186); 
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %17lld", 186 , nomor);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %17s", 186 , alamat);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %17d", 186 , kodepos);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c %17.2f", 186 , ongkir);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c %17.2f", 186 , harga);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %17.2f", 186 , diskon);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %15s  ", 186 , nama);printf("%c", 186); 
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %15llu  ", 186 , nomor);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %15s  ", 186 , alamat);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %15d  ", 186 , kodepos);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c Rp %12.2f  ", 186 , ongkir);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c Rp %12.2f  ", 186 , harga);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %13.2f %%  ", 186 , diskon);printf("%c", 186);
     printf("\n%c", 204);drawDoubleLine(19);printf("%c", 203);drawDoubleLine(9);printf("%c", 206);drawDoubleLine(15);printf("%c", 206);drawDoubleLine(18);printf("%c", 186);
-    printf("\n%c", 186);printf(" %18s", namaIkan);printf("%c", 186);printf(" %5.2f Kg", berat);printf("%c", 186);printf("  Total Harga  %c %17.2f", 186 , HargaTotal);printf("%c", 186);
+    printf("\n%c", 186);printf(" %18s", namaIkan);printf("%c", 186);printf(" %5.2f Kg", berat);printf("%c", 186);printf("  Total Harga  %c Rp %13.2f  ", 186 , HargaTotal);printf("%c", 186);
     printf("\n%c", 200);drawDoubleLine(19);printf("%c", 202);drawDoubleLine(9);printf("%c", 202);drawDoubleLine(15);printf("%c", 202);drawDoubleLine(18);printf("%c", 188);
 
     }
-/*
-╔════════════════════════════════════════════════════════════════╗
-║                                                                ║
-║                        CHALLENGE 1 PNC                         ║
-║                          YengiYoluPNC                          ║
-╠═════════════════════════════╦═══════════════╦══════════════════║
-╠                             ║  Nama         ║             asdf'║
-╠                             ║  No.Telp      ║         123456789║
-╠                             ║  Alamat       ║              asdf║
-╠                             ║  Kode Pos     ║             12345║
-╠                             ║  Ongkir       ║         630000.00║
-╠                             ║  Harga        ║         126250.00║
-╠                             ║  Diskon       ║              0.00║
-╠═══════════════════╦═════════╬═══════════════╬══════════════════║
-╠           Kepiting║ 18.30 Kg║  Total Harga  ║         756250.00║
-╚═══════════════════╩═════════╩═══════════════╩══════════════════╝ 
-*/
+
 
     /*
 ░: 176

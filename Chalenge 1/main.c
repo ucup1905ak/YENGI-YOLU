@@ -14,7 +14,7 @@ int main(){
     int hari, bulan, tahun;
     int pilihan;
     int kodepos;
-    long long int nomor;
+    unsigned long long int nomor;
     bool menu1,menu2,menu3,menu4,menu5,menu6,menu8;
     
 
