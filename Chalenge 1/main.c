@@ -5,7 +5,7 @@
 
 int main(){
     srand(time(NULL));
-    string jawaban;
+    char jawaban;
 
     int captchaAttempt;
     string inputString;
@@ -16,10 +16,11 @@ int main(){
     string username, password , captcha, nama, alamat, tempStr;
     int hari, bulan, tahun, i, j;
     int pilihan, indexControl;
-    int kodepos;
+    string kodepos;
     double accountBalance = 0;
     double nominalBayar;
-    unsigned long long int nomor;
+    string nomor;
+    
     bool menu1,menu2,menu3,menu5,menu6,menu8;
     int menu4 = 0; 
     int hit = 0; 
@@ -105,7 +106,7 @@ int main(){
         switch(pilihan){
             case 49: //case1
                 if(!menu1){
-                    dataInput(nama, &nomor, alamat, &kodepos);
+                    dataInput(nama, nomor, alamat, kodepos);
                     randIkan(jenisIkan, namaIkan, &kedalaman);
                     harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
                     diskon = randomDiskon();
@@ -145,7 +146,7 @@ int main(){
                 break;
             case 51: //Case 3
                     
-                if(!menu1 && !menu2){
+                if(!menu1){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Belum Ada Data Tersimpan [!]");
                     getch();
@@ -277,6 +278,14 @@ int main(){
    
                 break;
             case 56:
+                if(!menu1){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                    break;
+                }
+                PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
+                getch();
                 break;
             default:
                 printf("\n\t\x1b[31m");
