@@ -168,12 +168,13 @@ int main(){
                 getch();
                 break;
             case 53:
-            
-                blok("\033[48;5;45m", "0m", 400, &indexControl);Sleep(2000);
-                blok("\033[48;5;39m", "350m", 400, &indexControl);Sleep(2000);
-                blok("\033[48;5;33m", "700m", 400, &indexControl);Sleep(2000);
-                blok("\033[48;5;27m", "1050m", 400, &indexControl);Sleep(2000);
-                blok("\033[48;5;18m", "1400m", 400, &indexControl);Sleep(2000);
+                system("cls");
+                system("color 0F");
+                blok("\033[48;5;45m", "0m", kedalaman, &indexControl);Sleep(2000);
+                blok("\033[48;5;39m", "350m", kedalaman, &indexControl);Sleep(2000);
+                blok("\033[48;5;33m", "700m", kedalaman, &indexControl);Sleep(2000);
+                blok("\033[48;5;27m", "1050m", kedalaman, &indexControl);Sleep(2000);
+                blok("\033[48;5;18m", "1400m", kedalaman, &indexControl);Sleep(2000);
                 getch();
                 break;
             case 54:
