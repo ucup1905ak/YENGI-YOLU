@@ -514,14 +514,13 @@ void idAuth(char *orderID, int percobaan){
     }
   }
 }
-void initializeUserData(string username, string password, int *hari, int *bulan, int *tahun){
-  strcpy(username, "");
-  strcpy(password, "");
-  *hari = 0;
-  *bulan = 0;
-  *tahun = 0;
-}
 
+void initializeDataPembeli(string nama, long long int *nomor, string alamat, int *kodepos){
+  strcpy(nama, "");
+  *nomor = 0;
+  strcpy(alamat, "");
+  *kodepos = 0;
+}
 
 void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal){
   strcpy(jenisIkan, "");
