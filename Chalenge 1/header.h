@@ -65,5 +65,5 @@ int cekPembayaran(int counter, double balance,  double nominalBayar);
 
 //case 5
 void blok(const char *warna, const char *label, int kedalamanTarget, int *indexControl);
-void tampilkanIkan(int kedalaman, char *warna);
+void tampilkanIkan(int kedalaman, char *warna, char *label);
 

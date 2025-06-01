@@ -225,6 +225,7 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
 
 void dataInput(char *nama, unsigned long long int *nomor, char *alamat, int *kodepos){
   string tempStr;
+  char *endStr;
 
   printf("\x1b[0m");
   //Masukkan Nama
@@ -263,7 +264,7 @@ void dataInput(char *nama, unsigned long long int *nomor, char *alamat, int *kod
       printf("\e[0J");
     }
     else{
-      *nomor = atoi(tempStr);
+      *nomor = strtoull(tempStr, &endStr, 10);
       break;
     }
   }while(1);
@@ -642,7 +643,13 @@ void blok(const char *warna, const char *label, int kedalamanTarget, int *indexC
 int i, j;
     int targetDiv = kedalamanTarget / 350;
 
-    for (i = 0; i < 6; i++) {
+    
+
+    // Setelah semua baris blok dicetak, tampilkan ikan di samping (jika ini blok target)
+    if (*indexControl == targetDiv) {
+        tampilkanIkan(kedalamanTarget, warna, label);
+    }else{
+      for (i = 0; i < 6; i++) {
         // Label di kiri hanya pada baris pertama
         printf("%-6s", (i == 0) ? label : "");
 
@@ -653,53 +660,49 @@ int i, j;
         for (j = 0; j < 50; j++) printf(" ");
         printf("\n");
     }
-
-    // Setelah semua baris blok dicetak, tampilkan ikan di samping (jika ini blok target)
-    if (*indexControl == targetDiv) {
-        tampilkanIkan(kedalamanTarget, warna);
-    }else{
-    	
 	}
 
     (*indexControl)++; // Naikkan index untuk blok selanjutnya
 }
-void tampilkanIkan(int kedalaman, char *warna) {
+void tampilkanIkan(int kedalaman, char *warna, char *label) {
   int i,j;
   for (i = 0; i < 6; i++) {
         // Label di kiri hanya pada baris pertama
-        printf("%-6s", (i == 0) ? "" : "");
+        printf("%-6s", (i == 0) ? label : "");
 
         // Cetak blok warna
-        printf("%s", warna);
-        for (j = 0; j < 50; j++) printf(" ");
-        printf("\033[0m"); // Reset warna + ganti baris
-        for (j = 0; j < 50; j++) printf(" ");
-        printf("\n");
+        
         if(i == 1){
           printf("%s", warna);
           for (j = 0; j < 50; j++) printf(" ");
           printf("\033[0m"); // Reset warna + ganti baris
-          printf(" %d m\n", kedalaman);
+          printf("  %d m\n", kedalaman);
         }else if(i == 2){
           printf("%s", warna);
           for (j = 0; j < 50; j++) printf(" ");
           printf("\033[0m"); // Reset warna + ganti baris
-          printf("    ,/.]     __\n");
+          printf("     ,/.]     __\n");
         }else if(i == 3){
           printf("%s", warna);
           for (j = 0; j < 50; j++) printf(" ");
           printf("\033[0m"); // Reset warna + ganti baris
-          printf(" ,-'    `!._/ /\n");
+          printf("  ,-'    `!._/ /\n");
         }else if(i == 4){
           printf("%s", warna);
           for (j = 0; j < 50; j++) printf(" ");
           printf("\033[0m"); // Reset warna + ganti baris
-          printf("> @ )<|    _ <\n");
+          printf(" > @ )<|    _ <\n");
         }else if (i == 5){
           printf("%s", warna);
           for (j = 0; j < 50; j++) printf(" ");
           printf("\033[0m"); // Reset warna + ganti baris
-          printf("`-....,,;' \\_\\\n");
+          printf(" `-....,,;' \\_\\\n");
+        }else{
+          printf("%s", warna);
+          for (j = 0; j < 50; j++) printf(" ");
+          printf("\033[0m"); // Reset warna + ganti baris
+          for (j = 0; j < 50; j++) printf(" ");
+          printf("\n");
         }
     } // PUSH DULU DONG, CASE 4 UDAH BERESH //sek
     // printf(" %d m\n", kedalaman);
