@@ -68,4 +68,4 @@ void blok(const char *warna, const char *label, int kedalamanTarget, int *indexC
 void tampilkanIkan(int kedalaman, char *warna, char *label);
 
 //case 3
-void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat);
+void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalances);
