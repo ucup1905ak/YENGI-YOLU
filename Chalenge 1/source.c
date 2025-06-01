@@ -434,7 +434,7 @@ float totalHarga(float ongkir, float hargaIkan, float diskon) {
 }
 
 //Nampilkan Order ID MASIH ERORRR
-void resiDisplay(string nama, long int nomor, string alamat, int kodepos , 
+void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
                  float harga, float diskon, float ongkir, float HargaTotal, float berat) {
   printf("\n\t    _________________________________\n");
@@ -447,7 +447,7 @@ void resiDisplay(string nama, long int nomor, string alamat, int kodepos ,
   printf("\t   _________________________________\n");
   printf("\t   Nama         : %s\n", nama);
   printf("\t   Alamat       : %s\n", alamat);
-  printf("\t   No Telepon   : %ld\n", nomor);
+  printf("\t   No Telepon   : %lld\n", nomor);
   printf("\t   Kode Pos     : %d\n", kodepos);
   printf("\t   _________________________________\n");
   printf("\t   Jenis Ikan   : %s\n", jenisIkan);
