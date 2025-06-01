@@ -799,6 +799,7 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
     if (chanceHit == 0) { // 25% chance
         printf("\n\t[!] Kapal terkena hit! Total harga bertambah Rp 500.000 dan waktu pencarian bertambah 2 hari [!]");
         *accountBalance += 500000;
+        *HargaTotal +=500000;
         hariPencarian += 2;
     }
 
