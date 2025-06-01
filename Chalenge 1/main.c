@@ -103,7 +103,7 @@ int main(){
         pilihan = getche();
         printf("\x1b[0m");
         switch(pilihan){
-            case 49:
+            case 49: //case1
                 if(!menu1){
                     dataInput(nama, &nomor, alamat, &kodepos);
                     randIkan(jenisIkan, namaIkan, &kedalaman);
@@ -130,7 +130,7 @@ int main(){
                     break;
                 }
                 break;
-            case 50:
+            case 50: //case 2
                 if(!menu2){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Belum Ada Data Tersimpan [!]");
@@ -143,8 +143,9 @@ int main(){
                              kedalaman, harga, diskon, ongkir, HargaTotal, berat);
                 getch();
                 break;
-            case 51: //Case 2
-                if(!menu1){
+            case 51: //Case 3
+                    
+                if(!menu1 && !menu2){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Belum Ada Data Tersimpan [!]");
                     getch();
@@ -164,7 +165,7 @@ int main(){
                 
                 
                 break;
-            case 52:
+            case 52: //case 4
                 if(!menu1){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Belum Ada Data Tersimpan [!]");
@@ -193,7 +194,7 @@ int main(){
                 }while(true);
                 getch();
                 break;
-            case 53:
+            case 53: //case 5
                 if(!menu1){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Belum Ada Data Tersimpan [!]");
@@ -209,7 +210,7 @@ int main(){
                 blok("\033[48;5;18m", "1400m", kedalaman, &indexControl);Sleep(3000);
                 getch();
                 break;
-            case 54:
+            case 54: //case 6
                 if(!menu1){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Belum Ada Data Tersimpan [!]");

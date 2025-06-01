@@ -784,7 +784,7 @@ mulai terhitung tanggal 21, 22, 23 selesai, dan tanggal menjadi 24 Juni.
 OOHH CUMA TAMBAH HARI
 */
 
-void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalance) {
+void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat) {
     int hariPencarian = 0;
     int chanceHit = rand() % 4; // 0-3
     int i;
@@ -798,7 +798,7 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
     
     if (chanceHit == 0) { // 25% chance
         printf("\n\t[!] Kapal terkena hit! Total harga bertambah Rp 500.000 dan waktu pencarian bertambah 2 hari [!]");
-        *accountBalance += 500000;
+        *HargaTotal += 500000;
         hariPencarian += 2;
     }
 
@@ -825,10 +825,4 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
     }
     
     printf("\n\t[~] Pencarian selesai pada %02d-%02d-%04d [~]", *hari, *bulan, *tahun);
-}
-
-void deleteInit(char *nama, unsigned long long int *nomor, char * alamat, int *kodepos , 
-                 char * jenisIkan, char * namaIkan, int * kedalaman,float * berat,
-                 float * harga, float *diskon, float *ongkir, float *HargaTotal, double *accountBalance){
-
 }
