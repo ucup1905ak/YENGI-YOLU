@@ -590,55 +590,36 @@ void PembayaranDisplay(string nama, long long int nomor, string alamat, int kode
     printf("\n%c", 186);drawVoidLineWithText(64, "YengiYoluPNC");printf("%c", 186);
     // printf("\n%c", 186);drawVoid(22); printf("CHALLENGE 1 PNC 2025");drawVoid(22);printf("%c", 186);
     // printf("\n%c", 186);drawVoid(22); printf("YengiYoluPNC");drawVoid(22);printf("%c", 186);
-    printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 186); 
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %17s", 186 , nama);printf("%c", 186); 
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %17lld", 186 , nomor);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %17s", 186 , alamat);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %17d", 186 , kodepos);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c %17.2f", 186 , ongkir);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Harga        %c %17.2f", 186 , harga);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %17.2f", 186 , diskon);printf("%c", 186);
-    printf("\n%c", 204);drawDoubleLine(21);printf("%c", 203);drawDoubleLine(9);printf("%c", 206);drawDoubleLine(18);printf("%c", 186); 
-    printf("\n%c", 204);printf(" %21s", namaIkan);printf("%c", 186);printf(" %6.2f Kg", berat);printf("%c", 186);printf("  Total Harga   %c %17.2f", 186 , HargaTotal);printf("%c", 186);
-    /*
-   printf("%c", 204);
-    printf("╔════════════════════════════════════════════════════════════════════════════╗\n");
-    printf("│                                                                            │\n");
-    printf("│                            CHALLENGE 1 PNC 2025                          │\n");
-    printf("│                                                              YengiYoluPN │\n");
-    printf("├────────────────────────────────────────┬─────────────────┬─────────────────┤\n");
-    printf("│                                        │ Nama            │ %-15s │\n", nama);
-    printf("│        .                               ├─────────────────┼─────────────────┤\n");
-    printf("│       ':'                              │ No. Telp        │ %015lld │\n", nomor);
-    printf("│     ___:____     |'\\/'|                ├─────────────────┼─────────────────┤\n");
-    printf("│   ,'        `.    \\ /                  │ Alamat          │ %-15s │\n", alamat);
-    printf("│   |  O        \\___/ |                  ├─────────────────┼─────────────────┤\n");
-    printf("│ ~^~^~^~^~^~^~^~^~^~^~^~^~                │ Kode Pos        │ %-15d │\n", kodepos);
-    printf("│                                        ├─────────────────┼─────────────────┤\n");
-    printf("│                                        │ Ongkir          │ Rp %12.2f │\n", ongkir);
-    printf("│                                        ├─────────────────┼─────────────────┤\n");
-    printf("│                                        │ Harga           │ Rp %12.2f │\n", harga);
-    printf("│                                        ├─────────────────┼─────────────────┤\n");
-    printf("│                                        │ Diskon          │ %13.2f%% │\n", diskon);
-    printf("├────────────────────────────────────────┼─────────────────┼─────────────────┤\n");
-    printf("│ %-15s │ %.2f kg        │ Total Harga     │ Rp %12.2f │\n", namaIkan, berat, HargaTotal);
-    printf("└────────────────────────────────────────┴─────────────────┴─────────────────┘\n");
-    
+    printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 185); 
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %17s", 186 , nama);printf("%c", 186); 
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %17lld", 186 , nomor);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %17s", 186 , alamat);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %17d", 186 , kodepos);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c %17.2f", 186 , ongkir);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c %17.2f", 186 , harga);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %17.2f", 186 , diskon);printf("%c", 186);
+    printf("\n%c", 204);drawDoubleLine(19);printf("%c", 203);drawDoubleLine(9);printf("%c", 206);drawDoubleLine(15);printf("%c", 206);drawDoubleLine(18);printf("%c", 186);
+    printf("\n%c", 186);printf(" %18s", namaIkan);printf("%c", 186);printf(" %5.2f Kg", berat);printf("%c", 186);printf("  Total Harga  %c %17.2f", 186 , HargaTotal);printf("%c", 186);
+    printf("\n%c", 200);drawDoubleLine(19);printf("%c", 202);drawDoubleLine(9);printf("%c", 202);drawDoubleLine(15);printf("%c", 202);drawDoubleLine(18);printf("%c", 188);
+
+    }
+/*
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
 ║                        CHALLENGE 1 PNC                         ║
 ║                          YengiYoluPNC                          ║
-╠═════════════════════════════╦══════════════════════════════════║
-╠                             ║  Nama         ║             Farel║
-╠                             ║  No.Telp      ║          13456789║
-╠                             ║  Alamat       ║           Alfmasf║
+╠═════════════════════════════╦═══════════════╦══════════════════║
+╠                             ║  Nama         ║             asdf'║
+╠                             ║  No.Telp      ║         123456789║
+╠                             ║  Alamat       ║              asdf║
 ╠                             ║  Kode Pos     ║             12345║
-╠                             ║  Ongkir       ║       560000.00║
-╠                             ║  Harga        ║      1575000.00║
-╠                             ║  Diskon       ║           20.00║                                                                                                                                                                                                                                                      
- */
-    }
-
+╠                             ║  Ongkir       ║         630000.00║
+╠                             ║  Harga        ║         126250.00║
+╠                             ║  Diskon       ║              0.00║
+╠═══════════════════╦═════════╬═══════════════╬══════════════════║
+╠           Kepiting║ 18.30 Kg║  Total Harga  ║         756250.00║
+╚═══════════════════╩═════════╩═══════════════╩══════════════════╝ 
+*/
 
     /*
 ░: 176

@@ -29,9 +29,9 @@ int stdDate(int hari,int bulan, int tahun);
 //Input Data
 void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos);
 
-void resiDisplay(string nama, long int nomor, string alamat, int kodepos , 
+void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
-                 float harga, float diskon, float ongkir, float HargaTotal, float berat);
+                 float harga, float diskon, float ongkir, float HargaTotal, float berat) ;
 
 bool isStringRight(string text);
 int isNomorTelp(char *ch) ;
@@ -48,7 +48,7 @@ float hargaIkan(char *jenisIkan, float berat, int kedalaman);
 void generateOrderID(char * orderID);
 void idAuth(char *orderID, int *percobaan);
 
-void initializeDataPembeli(string nama, long int *nomor, string alamat, int *kodepos);
+void initializeDataPembeli(string nama, long long int *nomor, string alamat, int *kodepos);
 void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal);
 
 
