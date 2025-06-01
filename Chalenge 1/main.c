@@ -151,6 +151,11 @@ int main(){
                     getch();
                     break;
                 }
+                if(accountBalance <= 0){
+                    printf("\n\t\033[1;32m[*] Pencarian Sudah Selesai [*]\033[0m\n");
+                    getch();
+                    break;
+                }
                 if(menu4==0 || accountBalance > 0){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Pencarian Belum Bisa Dilakukan, Minimal 50% Pembayaran [!]");
@@ -237,7 +242,7 @@ int main(){
                         printf("* ");
                         Sleep(1000);
                     }
-                    
+
                     printf("\n\t\t[*] Data Berhasil Dihapus [*]");
                 }else if(strcmpi(&jawaban, "N") == 0){
                     printf("\n\t\x1b[31m");
