@@ -1,5 +1,8 @@
 #include "header.h"
 #include <time.h>
+
+
+
 int main(){
     srand(time(NULL));
     
@@ -12,8 +15,10 @@ int main(){
     //User Account
     string username, password , captcha, nama, alamat, tempStr;
     int hari, bulan, tahun;
-    int pilihan;
+    int pilihan, indexControl;
     int kodepos;
+    double accountBalance = 0;
+    double nominalBayar;
     unsigned long long int nomor;
     bool menu1,menu2,menu3,menu4,menu5,menu6,menu8;
     
@@ -106,6 +111,7 @@ int main(){
                     berat = randomBerat();
                     ongkir = ongkosKirim(berat);
                     HargaTotal = totalHarga(ongkir, harga, diskon);
+                    accountBalance = HargaTotal;
                     system("cls");
                     system("color 0F");
                     while(percobaan > 0){
@@ -137,15 +143,41 @@ int main(){
                 }
                 break;
             case 51:
-            
                 break;
             case 52:
+                if(accountBalance<=0){
+                    printf("\n\t[*] Pembayaran Sudah Lunas [*]");
+                    getch();
+                    break;
+                }
                 PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
+
+                printf("\nHarus Dilunasi      : Rp %.2f\n",accountBalance);
+                printf("\e[s");
+                do{
+                    printf("\nMasukan Uang\t: Rp ");
+                    scanf("%lf", &nominalBayar);
+                    if(cekPembayaran(menu4, accountBalance, nominalBayar)){
+                        accountBalance = pembayaran(accountBalance, nominalBayar);
+                        menu4++;
+                        break;
+                    }
+                    getch();
+                    printf("\e[u\e[0J");
+                }while(true);
                 getch();
                 break;
             case 53:
+            
+                blok("\033[48;5;45m", "0m", 400, &indexControl);Sleep(2000);
+                blok("\033[48;5;39m", "350m", 400, &indexControl);Sleep(2000);
+                blok("\033[48;5;33m", "700m", 400, &indexControl);Sleep(2000);
+                blok("\033[48;5;27m", "1050m", 400, &indexControl);Sleep(2000);
+                blok("\033[48;5;18m", "1400m", 400, &indexControl);Sleep(2000);
+                getch();
                 break;
             case 54:
+
                 break;
             case 56:
                 break;
@@ -159,3 +191,31 @@ int main(){
 }
 
 
+/*
+        variable
+        Masukkan Uang   : Rp 3000000
+
+
+        [$] Berhasil Membayar Rp 3000000.00 [$]
+
+        [!] Sisa Pembayaran Rp 2707511.00 [!]
+        
+
+
+        /-----/
+                Dibayar         : Rp 3000000.00
+        Masukkan Uang   : Rp
+
+
+/----/
+                [$] Kembalian   : Rp 1792489.00
+
+        [~] Pembayaran Lunas [~]
+
+/-//////
+        [*] Pembayaran Sudah Lunas [*]
+
+
+
+
+        */

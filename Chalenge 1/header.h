@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <math.h>
+#include <windows.h>
 typedef char string[100];
 
 
@@ -58,3 +59,11 @@ void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float
 void PembayaranDisplay(string nama, unsigned long long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,float berat,
                  float harga, float diskon, float ongkir, float HargaTotal);
+
+double pembayaran(double accountBalance, double nominalBayar);
+int cekPembayaran(int counter, double balance,  double nominalBayar);
+
+//case 5
+void blok(const char *warna, const char *label, int kedalamanTarget, int *indexControl);
+void tampilkanIkan(int kedalaman, char *warna);
+

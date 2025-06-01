@@ -508,7 +508,7 @@ void idAuth(char *orderID, int *percobaan){
     } 
     else{
       printf("\n\t\033[1;31m    [!] Data Gagal Diinputkan [!]");
-      *percobaan--;
+      (*percobaan)--;
       getch();
       printf("\e[u");
       printf("\e[0J");
@@ -597,12 +597,117 @@ void PembayaranDisplay(string nama, unsigned long long int nomor, string alamat,
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c Rp %12.2f  ", 186 , harga);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %13.2f %%  ", 186 , diskon);printf("%c", 186);
     printf("\n%c", 204);drawDoubleLine(19);printf("%c", 203);drawDoubleLine(9);printf("%c", 206);drawDoubleLine(15);printf("%c", 206);drawDoubleLine(18);printf("%c", 186);
-    printf("\n%c", 186);printf(" %18s", namaIkan);printf("%c", 186);printf(" %5.2f Kg", berat);printf("%c", 186);printf("  Total Harga  %c Rp %13.2f  ", 186 , HargaTotal);printf("%c", 186);
+    printf("\n%c", 186);printf(" %18s", namaIkan);printf("%c", 186);printf(" %5.2f Kg", berat);printf("%c", 186);printf("  Total Harga  %c Rp %12.2f  ", 186 , HargaTotal);printf("%c", 186);
     printf("\n%c", 200);drawDoubleLine(19);printf("%c", 202);drawDoubleLine(9);printf("%c", 202);drawDoubleLine(15);printf("%c", 202);drawDoubleLine(18);printf("%c", 188);
+    system("color F0");
+    }
+double pembayaran(double accountBalance, double nominalBayar){
+    accountBalance -= nominalBayar;
+    printf("\n\t[$] Berhasil Membayar Rp %.2lf [$]", nominalBayar);
 
+    if(accountBalance>0)
+        printf("\n\t[!] Sisa Pembayaran Rp %.2lf [!]", accountBalance);
+
+    if(accountBalance <=0){
+        printf("\n\t[~] Pembayaran Lunas [~]");
+        accountBalance = 0;
+        getch();
+    }
+    return accountBalance;
+}
+
+int cekPembayaran(int counter, double balance,  double nominalBayar){
+    switch (counter)
+    {
+    case 0:
+        if(nominalBayar < (balance / 2)){
+            printf("\n\t[!] Minimal 50%% dari Harga Total [!]");
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    case 1:
+        if(nominalBayar < balance){
+            printf("\n\t[!] Pembayaran Harus Lunas[!]");
+            return 0;
+            break;
+        }
+        return 1;
+        break;
+    }
+}
+
+void blok(const char *warna, const char *label, int kedalamanTarget, int *indexControl){
+int i, j;
+    int targetDiv = kedalamanTarget / 350;
+
+    for (i = 0; i < 6; i++) {
+        // Label di kiri hanya pada baris pertama
+        printf("%-6s", (i == 0) ? label : "");
+
+        // Cetak blok warna
+        printf("%s", warna);
+        for (j = 0; j < 50; j++) printf(" ");
+        printf("\033[0m"); // Reset warna + ganti baris
+        for (j = 0; j < 50; j++) printf(" ");
+        printf("\n");
     }
 
+    // Setelah semua baris blok dicetak, tampilkan ikan di samping (jika ini blok target)
+    if (*indexControl == targetDiv) {
+        tampilkanIkan(kedalamanTarget, warna);
+    }else{
+    	
+	}
 
+    (*indexControl)++; // Naikkan index untuk blok selanjutnya
+}
+void tampilkanIkan(int kedalaman, char *warna) {
+  int i,j;
+  for (i = 0; i < 6; i++) {
+        // Label di kiri hanya pada baris pertama
+        printf("%-6s", (i == 0) ? "" : "");
+
+        // Cetak blok warna
+        printf("%s", warna);
+        for (j = 0; j < 50; j++) printf(" ");
+        printf("\033[0m"); // Reset warna + ganti baris
+        for (j = 0; j < 50; j++) printf(" ");
+        printf("\n");
+        if(i == 1){
+          printf("%s", warna);
+          for (j = 0; j < 50; j++) printf(" ");
+          printf("\033[0m"); // Reset warna + ganti baris
+          printf(" %d m\n", kedalaman);
+        }else if(i == 2){
+          printf("%s", warna);
+          for (j = 0; j < 50; j++) printf(" ");
+          printf("\033[0m"); // Reset warna + ganti baris
+          printf("    ,/.]     __\n");
+        }else if(i == 3){
+          printf("%s", warna);
+          for (j = 0; j < 50; j++) printf(" ");
+          printf("\033[0m"); // Reset warna + ganti baris
+          printf(" ,-'    `!._/ /\n");
+        }else if(i == 4){
+          printf("%s", warna);
+          for (j = 0; j < 50; j++) printf(" ");
+          printf("\033[0m"); // Reset warna + ganti baris
+          printf("> @ )<|    _ <\n");
+        }else if (i == 5){
+          printf("%s", warna);
+          for (j = 0; j < 50; j++) printf(" ");
+          printf("\033[0m"); // Reset warna + ganti baris
+          printf("`-....,,;' \\_\\\n");
+        }
+    } // PUSH DULU DONG, CASE 4 UDAH BERESH //sek
+    // printf(" %d m\n", kedalaman);
+    // printf("    ,/.]     __\n");
+    // printf(" ,-'    `!._/ /\n");
+    // printf("> @ )<|    _ <\n");
+    // printf("`-....,,;' \\_\\\n");
+}
     /*
 ░: 176
 ▒: 177
