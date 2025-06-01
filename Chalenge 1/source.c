@@ -590,14 +590,13 @@ void PembayaranDisplay(string nama, long long int nomor, string alamat, int kode
     // printf("\n%c", 186);drawVoid(22); printf("CHALLENGE 1 PNC 2025");drawVoid(22);printf("%c", 186);
     // printf("\n%c", 186);drawVoid(22); printf("YengiYoluPNC");drawVoid(22);printf("%c", 186);
     printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(34);printf("%c", 186); 
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186); 
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
-
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %17s", 186 , nama);printf("%c", 186); 
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %17lld", 186 , nomor);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %17s", 186 , alamat);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %17d", 186 , kodepos);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c %15.2f", 186 , ongkir);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Harga        %c %15.2f", 186 , harga);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %15.2f", 186 , diskon);printf("%c", 186);
     /*
    printf("%c", 204);
     printf("╔════════════════════════════════════════════════════════════════════════════╗\n");
