@@ -3,11 +3,14 @@
 int main(){
     srand(time(NULL));
     
-
+    //Variable untuk Login
     int captchaAttempt;
     string inputString;
     bool authentication = false;
     int percobaan = 3;
+
+    //flow
+    int case1 = 0, case2 = 0, case3 = 0, case4 = 0, case5 = 0, case6 = 0;
 
     //User Account
     string username, password , captcha, nama, alamat;
@@ -134,13 +137,26 @@ int main(){
                     initializeIkanData(jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal);
                     getch();
                 }
+                case1++;
                 break;
             case 50:
+            if(case1 == 0){
+                printf("\n\t\x1b[31m[!] Silahkan Input Data Terlebih Dahulu [!]");
+                getch();
+                break;
+            }
+                system("cls");
+                resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
+                printf("\n\n\tPress Any Key to Continue . . . ");
+                getch();
+                case2++;
                 break;
             case 51:
 
                 break;
             case 52:
+            PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
+            getch();
                 break;
             case 53:
                 break;
