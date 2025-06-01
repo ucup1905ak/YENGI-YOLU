@@ -591,9 +591,9 @@ void PembayaranDisplay(string nama, string nomor, string alamat, string kodepos 
     printf("\n%c", 186);drawVoid(64); printf("%c", 186);
     printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 185); 
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %15s  ", 186 , nama);printf("%c", 186); 
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %s  ", 186 , nomor);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %15s  ", 186 , nomor);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %15s  ", 186 , alamat);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %s  ", 186 , kodepos);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %15s  ", 186 , kodepos);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c Rp %12.2f  ", 186 , ongkir);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c Rp %12.2f  ", 186 , harga);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %13.2f %%  ", 186 , diskon);printf("%c", 186);
