@@ -453,7 +453,7 @@ void resiDisplay(string nama, long int nomor, string alamat, int kodepos ,
   printf("\t   Jenis Ikan   : %s\n", jenisIkan);
   printf("\t   Nama Ikan    : %s\n", namaIkan);
   printf("\t   Kedalaman    : %d\n", kedalaman);
-  printf("\t   Berat Ikan   : %.2f\n", berat);
+  printf("\t   Berat Ikan   : %.2f kg\n", berat);
   printf("\t   Ongkir       : Rp %.2f\n",ongkir);
   printf("\t   Harga Ikan   : Rp %.2f\n", harga);
   printf("\t   Total        : Rp %.2f\n", ongkir + harga);
@@ -494,7 +494,7 @@ void generateOrderID(char *orderID){
     }}
   }while(countKapital > 0 || countDigit > 0);
 }
-void idAuth(char *orderID, int percobaan){
+void idAuth(char *orderID, int *percobaan){
   string tempStr;
   printf("\e[s");
   while(percobaan > 0){
@@ -503,11 +503,12 @@ void idAuth(char *orderID, int percobaan){
     printf("\n\t    Confirm ID   : ");fflush(stdin);gets(tempStr);
     if(strcmp(tempStr, orderID) == 0){  
       printf("\n\t\033[1;32m    [~] Berhasil Input Data [~]");
+      *percobaan = 0;
       break;
     } 
     else{
       printf("\n\t\033[1;31m    [!] Data Gagal Diinputkan [!]");
-      percobaan--;
+      *percobaan--;
       getch();
       printf("\e[u");
       printf("\e[0J");

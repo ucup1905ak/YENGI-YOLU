@@ -46,7 +46,7 @@ float hargaIkan(char *jenisIkan, float berat, int kedalaman);
 
 //Order id
 void generateOrderID(char * orderID);
-void idAuth(char *orderID, int percobaan);
+void idAuth(char *orderID, int *percobaan);
 
 void initializeDataPembeli(string nama, long long int *nomor, string alamat, int *kodepos);
 void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal);

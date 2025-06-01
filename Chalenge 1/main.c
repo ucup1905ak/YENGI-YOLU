@@ -90,6 +90,7 @@ int main(){
     system("cls");
     inputTanggal(&hari, &bulan, &tahun, username);
     menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
+    percobaan = 3;
     while(1){
         system("cls");
         system("color 09");
@@ -107,13 +108,15 @@ int main(){
                     HargaTotal = totalHarga(ongkir, harga, diskon);
                     system("cls");
                     system("color 0F");
-                    resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
+                    while(percobaan > 0){
+                        resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
                                 kedalaman, harga, diskon, ongkir, HargaTotal, berat);
-                    generateOrderID(orderID);
-                    idAuth(orderID, 3);
-                    menu1 = true;
-                    menu2 = true;
-                    getch();
+                        generateOrderID(orderID);
+                        idAuth(orderID, &percobaan);
+                        menu1 = true;
+                        menu2 = true;
+                        getch();
+                    }
                 }else{
                     printf("\t\033[1;32m[!] Data Sudah Terisi [!]\033[0m\n");
                     getch();
