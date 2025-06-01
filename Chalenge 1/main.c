@@ -5,7 +5,7 @@
 
 int main(){
     srand(time(NULL));
-    
+    char jawaban;
 
     int captchaAttempt;
     string inputString;
@@ -14,13 +14,13 @@ int main(){
 
     //User Account
     string username, password , captcha, nama, alamat, tempStr;
-    int hari, bulan, tahun;
+    int hari, bulan, tahun, i, j;
     int pilihan, indexControl;
     int kodepos;
     double accountBalance = 0;
     double nominalBayar;
     unsigned long long int nomor;
-    bool menu1,menu2,menu3,menu4,menu5,menu6,menu8;
+    bool menu1,menu2,menu3,menu4,menu5,menu6,menu8, pencarianIkan;
     
 
     
@@ -101,6 +101,7 @@ int main(){
         system("color 09");
         menuDisplay(username,hari,bulan,tahun);
         pilihan = getche();
+        printf("\x1b[0m");
         switch(pilihan){
             case 49:
                 if(!menu1){
@@ -141,8 +142,10 @@ int main(){
                     printf("\nt[!] Belum Ada Data Tersimpan [!]");
                     getch();
                 }
+                menu2 = true;
                 break;
             case 51:
+                pencarianIkan = true; //<----- tolong ini dipakai kalau pencarian ikan sudah dilakukan
                 break;
             case 52:
                 if(accountBalance<=0){
@@ -178,11 +181,51 @@ int main(){
                 getch();
                 break;
             case 54:
-
+                if(!menu1){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                    break;
+                }
+                if(accountBalance > 0){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Pembayaran belum Lunas [!]");
+                    getch();
+                    break;
+                }
+                if(!pencarianIkan){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Pencarian Ikan Belum Dilakukan [!]");
+                    getch();
+                    break;
+                }
+                printf("\n\tKonfirmasi [Y/N] : ");scanf("%c", &jawaban);
+                if(strcmpi(&jawaban, "Y") == 0){
+                    printf("\n\t\t[~] Memproses Penghapusan Data [~]");
+                    printf("\n\t\t\t");
+                    for(i = 0; i < 5; i++){
+                        printf("* ");
+                        Sleep(1000);
+                    }
+                    printf("\n\t\t[*] Data Berhasil Dihapus [*]");
+                }else if(strcmpi(&jawaban, "N") == 0){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Batal Menghapus Data [!]");
+                    getch();
+                    break;
+                }else{
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Pilihan Invalid [!]");
+                    getch();
+                    break;
+                }
                 break;
             case 56:
                 break;
             default:
+                printf("\n\t\x1b[31m");
+                printf("\n\t[!] Menu Tidak Ditemukan [!]");
+                getch();
                 break;
         }
     }
