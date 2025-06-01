@@ -163,26 +163,11 @@ int main(){
                 }
                 pencarianIkan(kedalaman, &hari, &bulan, &tahun, &HargaTotal, &harga, &berat, &accountBalance);
                 printf("\n\t\033[1;32m[+] Pencarian Selesai [+]\033[0m");
-                getch();
                 menu3 = true;
-                /*
-                Mulai Pencarian
-Pencarian dapat dilakukan ketika sudah ada data yang tersimpan dan usersudah melakukan
-pembayaran minimal 50% dari total harga.
-kedalaman Hari diperlukan
-0-499m 3 hari
-500-999m 5 hari
->=1000m 7 hari
-Dalam pencarian, terdapat 25% chance kapal terkena hit, dimana total harga akan
-bertambah Rp 500.000 dan waktu pencarian secara langsung ditambah 2 hari (Untuk detail
-lihat pada demo).
-Tampilan ketika kapal terkena hit
-Jika hari selanjutnya merupakan 30 Mei 2025 – 21 Juni 2025 maka akan dilanjutkan setelah
-21 Juni 2025.
-Karena kedalaman 800m (3 hari), tanggal 30 Mei tidak dihitung dan 21 Juni tidak dihitung,
-mulai terhitung tanggal 21, 22, 23 selesai, dan tanggal menjadi 24 Juni.*/
-              
-
+                getch();
+                printf("\e[u\e[0J");
+                
+                
                 break;
             case 52:
                 if(!menu1){
