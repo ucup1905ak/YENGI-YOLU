@@ -760,3 +760,69 @@ void tampilkanIkan(int kedalaman, char *warna, char *label) {
 ▌: 221
 ▐: 222
 ▀: 223*/
+
+
+
+//CASE 3
+
+                /*
+                Mulai Pencarian
+Pencarian dapat dilakukan ketika sudah ada data yang tersimpan dan usersudah melakukan
+pembayaran minimal 50% dari total harga.
+kedalaman Hari diperlukan
+0-499m 3 hari
+500-999m 5 hari
+>=1000m 7 hari
+Dalam pencarian, terdapat 25% chance kapal terkena hit, dimana total harga akan
+bertambah Rp 500.000 dan waktu pencarian secara langsung ditambah 2 hari (Untuk detail
+lihat pada demo).
+Tampilan ketika kapal terkena hit
+Jika hari selanjutnya merupakan 30 Mei 2025 – 21 Juni 2025 maka akan dilanjutkan setelah
+21 Juni 2025.
+Karena kedalaman 800m (3 hari), tanggal 30 Mei tidak dihitung dan 21 Juni tidak dihitung,
+mulai terhitung tanggal 21, 22, 23 selesai, dan tanggal menjadi 24 Juni.
+OOHH CUMA TAMBAH HARI
+*/
+
+void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat) {
+    int hariPencarian = 0;
+    int chanceHit = rand() % 4; // 0-3
+    int i;
+    if (kedalaman < 500) {
+        hariPencarian = 3;
+    } else if (kedalaman < 1000) {
+        hariPencarian = 5;
+    } else {
+        hariPencarian = 7;
+    }
+    
+    if (chanceHit == 0) { // 25% chance
+        printf("\n\t[!] Kapal terkena hit! Total harga bertambah Rp 500.000 dan waktu pencarian bertambah 2 hari [!]");
+        *HargaTotal += 500000;
+        hariPencarian += 2;
+    }
+
+    // Update tanggal
+    for (i = 0; i < hariPencarian; i++) {
+        (*hari)++;
+        if (*hari > HariDalamBulan(*bulan, *tahun)) {
+            (*hari) = 1;
+            (*bulan)++;
+            if (*bulan > 12) {
+                (*bulan) = 1;
+                (*tahun)++;
+            }
+        }
+        
+        // Cek apakah tanggal jatuh pada libur PNC
+        if (stdDate(*hari, *bulan, *tahun) >= 738910 && stdDate(*hari, *bulan, *tahun) <= 738932) {
+            printf("\n\t[!] Sedang libur antara tanggal 30 Mei - 21 Juni 2025 karena sedang mengikuti PNC 2025");
+            printf("\n\t[!] Dilanjutkan setelah 21 Juni 2025\n");
+            *hari = 22; // Lanjutkan dari 22 Juni
+            *bulan = 6; // Bulan Juni
+            *tahun = 2025; // Tahun 2025
+        }
+    }
+    
+    printf("\n\t[~] Pencarian selesai pada %02d-%02d-%04d [~]", *hari, *bulan, *tahun);
+}

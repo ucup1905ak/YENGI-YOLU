@@ -20,8 +20,8 @@ int main(){
     double accountBalance = 0;
     double nominalBayar;
     unsigned long long int nomor;
-    bool menu1,menu2,menu3,menu4,menu5,menu6,menu8;
-    
+    bool menu1,menu2,menu3,menu5,menu6,menu8;
+    int menu4 = 0; //Menu 4 untuk pembayaran
 
     
     
@@ -130,19 +130,52 @@ int main(){
                 }
                 break;
             case 50:
-                if(menu2){
-                    system("cls");
-                    system("color 0F");
-                    resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
-                                kedalaman, harga, diskon, ongkir, HargaTotal, berat);
-                    getch();
-                }else{
+                if(!menu2){
                     printf("\n\t\x1b[31m");
                     printf("\nt[!] Belum Ada Data Tersimpan [!]");
                     getch();
+                    break;
                 }
+                system("cls");
+                system("color 0F");
+                resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
+                             kedalaman, harga, diskon, ongkir, HargaTotal, berat);
+                getch();
                 break;
-            case 51:
+            case 51: //Case 2
+                if(!(menu1 && menu2)){
+                    printf("\n\t\x1b[31m");
+                    printf("\nt[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                    break;
+                }
+                if(menu4==0){
+                    printf("\n\t\x1b[31m");
+                    printf("\nt[!] Belum Ada Pembayaran [!]");
+                    getch();
+                    break;
+                }
+                pencarianIkan(kedalaman, &hari, &bulan, &tahun, &HargaTotal, &harga, &berat);
+                printf("\n\t\033[1;32m[+] Pencarian Selesai [+]\033[0m");
+                menu3 = true;
+                /*
+                Mulai Pencarian
+Pencarian dapat dilakukan ketika sudah ada data yang tersimpan dan usersudah melakukan
+pembayaran minimal 50% dari total harga.
+kedalaman Hari diperlukan
+0-499m 3 hari
+500-999m 5 hari
+>=1000m 7 hari
+Dalam pencarian, terdapat 25% chance kapal terkena hit, dimana total harga akan
+bertambah Rp 500.000 dan waktu pencarian secara langsung ditambah 2 hari (Untuk detail
+lihat pada demo).
+Tampilan ketika kapal terkena hit
+Jika hari selanjutnya merupakan 30 Mei 2025 – 21 Juni 2025 maka akan dilanjutkan setelah
+21 Juni 2025.
+Karena kedalaman 800m (3 hari), tanggal 30 Mei tidak dihitung dan 21 Juni tidak dihitung,
+mulai terhitung tanggal 21, 22, 23 selesai, dan tanggal menjadi 24 Juni.*/
+              
+
                 break;
             case 52:
                 if(accountBalance<=0){
