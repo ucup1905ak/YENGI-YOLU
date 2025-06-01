@@ -121,7 +121,6 @@ int main(){
                                 kedalaman, harga, diskon, ongkir, HargaTotal, berat);
                         generateOrderID(orderID);
                         idAuth(orderID, &percobaan);
-                        menu1 = true;
                         menu2 = true;
                         getch();
                     }
@@ -130,6 +129,7 @@ int main(){
                     getch();
                     break;
                 }
+                menu1 = true;
                 break;
             case 50: //case 2
                 if(!menu2){
