@@ -242,7 +242,8 @@ int main(){
                         printf("* ");
                         Sleep(1000);
                     }
-
+                    menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
+                    deleteInit(nama, &nomor, alamat, &kodepos, jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal, &accountBalance);
                     printf("\n\t\t[*] Data Berhasil Dihapus [*]");
                 }else if(strcmpi(&jawaban, "N") == 0){
                     printf("\n\t\x1b[31m");
