@@ -590,14 +590,16 @@ void PembayaranDisplay(string nama, long long int nomor, string alamat, int kode
     printf("\n%c", 186);drawVoidLineWithText(64, "YengiYoluPNC");printf("%c", 186);
     // printf("\n%c", 186);drawVoid(22); printf("CHALLENGE 1 PNC 2025");drawVoid(22);printf("%c", 186);
     // printf("\n%c", 186);drawVoid(22); printf("YengiYoluPNC");drawVoid(22);printf("%c", 186);
-    printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(34);printf("%c", 186); 
+    printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 186); 
     printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %17s", 186 , nama);printf("%c", 186); 
     printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %17lld", 186 , nomor);printf("%c", 186);
     printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %17s", 186 , alamat);printf("%c", 186);
     printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %17d", 186 , kodepos);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c %15.2f", 186 , ongkir);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Harga        %c %15.2f", 186 , harga);printf("%c", 186);
-    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %15.2f", 186 , diskon);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c %17.2f", 186 , ongkir);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Harga        %c %17.2f", 186 , harga);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %17.2f", 186 , diskon);printf("%c", 186);
+    printf("\n%c", 204);drawDoubleLine(21);printf("%c", 203);drawDoubleLine(9);printf("%c", 206);drawDoubleLine(18);printf("%c", 186); 
+    printf("\n%c", 204);printf(" %21s", namaIkan);printf("%c", 186);printf(" %6.2f Kg", berat);printf("%c", 186);printf("  Total Harga   %c %17.2f", 186 , HargaTotal);printf("%c", 186);
     /*
    printf("%c", 204);
     printf("╔════════════════════════════════════════════════════════════════════════════╗\n");
@@ -621,6 +623,19 @@ void PembayaranDisplay(string nama, long long int nomor, string alamat, int kode
     printf("├────────────────────────────────────────┼─────────────────┼─────────────────┤\n");
     printf("│ %-15s │ %.2f kg        │ Total Harga     │ Rp %12.2f │\n", namaIkan, berat, HargaTotal);
     printf("└────────────────────────────────────────┴─────────────────┴─────────────────┘\n");
+    
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║                        CHALLENGE 1 PNC                         ║
+║                          YengiYoluPNC                          ║
+╠═════════════════════════════╦══════════════════════════════════║
+╠                             ║  Nama         ║             Farel║
+╠                             ║  No.Telp      ║          13456789║
+╠                             ║  Alamat       ║           Alfmasf║
+╠                             ║  Kode Pos     ║             12345║
+╠                             ║  Ongkir       ║       560000.00║
+╠                             ║  Harga        ║      1575000.00║
+╠                             ║  Diskon       ║           20.00║                                                                                                                                                                                                                                                      
  */
     }
 
