@@ -150,7 +150,7 @@ int main(){
                     getch();
                     break;
                 }
-                if(accountBalance <= 0){
+                if(menu3){
                     printf("\n\t\033[1;32m[*] Pencarian Sudah Selesai [*]\033[0m\n");
                     getch();
                     break;

@@ -784,7 +784,7 @@ mulai terhitung tanggal 21, 22, 23 selesai, dan tanggal menjadi 24 Juni.
 OOHH CUMA TAMBAH HARI
 */
 
-void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalance) {
+void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalances) {
     int hariPencarian = 0;
     int chanceHit = rand() % 4; // 0-3
     int i;
@@ -798,7 +798,7 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
     
     if (chanceHit == 0) { // 25% chance
         printf("\n\t[!] Kapal terkena hit! Total harga bertambah Rp 500.000 dan waktu pencarian bertambah 2 hari [!]");
-        *accountBalance += 500000;
+        *accountBalances += 500000;
         *HargaTotal +=500000;
         hariPencarian += 2;
     }
@@ -818,7 +818,7 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
         // Cek apakah tanggal jatuh pada libur PNC
         if (stdDate(*hari, *bulan, *tahun) >= 738910 && stdDate(*hari, *bulan, *tahun) <= 738932) {
             printf("\n\t[!] Sedang libur antara tanggal 30 Mei - 21 Juni 2025 karena sedang mengikuti PNC 2025");
-            printf("\n\t[!] Dilanjutkan setelah 21 Juni 2025\n");
+            printf(" akan dilanjutkan setelah 21 Juni 2025\n");
             *hari = 22; // Lanjutkan dari 22 Juni
             *bulan = 6; // Bulan Juni
             *tahun = 2025; // Tahun 2025
@@ -831,5 +831,17 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
 void deleteInit(char *nama, unsigned long long int *nomor, char * alamat, int *kodepos , 
                  char * jenisIkan, char * namaIkan, int * kedalaman,float * berat,
                  float * harga, float *diskon, float *ongkir, float *HargaTotal, double *accountBalance){
-
+  *nama = "";
+  *nomor = 0;
+  *alamat = "";
+  *kodepos = 0;
+  *jenisIkan = "";
+  *namaIkan = "";
+  *kedalaman = 0;
+  *berat = 0.00;
+  *harga = 0.00;
+  *diskon = 0.00;
+  *ongkir = 0.00;
+  *HargaTotal = 0.00;
+  *accountBalance = 0.00;
 }
