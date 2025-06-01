@@ -764,7 +764,7 @@ void tampilkanIkan(int kedalaman, char *warna, char *label) {
 
 
 
-void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalances) {
+int pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalances) {
     int hariPencarian = 0;
     int chanceHit = rand() % 4; 
     int i;
@@ -777,10 +777,10 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
     }
 
     if (chanceHit == 0) {
-        printf("\n\t[!] Kapal terkena hit! Total harga bertambah Rp 500.000 dan waktu pencarian bertambah 2 hari [!]");
+        printf("\n\t[*] Kapal Mengalami Kerusakan, Waktu Pencarian Diperpanjang 2 hari [*]");
         *accountBalances += 500000;
         *HargaTotal +=500000;
-        hariPencarian += 2;
+        return 0; //bakal return 0 ketika kapal kena hit
     }
     for (i = 0; i < hariPencarian; i++) {
         (*hari)++;
@@ -795,7 +795,8 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
       
         if (stdDate(*hari, *bulan, *tahun) >= 738910 && stdDate(*hari, *bulan, *tahun) <= 738932) {
             printf("\n\t[!] Sedang libur antara tanggal 30 Mei - 21 Juni 2025 karena sedang mengikuti PNC 2025");
-            printf(" akan dilanjutkan setelah 21 Juni 2025\n");
+            delay(1000); 
+            printf("\n\t[*] dilanjutkan setelah 21 Juni 2025\n");
             *hari = 22;
             *bulan = 6;
             *tahun = 2025; 
@@ -803,6 +804,7 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
     }
     delay(1000); 
     printf("\n\t[~] Pencarian selesai pada %02d-%02d-%04d [~]", *hari, *bulan, *tahun);
+    return 1;
 }
 
 void deleteInit(char *nama, unsigned long long int *nomor, char * alamat, int *kodepos , 

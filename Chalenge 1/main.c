@@ -21,8 +21,8 @@ int main(){
     double nominalBayar;
     unsigned long long int nomor;
     bool menu1,menu2,menu3,menu5,menu6,menu8;
-    int menu4 = 0; //Menu 4 untuk pembayaran
-
+    int menu4 = 0; 
+    int hit = 0; 
     
     
     //Variable untuk Ikan
@@ -162,7 +162,16 @@ int main(){
                     getch();
                     break;
                 }
-                pencarianIkan(kedalaman, &hari, &bulan, &tahun, &HargaTotal, &harga, &berat, &accountBalance);
+                if(hit > 0 && accountBalance > 0){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] [!] Pencarian Belum Bisa Dilanjutkan, Pembayaran Wajib Lunas [!]");
+                    getch();
+                    break;
+                }
+                if(!pencarianIkan(kedalaman, &hari, &bulan, &tahun, &HargaTotal, &harga, &berat, &accountBalance)){
+                    hit++;
+                    break;
+                }
                 printf("\n\t\033[1;32m[+] Pencarian Selesai [+]\033[0m");
                 menu3 = true;
                 getch();
@@ -234,28 +243,38 @@ int main(){
                     getch();
                     break;
                 }
-                printf("\n\tKonfirmasi [Y/N] : ");scanf("%c", jawaban);
-                if(strcmpi(jawaban, "Y") == 0){
-                    printf("\n\t\t[~] Memproses Penghapusan Data [~]");
+                printf("\n\tKonfirmasi [y/N] : ");
+                switch(getch()){
+                	case 'y':
+									case 'Y':
+										printf("\n\t\t[~] Memproses Penghapusan Data [~]");
                     printf("\n\t\t\t");
                     for(i = 0; i < 5; i++){
                         printf("* ");
                         Sleep(1000);
                     }
                     menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
+                    hit = 0;
                     deleteInit(nama, &nomor, alamat, &kodepos, jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal, &accountBalance);
                     printf("\n\t\t[*] Data Berhasil Dihapus [*]");
-                }else if(strcmpi(jawaban, "N") == 0){
-                    printf("\n\t\x1b[31m");
+										break;
+
+									case 27:
+									case 'n':
+				 					case 'N':
+				 						printf("\n\t\x1b[31m");
                     printf("\n\t[!] Batal Menghapus Data [!]");
                     getch();
                     break;
-                }else{
-                    printf("\n\t\x1b[31m");
+			
+				 					default:
+									 	printf("\n\t\x1b[31m");
                     printf("\n\t[!] Pilihan Invalid [!]");
                     getch();
                     break;
-                }
+
+								}
+   
                 break;
             case 56:
                 break;
