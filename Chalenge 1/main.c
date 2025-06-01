@@ -5,7 +5,7 @@
 
 int main(){
     srand(time(NULL));
-    char jawaban;
+    string jawaban;
 
     int captchaAttempt;
     string inputString;
@@ -234,8 +234,8 @@ int main(){
                     getch();
                     break;
                 }
-                printf("\n\tKonfirmasi [Y/N] : ");scanf("%c", &jawaban);
-                if(strcmpi(&jawaban, "Y") == 0){
+                printf("\n\tKonfirmasi [Y/N] : ");scanf("%c", jawaban);
+                if(strcmpi(jawaban, "Y") == 0){
                     printf("\n\t\t[~] Memproses Penghapusan Data [~]");
                     printf("\n\t\t\t");
                     for(i = 0; i < 5; i++){
@@ -245,7 +245,7 @@ int main(){
                     menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
                     deleteInit(nama, &nomor, alamat, &kodepos, jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal, &accountBalance);
                     printf("\n\t\t[*] Data Berhasil Dihapus [*]");
-                }else if(strcmpi(&jawaban, "N") == 0){
+                }else if(strcmpi(jawaban, "N") == 0){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Batal Menghapus Data [!]");
                     getch();
