@@ -27,7 +27,7 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username);
 int stdDate(int hari,int bulan, int tahun);
 
 //Input Data
-void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos);
+void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos);
 
 void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
