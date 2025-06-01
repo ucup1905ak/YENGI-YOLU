@@ -2,3 +2,5 @@
 main.exe
 Makefile.win
 source.o
+main.o
+Chalenge 1.exe
