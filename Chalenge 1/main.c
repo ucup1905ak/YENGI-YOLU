@@ -300,31 +300,3 @@ int main(){
 }
 
 
-/*
-        variable
-        Masukkan Uang   : Rp 3000000
-
-
-        [$] Berhasil Membayar Rp 3000000.00 [$]
-
-        [!] Sisa Pembayaran Rp 2707511.00 [!]
-        
-
-
-        /-----/
-                Dibayar         : Rp 3000000.00
-        Masukkan Uang   : Rp
-
-
-/----/
-                [$] Kembalian   : Rp 1792489.00
-
-        [~] Pembayaran Lunas [~]
-
-/-//////
-        [*] Pembayaran Sudah Lunas [*]
-
-
-
-
-        */
