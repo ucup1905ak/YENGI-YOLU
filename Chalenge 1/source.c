@@ -831,12 +831,12 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
 void deleteInit(char *nama, unsigned long long int *nomor, char * alamat, int *kodepos , 
                  char * jenisIkan, char * namaIkan, int * kedalaman,float * berat,
                  float * harga, float *diskon, float *ongkir, float *HargaTotal, double *accountBalance){
-  *nama = "";
+  strcpy(nama, "");
+  strcpy(alamat, "");
+  strcpy(jenisIkan, "");
+  strcpy(namaIkan, "");
   *nomor = 0;
-  *alamat = "";
   *kodepos = 0;
-  *jenisIkan = "";
-  *namaIkan = "";
   *kedalaman = 0;
   *berat = 0.00;
   *harga = 0.00;

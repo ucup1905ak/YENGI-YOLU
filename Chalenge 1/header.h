@@ -69,3 +69,7 @@ void tampilkanIkan(int kedalaman, char *warna, char *label);
 
 //case 3
 void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalance);
+
+void deleteInit(char *nama, unsigned long long int *nomor, char * alamat, int *kodepos , 
+                 char * jenisIkan, char * namaIkan, int * kedalaman,float * berat,
+                 float * harga, float *diskon, float *ongkir, float *HargaTotal, double *accountBalance);
