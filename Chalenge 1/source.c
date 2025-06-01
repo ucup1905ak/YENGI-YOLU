@@ -583,23 +583,24 @@ void PembayaranDisplay(string nama, string nomor, string alamat, string kodepos 
                  float harga, float diskon, float ongkir, float HargaTotal){
     system("cls");
     system("color F0");
-    printf("\n%c", 201);drawDoubleLine(64);printf("%c", 187); 
-    printf("\n%c", 186);drawVoid(64); printf("%c", 186);
-    printf("\n%c", 186);drawVoidLineWithText(64, "CHALLENGE 1 PNC");printf("%c", 186);
-    printf("\n%c", 186);drawVoid(64); printf("%c", 186);
-    printf("\n%c", 186);drawVoidLineWithText(64, "YengiYoluPNC");printf("%c", 186);
-    printf("\n%c", 186);drawVoid(64); printf("%c", 186);
-    printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 185); 
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %15s  ", 186 , nama);printf("%c", 186); 
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %15s  ", 186 , nomor);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %15s  ", 186 , alamat);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %15s  ", 186 , kodepos);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c Rp %12.2f  ", 186 , ongkir);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c Rp %12.2f  ", 186 , harga);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %13.2f %%  ", 186 , diskon);printf("%c", 186);
-    printf("\n%c", 204);drawDoubleLine(19);printf("%c", 203);drawDoubleLine(9);printf("%c", 206);drawDoubleLine(15);printf("%c", 206);drawDoubleLine(18);printf("%c", 186);
-    printf("\n%c", 186);printf(" %18s", namaIkan);printf("%c", 186);printf(" %5.2f Kg", berat);printf("%c", 186);printf("  Total Harga  %c Rp %12.2f  ", 186 , HargaTotal);printf("%c", 186);
-    printf("\n%c", 200);drawDoubleLine(19);printf("%c", 202);drawDoubleLine(9);printf("%c", 202);drawDoubleLine(15);printf("%c", 202);drawDoubleLine(18);printf("%c", 188);
+    printf("\n\n");
+    printf("\n\t\t%c", 201);drawDoubleLine(64);printf("%c", 187); 
+    printf("\n\t\t%c", 186);drawVoid(64); printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoidLineWithText(64, "CHALLENGE 1 PNC");printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoid(64); printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoidLineWithText(64, "YengiYoluPNC");printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoid(64); printf("%c", 186);
+    printf("\n\t\t%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 185); 
+    printf("\n\t\t%c", 186);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %15s  ", 186 , nama);printf("%c", 186); 
+    printf("\n\t\t%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %15s  ", 186 , nomor);printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %15s  ", 186 , alamat);printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %15s  ", 186 , kodepos);printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c Rp %12.2f  ", 186 , ongkir);printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c Rp %12.2f  ", 186 , harga);printf("%c", 186);
+    printf("\n\t\t%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %13.2f %%  ", 186 , diskon);printf("%c", 186);
+    printf("\n\t\t%c", 204);drawDoubleLine(19);printf("%c", 203);drawDoubleLine(9);printf("%c", 206);drawDoubleLine(15);printf("%c", 206);drawDoubleLine(18);printf("%c", 186);
+    printf("\n\t\t%c", 186);printf(" %18s", namaIkan);printf("%c", 186);printf(" %5.2f Kg", berat);printf("%c", 186);printf("  Total Harga  %c Rp %12.2f  ", 186 , HargaTotal);printf("%c", 186);
+    printf("\n\t\t%c", 200);drawDoubleLine(19);printf("%c", 202);drawDoubleLine(9);printf("%c", 202);drawDoubleLine(15);printf("%c", 202);drawDoubleLine(18);printf("%c", 188);
     system("color F0");
     }
 double pembayaran(double accountBalance, double nominalBayar){
