@@ -94,13 +94,18 @@ int main(){
         pilihan = getch();
         switch(pilihan){
             case 49:
-                // dataInput(nama, &nomor, alamat, &kodepos);
+                dataInput(nama, &nomor, alamat, &kodepos);
+                //INI UNTUK GENERATE IKAN RANDOM
                 randIkan(jenisIkan, namaIkan, &kedalaman);
-                harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
-                diskon = randomDiskon();
                 berat = randomBerat();
+                diskon = randomDiskon();
+                harga = hargaIkan(jenisIkan, berat, kedalaman);
                 ongkir = ongkosKirim(berat);
                 HargaTotal = totalHarga(ongkir, harga, diskon);
+
+
+
+                //GENERATE ORDER ID
                 generateOrderID(orderID);
                 printf("\n\nORDER ID : %s\n", orderID);
                 printf("\n[%s][%s][%d][%.2f]\n", jenisIkan, namaIkan, kedalaman, berat);
@@ -114,6 +119,7 @@ int main(){
             case 50:
                 break;
             case 51:
+
                 break;
             case 52:
                 break;

@@ -7,8 +7,6 @@
 
 typedef char string[100];
 
-
-
 //Utility
 void delay(int milisec); //utility Delay
 void flushKeyBoard();

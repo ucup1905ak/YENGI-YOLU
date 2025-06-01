@@ -448,17 +448,6 @@ void resiDisplay(string nama, long long int nomor, string alamat, int kodepos ,
 }
 
 
-//ORDER ID
-/*
-o Order ID case sensitive (4 digit) terdiri dari 2 huruf kapital dan 2 angka,
-dengan posisi yang berbeda setiap mendapat order id baru.
-
-Terdapat 4 digit
-Order ID yang harus dikonfirmasi user untuk menyelesaikan pesanan. Ketika user salah
-menginputkan ID sebanyak 3x, maka informasi yang sudah diinputkan maupun didapatkan
-user akan hilang (ID tidak akan berubah ketika user salah input).
-*/
-
 void generateOrderID(char * orderID){
   strcpy(orderID, "");
   int countKapital = 2;
