@@ -131,10 +131,9 @@ int main(){
                 }
                 break;
             case 50:
-
                 if(!menu2){
                     printf("\n\t\x1b[31m");
-                    printf("\nt[!] Belum Ada Data Tersimpan [!]");
+                    printf("\n\t[!] Belum Ada Data Tersimpan [!]");
                     getch();
                     break;
                 }
@@ -144,35 +143,49 @@ int main(){
                              kedalaman, harga, diskon, ongkir, HargaTotal, berat);
                 getch();
                 break;
-
-            case 51: //Case 3
-                if(menu3){
-                    printf("\n\t[*] Pencarian Sudah Selesai [*]");
-                    getch();
-                    break;
-                }
-                if(!(menu1 && menu2)){
+            case 51: //Case 2
+                if(!menu1){
                     printf("\n\t\x1b[31m");
-                    printf("\nt[!] Belum Ada Data Tersimpan [!]");
+                    printf("\n\t[!] Belum Ada Data Tersimpan [!]");
                     getch();
                     break;
                 }
-                if(menu4==0){
+                if(menu4==0 || accountBalance > 0){
                     printf("\n\t\x1b[31m");
-                    printf("\nt[!] Belum Ada Pembayaran [!]");
+                    printf("\n\t[!] Pencarian Belum Bisa Dilakukan, Minimal 50% Pembayaran [!]");
                     getch();
                     break;
                 }
-                printf("\e[s");
-                pencarianIkan(kedalaman, &hari, &bulan, &tahun, &HargaTotal, &harga, &berat);
-                delay(1500);
+                pencarianIkan(kedalaman, &hari, &bulan, &tahun, &HargaTotal, &harga, &berat, &accountBalance);
                 printf("\n\t\033[1;32m[+] Pencarian Selesai [+]\033[0m");
                 getch();
-                printf("\e[u\e[0J");
                 menu3 = true;
+                /*
+                Mulai Pencarian
+Pencarian dapat dilakukan ketika sudah ada data yang tersimpan dan usersudah melakukan
+pembayaran minimal 50% dari total harga.
+kedalaman Hari diperlukan
+0-499m 3 hari
+500-999m 5 hari
+>=1000m 7 hari
+Dalam pencarian, terdapat 25% chance kapal terkena hit, dimana total harga akan
+bertambah Rp 500.000 dan waktu pencarian secara langsung ditambah 2 hari (Untuk detail
+lihat pada demo).
+Tampilan ketika kapal terkena hit
+Jika hari selanjutnya merupakan 30 Mei 2025 – 21 Juni 2025 maka akan dilanjutkan setelah
+21 Juni 2025.
+Karena kedalaman 800m (3 hari), tanggal 30 Mei tidak dihitung dan 21 Juni tidak dihitung,
+mulai terhitung tanggal 21, 22, 23 selesai, dan tanggal menjadi 24 Juni.*/
+              
 
                 break;
             case 52:
+                if(!menu1){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                    break;
+                }
                 if(accountBalance<=0){
                     printf("\n\t[*] Pembayaran Sudah Lunas [*]");
                     getch();
@@ -196,13 +209,19 @@ int main(){
                 getch();
                 break;
             case 53:
+                if(!menu1){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                    break;
+                }
                 system("cls");
                 system("color 0F");
-                blok("\033[48;5;45m", "0m", kedalaman, &indexControl);Sleep(2000);
-                blok("\033[48;5;39m", "350m", kedalaman, &indexControl);Sleep(2000);
-                blok("\033[48;5;33m", "700m", kedalaman, &indexControl);Sleep(2000);
-                blok("\033[48;5;27m", "1050m", kedalaman, &indexControl);Sleep(2000);
-                blok("\033[48;5;18m", "1400m", kedalaman, &indexControl);Sleep(2000);
+                blok("\033[48;5;45m", "0m", kedalaman, &indexControl);Sleep(3000);
+                blok("\033[48;5;39m", "350m", kedalaman, &indexControl);Sleep(3000);
+                blok("\033[48;5;33m", "700m", kedalaman, &indexControl);Sleep(3000);
+                blok("\033[48;5;27m", "1050m", kedalaman, &indexControl);Sleep(3000);
+                blok("\033[48;5;18m", "1400m", kedalaman, &indexControl);Sleep(3000);
                 getch();
                 break;
             case 54:
@@ -232,6 +251,7 @@ int main(){
                         printf("* ");
                         Sleep(1000);
                     }
+                    
                     printf("\n\t\t[*] Data Berhasil Dihapus [*]");
                 }else if(strcmpi(&jawaban, "N") == 0){
                     printf("\n\t\x1b[31m");
