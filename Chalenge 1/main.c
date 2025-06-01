@@ -5,7 +5,7 @@
 
 int main(){
     srand(time(NULL));
-    string jawaban;
+    char jawaban;
 
     int captchaAttempt;
     string inputString;
@@ -145,7 +145,7 @@ int main(){
                 break;
             case 51: //Case 3
                     
-                if(!menu1 && !menu2){
+                if(!menu1){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Belum Ada Data Tersimpan [!]");
                     getch();
@@ -234,8 +234,8 @@ int main(){
                     getch();
                     break;
                 }
-                printf("\n\tKonfirmasi [Y/N] : ");scanf("%c", jawaban);
-                if(strcmpi(jawaban, "Y") == 0){
+                printf("\n\tKonfirmasi [Y/N] : ");jawaban = getche();
+                if(jawaban == 'Y' || jawaban == 'y'){
                     printf("\n\t\t[~] Memproses Penghapusan Data [~]");
                     printf("\n\t\t\t");
                     for(i = 0; i < 5; i++){
@@ -245,7 +245,7 @@ int main(){
                     menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
                     deleteInit(nama, &nomor, alamat, &kodepos, jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal, &accountBalance);
                     printf("\n\t\t[*] Data Berhasil Dihapus [*]");
-                }else if(strcmpi(jawaban, "N") == 0){
+                }else if(jawaban == 'N' || jawaban == 'n'){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Batal Menghapus Data [!]");
                     getch();
@@ -258,6 +258,14 @@ int main(){
                 }
                 break;
             case 56:
+                if(!menu1){
+                    printf("\n\t\x1b[31m");
+                    printf("\n\t[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                    break;
+                }
+                PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
+                getch();
                 break;
             default:
                 printf("\n\t\x1b[31m");
