@@ -223,7 +223,7 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
   getch();
 }    
 
-void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos){
+void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
   string tempStr;
 
   printf("\x1b[0m");
