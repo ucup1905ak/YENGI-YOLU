@@ -1,24 +1,22 @@
 #include "header.h"
-
+#include <time.h>
 int main(){
     srand(time(NULL));
     
-    //Variable untuk Login
+
     int captchaAttempt;
     string inputString;
     bool authentication = false;
     int percobaan = 3;
 
-    //flow
-    int case1 = 0, case2 = 0, case3 = 0, case4 = 0, case5 = 0, case6 = 0;
-
     //User Account
-    string username, password , captcha, nama, alamat;
+    string username, password , captcha, nama, alamat, tempStr;
     int hari, bulan, tahun;
     int pilihan;
     int kodepos;
-    long long int nomor;
-
+    long int nomor;
+    bool menu1,menu2,menu3,menu4,menu5,menu6,menu8;
+    
 
     
     
@@ -31,7 +29,6 @@ int main(){
     float ongkir;
     float berat;
     string orderID;
-    int OrderIDAttempt = 3;
 
 
     //LOGIN
@@ -92,68 +89,51 @@ int main(){
     }while(strcmp(captcha,inputString)!= 0);
     system("cls");
     inputTanggal(&hari, &bulan, &tahun, username);
+    menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
     while(1){
         system("cls");
+        system("color 09");
         menuDisplay(username,hari,bulan,tahun);
-        pilihan = getch();
+        pilihan = getche();
         switch(pilihan){
             case 49:
-                dataInput(nama, &nomor, alamat, &kodepos);
-                //INI UNTUK GENERATE IKAN RANDOM
-                randIkan(jenisIkan, namaIkan, &kedalaman);
-                berat = randomBerat();
-                diskon = randomDiskon();
-                harga = hargaIkan(jenisIkan, berat, kedalaman);
-                ongkir = ongkosKirim(berat);
-                HargaTotal = totalHarga(ongkir, harga, diskon);
-                // printf("\n[%s][%s][%d][%.2f]\n", jenisIkan, namaIkan, kedalaman, berat);
-                // printf("\n[%.2f][%.2f][%.2f][%.2f]\n", ongkir, harga, diskon, HargaTotal);
-                system("cls");
-                resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
-                //GENERATE ORDER ID
-                generateOrderID(orderID);
-                printf("\n ORDER ID : %s\n", orderID);
-                printf("\x1b[s");
-                do{
-                    printf(" Order ID : ");  
-                    scanf("%s", inputString);
-                    if(strcmp(orderID, inputString) != 0){
-                        printf("\n [!] Order ID Salah [!]");
-                        OrderIDAttempt--;
-                        getch();
-                        printf("\x1b[u"); printf("\x1b[0J");
-                    }else{
-                        printf("\n [+] Order ID Benar [+]");
-                        printf("\n\n Press Any Key to Continue . . . ");
-                        getch();
-                        printf("\x1b[0m");
-                        printf("\x1b[u"); printf("\x1b[0J");
-                    }
-                }while(strcmp(orderID, inputString) != 0 && OrderIDAttempt > 0);
-                if(OrderIDAttempt <= 0){
-                    printf("\n [!] Order ID Salah 3x [!]");
-                    printf("\n\n Press Any Key to Continue . . . ");
-                    initializeDataPembeli(nama, &nomor, alamat, &kodepos);
-                    initializeIkanData(jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal);
-                    case1 = 0;
+                if(!menu1){
+                    dataInput(nama, &nomor, alamat, &kodepos);
+                    randIkan(jenisIkan, namaIkan, &kedalaman);
+                    harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
+                    diskon = randomDiskon();
+                    berat = randomBerat();
+                    ongkir = ongkosKirim(berat);
+                    HargaTotal = totalHarga(ongkir, harga, diskon);
+                    system("cls");
+                    system("color 0F");
+                    resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
+                                kedalaman, harga, diskon, ongkir, HargaTotal, berat);
+                    generateOrderID(orderID);
+                    idAuth(orderID, 3);
+                    menu1 = true;
+                    menu2 = true;
                     getch();
+                }else{
+                    printf("\t\033[1;32m[!] Data Sudah Terisi [!]\033[0m\n");
+                    getch();
+                    break;
                 }
-                case1++;
                 break;
             case 50:
-            if(case1 == 0){
-                printf("\n\t\x1b[31m[!] Silahkan Input Data Terlebih Dahulu [!]");
-                getch();
-                break;
-            }
-                system("cls");
-                resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
-                printf("\n\n\tPress Any Key to Continue . . . ");
-                getch();
-                case2++;
+                if(menu2){
+                    system("cls");
+                    system("color 0F");
+                    resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
+                                kedalaman, harga, diskon, ongkir, HargaTotal, berat);
+                    getch();
+                }else{
+                    printf("\n\t\x1b[31m");
+                    printf("\nt[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                }
                 break;
             case 51:
-
                 break;
             case 52:
                 PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);

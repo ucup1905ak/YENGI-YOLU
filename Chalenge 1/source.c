@@ -1,7 +1,5 @@
 #include "header.h"
-#include <conio.h>
-#include <time.h>
-#include <math.h>
+
 #define USERNAME "YengiYolu"
 #define PASSWORD "YengiYoluPNC"
 char randomKapital() {
@@ -77,7 +75,7 @@ void menuDisplay(string username, int hari, int bulan, int tahun) {
   system("color 09");
   printf("\t\t\t--===[ CHALLENGE 1 PNC 2025 ]===--");
   printf("\n\n\tSelamat Datang, %s!", username);
-  printf("\n\tTanggal : %02d-%02d-%d", hari, bulan, tahun);
+  printf("\n\tTanggal : %02d-%02d-%04d", hari, bulan, tahun);
   printf("\n\n\t[1] Input Data");
   printf("\n\t[2] Cetak Nota");
   printf("\n\t[3] Mulai Pencarian");
@@ -221,11 +219,11 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
       break;
     }
   } while (true);
-  printf("\n\t\t[+] Berhasil Input Tanggal [+]");
+  printf("\n\t\t\033[1;32m[+] Berhasil Input Tanggal [+]");
   getch();
 }    
 
-void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
+void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos){
   string tempStr;
 
   printf("\x1b[0m");
@@ -245,7 +243,6 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  system("color 09");
 
   //Masukkan Nomor
   printf("\e[s");
@@ -270,7 +267,6 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  system("color 09");
 
   //Masukkan Alamat
   printf("\e[s");
@@ -288,7 +284,6 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  system("color 09");
 
   //Masukkan Kode Pos
   printf("\e[s");
@@ -313,9 +308,8 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  printf("\033[32m\t[~] Berhasil Input Data [~]\033[0m");
+  printf("\n\t\t\033[1;32m[~] Berhasil Input Data [~]");
   getch();
-  system("color 09");
 }
 bool isStringRight(string text){
   if(strlen(text) <= 0 || strlen(text) >= 29)return false;
@@ -438,68 +432,49 @@ float totalHarga(float ongkir, float hargaIkan, float diskon) {
   }
   return total;
 }
-/*
-         _________________________________
-        |           .                     |
-        |          ':'                    |
-        |        ___:____     |'\/'|      |
-        |      ,'        `.    \ /        |
-        |      |  O        \___/ |        |
-        |    ~^~^~^~^~^~^~^~^~^~^~^~^~    |
-         _________________________________
-         Nama           : asdfhasd
-         Alamat         : dsaf
-         No Telepon     : 123456789
-         Kode Pos       : 46155
-         _________________________________
-         Jenis Ikan     : Omnivora
-         Nama Ikan      : Hiu Paus
-         Kedalaman      : 500
-         Berat Ikan     : 15.47 kg
-         Ongkir         : Rp 525000.00
-         Harga Ikan     : Rp 1933778.75
-         Total          : Rp 2458778.75
-         Diskon         : 20.00%
-         Total Harga    : Rp 1967023.00
-        ___________________________________
 
-        ID              : 5Z1V
-
-        Confirm ID      :
-*/
 //Nampilkan Order ID MASIH ERORRR
-void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
-                 string jenisIkan, string namaIkan, int kedalaman,float berat,
-                 float harga, float diskon, float ongkir, float HargaTotal) {
-  printf("\n  _________________________________");
-  printf("\n |           .                     |");
-  printf("\n |          ':'                    |");
-  printf("\n |        ___:____     |'\\/'|      |");
-  printf("\n |      ,'        `.    \\  /        |");
-  printf("\n |      |  O        \\____/|        |");
-  printf("\n |    ~^~^~^~^~^~^~^~^~^~^~^~^~    |");
-  printf("\n  _________________________________");
-  printf("\n Nama           : %s", nama);
-  printf("\n Alamat         : %s", alamat);
-  printf("\n No Telepon     : %lld", nomor);
-  printf("\n Kode Pos       : %d", kodepos);
-  printf("\n _________________________________");
-  printf("\n Jenis Ikan     : %s", jenisIkan);
-  printf("\n Nama Ikan      : %s", namaIkan);
-  printf("\n Kedalaman      : %d", kedalaman);
-  printf("\n Berat Ikan     : %.2f kg", berat);
-  printf("\n Ongkir         : Rp %.2f", ongkir);
-  printf("\n Harga Ikan     : Rp %.2f", harga);
-  printf("\n Total          : Rp %.2f", ongkir + harga);
-  printf("\n Diskon         : %.2f%%", diskon);
-  printf("\n Total Harga    : Rp %.2f", HargaTotal);
-  printf("\n _________________________________");
-  // printf("\nID              : 5Z1V");
-  // printf("\nConfirm ID      :");
+void resiDisplay(string nama, long int nomor, string alamat, int kodepos , 
+                 string jenisIkan, string namaIkan, int kedalaman,
+                 float harga, float diskon, float ongkir, float HargaTotal, float berat) {
+  printf("\n\t    _________________________________\n");
+  printf("\t   |           .                     |\n");
+  printf("\t   |          ':'                    |\n");
+  printf("\t   |        ___:____     |'\/'|       |\n");
+  printf("\t   |      ,'        `.    \ /         |\n");
+  printf("\t   |      |  O        \___/ |         |\n");
+  printf("\t   |    ~^~^~^~^~^~^~^~^~^~^~^~^~    |\n");
+  printf("\t   _________________________________\n");
+  printf("\t   Nama         : %s\n", nama);
+  printf("\t   Alamat       : %s\n", alamat);
+  printf("\t   No Telepon   : %ld\n", nomor);
+  printf("\t   Kode Pos     : %d\n", kodepos);
+  printf("\t   _________________________________\n");
+  printf("\t   Jenis Ikan   : %s\n", jenisIkan);
+  printf("\t   Nama Ikan    : %s\n", namaIkan);
+  printf("\t   Kedalaman    : %d\n", kedalaman);
+  printf("\t   Berat Ikan   : %.2f\n", berat);
+  printf("\t   Ongkir       : Rp %.2f\n",ongkir);
+  printf("\t   Harga Ikan   : Rp %.2f\n", harga);
+  printf("\t   Total        : Rp %.2f\n", ongkir + harga);
+  printf("\t   Diskon       : %.2f%\n", diskon);
+  printf("\t   Total Harga  : Rp %.2f\n",HargaTotal);
+  printf("\t   _________________________________\n");
 }
 
 
-void generateOrderID(char * orderID){
+//ORDER ID
+/*
+o Order ID case sensitive (4 digit) terdiri dari 2 huruf kapital dan 2 angka,
+dengan posisi yang berbeda setiap mendapat order id baru.
+
+Terdapat 4 digit
+Order ID yang harus dikonfirmasi user untuk menyelesaikan pesanan. Ketika user salah
+menginputkan ID sebanyak 3x, maka informasi yang sudah diinputkan maupun didapatkan
+user akan hilang (ID tidak akan berubah ketika user salah input).
+*/
+
+void generateOrderID(char *orderID){
   strcpy(orderID, "");
   int countKapital = 2;
   int countDigit = 2;
@@ -519,13 +494,32 @@ void generateOrderID(char * orderID){
     }}
   }while(countKapital > 0 || countDigit > 0);
 }
-
-
-void initializeDataPembeli(string nama, long long int *nomor, string alamat, int *kodepos){
-  strcpy(nama, "");
-  *nomor = 0;
-  strcpy(alamat, "");
-  *kodepos = 0;
+void idAuth(char *orderID, int percobaan){
+  string tempStr;
+  printf("\e[s");
+  while(percobaan > 0){
+    system("color 0F");
+    printf("\n\t    ID           : %s", orderID);
+    printf("\n\t    Confirm ID   : ");fflush(stdin);gets(tempStr);
+    if(strcmp(tempStr, orderID) == 0){  
+      printf("\n\t\033[1;32m    [~] Berhasil Input Data [~]");
+      break;
+    } 
+    else{
+      printf("\n\t\033[1;31m    [!] Data Gagal Diinputkan [!]");
+      percobaan--;
+      getch();
+      printf("\e[u");
+      printf("\e[0J");
+    }
+  }
+}
+void initializeUserData(string username, string password, int *hari, int *bulan, int *tahun){
+  strcpy(username, "");
+  strcpy(password, "");
+  *hari = 0;
+  *bulan = 0;
+  *tahun = 0;
 }
 
 
