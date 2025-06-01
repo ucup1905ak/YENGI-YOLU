@@ -47,3 +47,14 @@ float hargaIkan(char *jenisIkan, float berat, int kedalaman);
 //Order id
 void generateOrderID(char * orderID);
 void idAuth(char *orderID, int percobaan);
+
+void initializeUserData(string username, string password, int *hari, int *bulan, int *tahun);
+void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal);
+
+
+
+//Case 4
+
+void PembayaranDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+                 string jenisIkan, string namaIkan, int kedalaman,float berat,
+                 float harga, float diskon, float ongkir, float HargaTotal);

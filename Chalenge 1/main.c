@@ -136,6 +136,8 @@ int main(){
             case 51:
                 break;
             case 52:
+                PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
+                getch();
                 break;
             case 53:
                 break;

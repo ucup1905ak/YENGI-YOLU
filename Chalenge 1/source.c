@@ -514,3 +514,129 @@ void idAuth(char *orderID, int percobaan){
     }
   }
 }
+void initializeUserData(string username, string password, int *hari, int *bulan, int *tahun){
+  strcpy(username, "");
+  strcpy(password, "");
+  *hari = 0;
+  *bulan = 0;
+  *tahun = 0;
+}
+void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal){
+  strcpy(jenisIkan, "");
+  strcpy(namaIkan, "");
+  *kedalaman = 0;
+  *berat = 0.0;
+  *harga = 0.0;
+  *diskon = 0.0;
+  *ongkir = 0.0;
+  *HargaTotal = 0.0;
+}
+
+void drawDoubleLine(int length) {
+    int i;
+    for( i = 0; i < length; i++) {
+        printf("%c", 205);
+    }
+}
+
+void drawSingleLine(int length) {
+    int i;
+    for( i = 0; i < length; i++) {
+        printf("%c", 196);
+    }
+}
+
+void drawVoid(int length) {
+  int i;
+    for( i = 0; i < length; i++) {
+        printf(" ");
+    }
+}
+void PembayaranDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+                 string jenisIkan, string namaIkan, int kedalaman,float berat,
+                 float harga, float diskon, float ongkir, float HargaTotal){
+
+                 
+    system("cls");
+    system("color F0");
+    printf("%c", 201);drawDoubleLine(65);printf("%c\n", 187); 
+    printf("\n%c", 186); drawVoid(63); printf("%c", 186);
+    printf("\n%c", 186);drawVoid(30); printf("CHALLENGE 1 PNC 2025");drawVoid(32);printf("%c", 186);
+    printf("%c", 204);drawDoubleLine(65);printf("%c\n", 185); 
+    /*
+   
+    printf("%c", 204);
+    printf("╔════════════════════════════════════════════════════════════════════════════╗\n");
+    printf("│                                                                            │\n");
+    printf("│                            CHALLENGE 1 PNC 2025                          │\n");
+    printf("│                                                              YengiYoluPN │\n");
+    printf("├────────────────────────────────────────┬─────────────────┬─────────────────┤\n");
+    printf("│                                        │ Nama            │ %-15s │\n", nama);
+    printf("│        .                               ├─────────────────┼─────────────────┤\n");
+    printf("│       ':'                              │ No. Telp        │ %015lld │\n", nomor);
+    printf("│     ___:____     |'\\/'|                ├─────────────────┼─────────────────┤\n");
+    printf("│   ,'        `.    \\ /                  │ Alamat          │ %-15s │\n", alamat);
+    printf("│   |  O        \\___/ |                  ├─────────────────┼─────────────────┤\n");
+    printf("│ ~^~^~^~^~^~^~^~^~^~^~^~^~                │ Kode Pos        │ %-15d │\n", kodepos);
+    printf("│                                        ├─────────────────┼─────────────────┤\n");
+    printf("│                                        │ Ongkir          │ Rp %12.2f │\n", ongkir);
+    printf("│                                        ├─────────────────┼─────────────────┤\n");
+    printf("│                                        │ Harga           │ Rp %12.2f │\n", harga);
+    printf("│                                        ├─────────────────┼─────────────────┤\n");
+    printf("│                                        │ Diskon          │ %13.2f%% │\n", diskon);
+    printf("├────────────────────────────────────────┼─────────────────┼─────────────────┤\n");
+    printf("│ %-15s │ %.2f kg        │ Total Harga     │ Rp %12.2f │\n", namaIkan, berat, HargaTotal);
+    printf("└────────────────────────────────────────┴─────────────────┴─────────────────┘\n");
+ */
+    }
+
+
+    /*
+░: 176
+▒: 177
+▓: 178
+│: 179
+┤: 180
+╡: 181
+╢: 182
+╖: 183
+╕: 184
+╣: 185
+║: 186
+╗: 187
+╝: 188
+╜: 189
+╛: 190
+┐: 191
+└: 192
+┴: 193
+┬: 194
+├: 195
+─: 196
+┼: 197
+╞: 198
+╟: 199
+╚: 200
+╔: 201
+╩: 202
+╦: 203
+╠: 204
+═: 205
+╬: 206
+╧: 207
+╨: 208
+╤: 209
+╥: 210
+╙: 211
+╘: 212
+╒: 213
+╓: 214
+╫: 215
+╪: 216
+┘: 217
+┌: 218
+█: 219
+▄: 220
+▌: 221
+▐: 222
+▀: 223*/
