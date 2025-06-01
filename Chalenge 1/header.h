@@ -43,7 +43,7 @@ float hargaIkan(char *jenisIkan, float berat, int kedalaman);
 
 //Order id
 void generateOrderID(char * orderID);
-void initializeUserData(string username, string password, int *hari, int *bulan, int *tahun);
+void initializeDataPembeli(string nama, long long int *nomor, string alamat, int *kodepos);
 void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal);
 
 

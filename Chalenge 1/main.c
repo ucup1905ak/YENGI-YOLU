@@ -133,8 +133,9 @@ int main(){
                 if(OrderIDAttempt <= 0){
                     printf("\n [!] Order ID Salah 3x [!]");
                     printf("\n\n Press Any Key to Continue . . . ");
-                    initializeUserData(username, password, &hari, &bulan, &tahun);
+                    initializeDataPembeli(nama, &nomor, alamat, &kodepos);
                     initializeIkanData(jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal);
+                    case1 = 0;
                     getch();
                 }
                 case1++;
@@ -155,8 +156,8 @@ int main(){
 
                 break;
             case 52:
-            PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
-            getch();
+                PembayaranDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, kedalaman, berat, harga, diskon, ongkir, HargaTotal);
+                getch();
                 break;
             case 53:
                 break;

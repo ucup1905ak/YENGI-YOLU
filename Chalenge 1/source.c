@@ -521,13 +521,14 @@ void generateOrderID(char * orderID){
 }
 
 
-void initializeUserData(string username, string password, int *hari, int *bulan, int *tahun){
-  strcpy(username, "");
-  strcpy(password, "");
-  *hari = 0;
-  *bulan = 0;
-  *tahun = 0;
+void initializeDataPembeli(string nama, long long int *nomor, string alamat, int *kodepos){
+  strcpy(nama, "");
+  *nomor = 0;
+  strcpy(alamat, "");
+  *kodepos = 0;
 }
+
+
 void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal){
   strcpy(jenisIkan, "");
   strcpy(namaIkan, "");
@@ -559,6 +560,29 @@ void drawVoid(int length) {
         printf(" ");
     }
 }
+
+void drawChar(int length, char c) {
+    int i;
+    for( i = 0; i < length; i++) {
+        printf("%c", c);
+    }
+}
+void drawVoidLineWithText(int length, string text) {
+    int i;
+    int textLength = strlen(text);
+    int padding = (length - textLength) / 2;
+    for (i = 0; i < padding; i++) {
+        printf(" ");
+    }
+    printf("%s", text);
+    for (i = 0; i < padding; i++) {
+        printf(" ");
+    }
+    if ((length - textLength) % 2 != 0) {
+        printf(" ");
+    }
+}
+
 void PembayaranDisplay(string nama, long long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,float berat,
                  float harga, float diskon, float ongkir, float HargaTotal){
@@ -566,13 +590,23 @@ void PembayaranDisplay(string nama, long long int nomor, string alamat, int kode
                  
     system("cls");
     system("color F0");
-    printf("%c", 201);drawDoubleLine(65);printf("%c\n", 187); 
-    printf("\n%c", 186); drawVoid(63); printf("%c", 186);
-    printf("\n%c", 186);drawVoid(30); printf("CHALLENGE 1 PNC 2025");drawVoid(32);printf("%c", 186);
-    printf("%c", 204);drawDoubleLine(65);printf("%c\n", 185); 
+    printf("\n%c", 201);drawDoubleLine(64);printf("%c", 187); 
+    printf("\n%c", 186);drawVoid(64); printf("%c", 186);
+    printf("\n%c", 186);drawVoidLineWithText(64, "CHALLENGE 1 PNC");printf("%c", 186);
+    printf("\n%c", 186);drawVoidLineWithText(64, "YengiYoluPNC");printf("%c", 186);
+    // printf("\n%c", 186);drawVoid(22); printf("CHALLENGE 1 PNC 2025");drawVoid(22);printf("%c", 186);
+    // printf("\n%c", 186);drawVoid(22); printf("YengiYoluPNC");drawVoid(22);printf("%c", 186);
+    printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(34);printf("%c", 186); 
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186); 
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
+    printf("\n%c", 204);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %26s", nama);printf("%c", 186);
+
     /*
-   
-    printf("%c", 204);
+   printf("%c", 204);
     printf("╔════════════════════════════════════════════════════════════════════════════╗\n");
     printf("│                                                                            │\n");
     printf("│                            CHALLENGE 1 PNC 2025                          │\n");
