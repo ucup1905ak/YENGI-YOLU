@@ -26,8 +26,22 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username);
 int stdDate(int hari,int bulan, int tahun);
 
 //Input Data
-void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos);
-void resiDisplay(string nama, long int nomor, string alamat, int kodepos);
+void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos);
+
+void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+                 string jenisIkan, string namaIkan, int kedalaman,
+                 float harga, float diskon, float ongkir, float HargaTotal);
+
 bool isStringRight(string text);
-int isNomorTelp();
+int isNomorTelp(char *ch) ;
+
+//IKAN
 void randIkan(char *jenisIkan, char *namaIkan, int *kedalaman);
+float randomBerat();
+float randomDiskon();
+float totalHarga(float ongkir, float hargaIkan, float diskon);
+float ongkosKirim(float berat);
+float hargaIkan(char *jenisIkan, float berat, int kedalaman);
+
+//Order id
+void generateOrderID(char * orderID);

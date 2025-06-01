@@ -1,6 +1,7 @@
 #include "header.h"
 #include <conio.h>
 #include <time.h>
+#include <math.h>
 #define USERNAME "YengiYolu"
 #define PASSWORD "YengiYoluPNC"
 char randomKapital() {
@@ -25,7 +26,6 @@ void delay(int milisec) {
 
 void generateCaptcha(string captcha) {
   strcpy(captcha, "");
-  srand(time(NULL));
   int i;
   char temp;
   bool stat1 = true, stat2 = true, stat3 = true, stat4 = true, stat5 = true,
@@ -225,7 +225,7 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
   getch();
 }    
 
-void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos){
+void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
   string tempStr;
 
   printf("\x1b[0m");
@@ -392,7 +392,90 @@ void randIkan(char *jenisIkan, char *namaIkan, int *kedalaman){
       break;
   }
 }
-//Nampilkan Order ID
-void resiDisplay(string nama, long int nomor, string alamat, int kodepos){
 
+
+float randomBerat() {
+  return (float)(rand() % 170 + 30) / 10; // berat ikan antara 3.0 kg - 20.0 kg
+}
+
+float ongkosKirim(float berat){
+  return round(berat) * 35000;
+}
+
+float hargaIkan(char *jenisIkan, float berat, int kedalaman ){
+  if(strcmp(jenisIkan, "Karnivora") == 0){
+    return berat * 500 * kedalaman;
+  }
+  else if(strcmp(jenisIkan, "Herbivora") == 0){
+    return berat * 350 * kedalaman;
+  }
+  else if(strcmp(jenisIkan, "Omnivora") == 0){
+    return  berat * 250 * kedalaman;
+  }
+}
+float randomDiskon() {
+  int chance = rand() % 8;
+  if (chance == 0) {
+    return 25.0; // diskon 25% - 1/8
+  } else if (chance == 1) {
+    return 20.0; // diskon 20% - 1/8
+  } else if (chance == 2) {
+    return 15.0; // diskon 15% - 1/8
+  } else if (chance == 3) {
+    return 12.0; // diskon 12% - 1/8
+  } else if (chance == 4) {
+    return 10.0; // diskon 10% - 1/8
+  } else {
+    return 0.0; // tidak ada diskon - 3/8
+  }
+
+}
+
+float totalHarga(float ongkir, float hargaIkan, float diskon) {
+  float total = ongkir + hargaIkan;
+  if (diskon > 0) {
+    total -= (total * diskon / 100);
+  }
+  return total;
+}
+
+//Nampilkan Order ID MASIH ERORRR
+void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+                 string jenisIkan, string namaIkan, int kedalaman,
+                 float harga, float diskon, float ongkir, float HargaTotal) {
+
+  getch();
+}
+
+
+//ORDER ID
+/*
+o Order ID case sensitive (4 digit) terdiri dari 2 huruf kapital dan 2 angka,
+dengan posisi yang berbeda setiap mendapat order id baru.
+
+Terdapat 4 digit
+Order ID yang harus dikonfirmasi user untuk menyelesaikan pesanan. Ketika user salah
+menginputkan ID sebanyak 3x, maka informasi yang sudah diinputkan maupun didapatkan
+user akan hilang (ID tidak akan berubah ketika user salah input).
+*/
+
+void generateOrderID(char * orderID){
+  strcpy(orderID, "");
+  int countKapital = 2;
+  int countDigit = 2;
+  do{
+    switch (rand()%4){
+    case 0:
+    if(countKapital > 0){
+      countKapital--;
+      appendChar(orderID, randomKapital());
+      break;
+    }
+    case 1:
+    if(countDigit > 0){
+      countDigit--;
+      appendChar(orderID, randomDigit());
+      break;
+    }}
+  }while(countKapital > 0 || countDigit > 0);
 }

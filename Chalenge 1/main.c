@@ -1,16 +1,35 @@
 #include "header.h"
 
 int main(){
+    srand(time(NULL));
+    
+
     int captchaAttempt;
     string inputString;
     bool authentication = false;
     int percobaan = 3;
+
+    //User Account
     string username, password , captcha, nama, alamat;
     int hari, bulan, tahun;
     int pilihan;
     int kodepos;
-    long int nomor;
+    long long int nomor;
+
+
     
+    
+    //Variable untuk Ikan
+    string jenisIkan, namaIkan;
+    int kedalaman;
+    float harga;
+    float diskon;
+    float HargaTotal;
+    float ongkir;
+    float berat;
+    string orderID;
+
+
     //LOGIN
     do{
         system("cls");
@@ -75,7 +94,22 @@ int main(){
         pilihan = getch();
         switch(pilihan){
             case 49:
-                dataInput(nama, &nomor, alamat, &kodepos);
+                // dataInput(nama, &nomor, alamat, &kodepos);
+                randIkan(jenisIkan, namaIkan, &kedalaman);
+                harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
+                diskon = randomDiskon();
+                berat = randomBerat();
+                ongkir = ongkosKirim(berat);
+                HargaTotal = totalHarga(ongkir, harga, diskon);
+                generateOrderID(orderID);
+                printf("\n\nORDER ID : %s\n", orderID);
+                printf("\n[%s][%s][%d][%.2f]\n", jenisIkan, namaIkan, kedalaman, berat);
+                printf("\n[%.2f][%.2f][%.2f][%.2f]\n", ongkir, harga, diskon, HargaTotal);
+                //TINGGAL BUAT DISPLAY RESI
+                
+                getch();
+                // resiDisplay(nama, nomor, alamat, kodepos,
+                            // hari, bulan, tahun, harga, diskon, ongkir, HargaTotal);
                 break;
             case 50:
                 break;
@@ -93,6 +127,7 @@ int main(){
                 break;
         }
     }
+    flushKeyBoard();
     getch();
     return 0;
 }
