@@ -96,7 +96,7 @@ int main(){
     system("cls");
     inputTanggal(&hari, &bulan, &tahun, username);
     menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
-    percobaan = 3;
+    
     while(1){
         system("cls");
         system("color 09");
@@ -106,6 +106,7 @@ int main(){
         switch(pilihan){
             case 49: //case1
                 if(!menu1){
+                    percobaan = 3;
                     dataInput(nama, nomor, alamat, kodepos);
                     randIkan(jenisIkan, namaIkan, &kedalaman);
                     harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
@@ -171,13 +172,15 @@ int main(){
                 }
                 if(!pencarianIkan(kedalaman, &hari, &bulan, &tahun, &HargaTotal, &harga, &berat, &accountBalance)){
                     hit++;
+                    getch();
                     break;
                 }
                 printf("\n\t\033[1;32m[+] Pencarian Selesai [+]\033[0m");
                 menu3 = true;
+                flushKeyBoard();
+                getch();
                 getch();
                 printf("\e[u\e[0J");
-                
                 
                 break;
             case 52: //case 4
@@ -274,7 +277,7 @@ int main(){
                     getch();
                     break;
 
-								}
+					}
    
                 break;
             case 56:
