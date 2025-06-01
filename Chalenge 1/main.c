@@ -1,5 +1,5 @@
 #include "header.h"
-
+#include <time.h>
 int main(){
     srand(time(NULL));
     
@@ -10,12 +10,13 @@ int main(){
     int percobaan = 3;
 
     //User Account
-    string username, password , captcha, nama, alamat;
+    string username, password , captcha, nama, alamat, tempStr;
     int hari, bulan, tahun;
     int pilihan;
     int kodepos;
-    long long int nomor;
-
+    long int nomor;
+    bool menu1,menu2,menu3,menu4,menu5,menu6,menu8;
+    
 
     
     
@@ -88,30 +89,49 @@ int main(){
     }while(strcmp(captcha,inputString)!= 0);
     system("cls");
     inputTanggal(&hari, &bulan, &tahun, username);
+    menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
     while(1){
         system("cls");
+        system("color 09");
         menuDisplay(username,hari,bulan,tahun);
-        pilihan = getch();
+        pilihan = getche();
         switch(pilihan){
             case 49:
-                // dataInput(nama, &nomor, alamat, &kodepos);
-                randIkan(jenisIkan, namaIkan, &kedalaman);
-                harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
-                diskon = randomDiskon();
-                berat = randomBerat();
-                ongkir = ongkosKirim(berat);
-                HargaTotal = totalHarga(ongkir, harga, diskon);
-                generateOrderID(orderID);
-                printf("\n\nORDER ID : %s\n", orderID);
-                printf("\n[%s][%s][%d][%.2f]\n", jenisIkan, namaIkan, kedalaman, berat);
-                printf("\n[%.2f][%.2f][%.2f][%.2f]\n", ongkir, harga, diskon, HargaTotal);
-                //TINGGAL BUAT DISPLAY RESI
-                
-                getch();
-                // resiDisplay(nama, nomor, alamat, kodepos,
-                            // hari, bulan, tahun, harga, diskon, ongkir, HargaTotal);
+                if(!menu1){
+                    dataInput(nama, &nomor, alamat, &kodepos);
+                    randIkan(jenisIkan, namaIkan, &kedalaman);
+                    harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
+                    diskon = randomDiskon();
+                    berat = randomBerat();
+                    ongkir = ongkosKirim(berat);
+                    HargaTotal = totalHarga(ongkir, harga, diskon);
+                    system("cls");
+                    system("color 0F");
+                    resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
+                                kedalaman, harga, diskon, ongkir, HargaTotal, berat);
+                    generateOrderID(orderID);
+                    idAuth(orderID, 3);
+                    menu1 = true;
+                    menu2 = true;
+                    getch();
+                }else{
+                    printf("\t\033[1;32m[!] Data Sudah Terisi [!]\033[0m\n");
+                    getch();
+                    break;
+                }
                 break;
             case 50:
+                if(menu2){
+                    system("cls");
+                    system("color 0F");
+                    resiDisplay(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, 
+                                kedalaman, harga, diskon, ongkir, HargaTotal, berat);
+                    getch();
+                }else{
+                    printf("\n\t\x1b[31m");
+                    printf("\nt[!] Belum Ada Data Tersimpan [!]");
+                    getch();
+                }
                 break;
             case 51:
                 break;

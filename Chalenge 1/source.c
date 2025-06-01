@@ -1,7 +1,5 @@
 #include "header.h"
-#include <conio.h>
-#include <time.h>
-#include <math.h>
+
 #define USERNAME "YengiYolu"
 #define PASSWORD "YengiYoluPNC"
 char randomKapital() {
@@ -77,7 +75,7 @@ void menuDisplay(string username, int hari, int bulan, int tahun) {
   system("color 09");
   printf("\t\t\t--===[ CHALLENGE 1 PNC 2025 ]===--");
   printf("\n\n\tSelamat Datang, %s!", username);
-  printf("\n\tTanggal : %02d-%02d-%d", hari, bulan, tahun);
+  printf("\n\tTanggal : %02d-%02d-%04d", hari, bulan, tahun);
   printf("\n\n\t[1] Input Data");
   printf("\n\t[2] Cetak Nota");
   printf("\n\t[3] Mulai Pencarian");
@@ -221,11 +219,11 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
       break;
     }
   } while (true);
-  printf("\n\t\t[+] Berhasil Input Tanggal [+]");
+  printf("\n\t\t\033[1;32m[+] Berhasil Input Tanggal [+]");
   getch();
 }    
 
-void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
+void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos){
   string tempStr;
 
   printf("\x1b[0m");
@@ -245,7 +243,6 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  system("color 09");
 
   //Masukkan Nomor
   printf("\e[s");
@@ -270,7 +267,6 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  system("color 09");
 
   //Masukkan Alamat
   printf("\e[s");
@@ -288,7 +284,6 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  system("color 09");
 
   //Masukkan Kode Pos
   printf("\e[s");
@@ -313,9 +308,8 @@ void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos){
       break;
     }
   }while(1);
-  printf("\033[32m\t[~] Berhasil Input Data [~]\033[0m");
+  printf("\n\t\t\033[1;32m[~] Berhasil Input Data [~]");
   getch();
-  system("color 09");
 }
 bool isStringRight(string text){
   if(strlen(text) <= 0 || strlen(text) >= 29)return false;
@@ -440,11 +434,32 @@ float totalHarga(float ongkir, float hargaIkan, float diskon) {
 }
 
 //Nampilkan Order ID MASIH ERORRR
-void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+void resiDisplay(string nama, long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
-                 float harga, float diskon, float ongkir, float HargaTotal) {
-
-  getch();
+                 float harga, float diskon, float ongkir, float HargaTotal, float berat) {
+  printf("\n\t    _________________________________\n");
+  printf("\t   |           .                     |\n");
+  printf("\t   |          ':'                    |\n");
+  printf("\t   |        ___:____     |'\/'|       |\n");
+  printf("\t   |      ,'        `.    \ /         |\n");
+  printf("\t   |      |  O        \___/ |         |\n");
+  printf("\t   |    ~^~^~^~^~^~^~^~^~^~^~^~^~    |\n");
+  printf("\t   _________________________________\n");
+  printf("\t   Nama         : %s\n", nama);
+  printf("\t   Alamat       : %s\n", alamat);
+  printf("\t   No Telepon   : %ld\n", nomor);
+  printf("\t   Kode Pos     : %d\n", kodepos);
+  printf("\t   _________________________________\n");
+  printf("\t   Jenis Ikan   : %s\n", jenisIkan);
+  printf("\t   Nama Ikan    : %s\n", namaIkan);
+  printf("\t   Kedalaman    : %d\n", kedalaman);
+  printf("\t   Berat Ikan   : %.2f\n", berat);
+  printf("\t   Ongkir       : Rp %.2f\n",ongkir);
+  printf("\t   Harga Ikan   : Rp %.2f\n", harga);
+  printf("\t   Total        : Rp %.2f\n", ongkir + harga);
+  printf("\t   Diskon       : %.2f%\n", diskon);
+  printf("\t   Total Harga  : Rp %.2f\n",HargaTotal);
+  printf("\t   _________________________________\n");
 }
 
 
@@ -459,7 +474,7 @@ menginputkan ID sebanyak 3x, maka informasi yang sudah diinputkan maupun didapat
 user akan hilang (ID tidak akan berubah ketika user salah input).
 */
 
-void generateOrderID(char * orderID){
+void generateOrderID(char *orderID){
   strcpy(orderID, "");
   int countKapital = 2;
   int countDigit = 2;
@@ -478,4 +493,24 @@ void generateOrderID(char * orderID){
       break;
     }}
   }while(countKapital > 0 || countDigit > 0);
+}
+void idAuth(char *orderID, int percobaan){
+  string tempStr;
+  printf("\e[s");
+  while(percobaan > 0){
+    system("color 0F");
+    printf("\n\t    ID           : %s", orderID);
+    printf("\n\t    Confirm ID   : ");fflush(stdin);gets(tempStr);
+    if(strcmp(tempStr, orderID) == 0){  
+      printf("\n\t\033[1;32m    [~] Berhasil Input Data [~]");
+      break;
+    } 
+    else{
+      printf("\n\t\033[1;31m    [!] Data Gagal Diinputkan [!]");
+      percobaan--;
+      getch();
+      printf("\e[u");
+      printf("\e[0J");
+    }
+  }
 }

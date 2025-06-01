@@ -4,7 +4,8 @@
 #include <stdbool.h>
 #include <conio.h>
 #include <ctype.h>
-
+#include <time.h>
+#include <math.h>
 typedef char string[100];
 
 
@@ -26,11 +27,11 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username);
 int stdDate(int hari,int bulan, int tahun);
 
 //Input Data
-void dataInput(char *nama, long long int *nomor, char *alamat, int *kodepos);
+void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos);
 
-void resiDisplay(string nama, long long int nomor, string alamat, int kodepos , 
+void resiDisplay(string nama, long int nomor, string alamat, int kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
-                 float harga, float diskon, float ongkir, float HargaTotal);
+                 float harga, float diskon, float ongkir, float HargaTotal, float berat);
 
 bool isStringRight(string text);
 int isNomorTelp(char *ch) ;
@@ -45,3 +46,4 @@ float hargaIkan(char *jenisIkan, float berat, int kedalaman);
 
 //Order id
 void generateOrderID(char * orderID);
+void idAuth(char *orderID, int percobaan);
