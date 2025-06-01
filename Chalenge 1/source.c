@@ -441,8 +441,8 @@ void resiDisplay(string nama, long int nomor, string alamat, int kodepos ,
   printf("\t   |           .                     |\n");
   printf("\t   |          ':'                    |\n");
   printf("\t   |        ___:____     |'\/'|       |\n");
-  printf("\t   |      ,'        `.    \ /         |\n");
-  printf("\t   |      |  O        \___/ |         |\n");
+  printf("\t   |      ,'        `.    \\ /        |\n");
+  printf("\t   |      |  O        \\___/ |        |\n");
   printf("\t   |    ~^~^~^~^~^~^~^~^~^~^~^~^~    |\n");
   printf("\t   _________________________________\n");
   printf("\t   Nama         : %s\n", nama);
