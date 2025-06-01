@@ -116,9 +116,8 @@ void clearLine(int i) {
   }
 }
 void flushKeyBoard() {
-  int ch;
-  while ((ch = getc(stdin)) != EOF && ch != '\n')
-    ;
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF) { }
 }
 
 int HariDalamBulan(int bulan, int tahun) {
@@ -148,6 +147,7 @@ int cekTanggal(int hari, int bulan, int tahun) {
   if (tahun < 1 || bulan < 1 || hari < 1) {
     printf("\x1b[31m");
     printf("\n\t[!]Hari, Bulan, Tahun tidak boleh 0 atau negative");
+    return 0;
   }
   if (hari > 31) {
     printf("\x1b[31m");
@@ -188,10 +188,8 @@ int cekTanggal(int hari, int bulan, int tahun) {
 void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
   system("color 09");
   int temp;
-  printf("\n\r\e[s");
-  do {
     system("color 09");
-    printf("\t\t\t--===[ CHALLENGE 1 PNC 2025 ]===--");
+    printf("\n\t\t\t--===[ CHALLENGE 1 PNC 2025 ]===--");
     printf("\n\n\tSelamat Datang, %s!", username);
     printf("\n\n\t[1] Input Data");
     printf("\n\t[2] Cetak Nota");
@@ -201,25 +199,31 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
     printf("\n\t[6] Next Costumer");
     printf("\n\n\t[8] Cetak Nota (BONUS)");
     printf("\n\t>>> ");
+    
+    printf("\n\r\x1b[s");
+  do {
+    system("color 09");
     printf("\n\n\tMasukkan hari [dd-mm-yyyy] : ");
-
     temp = scanf("%d - %d - %d", hari, bulan, tahun);
 
     if (temp != 3) {
       printf("\n\t\t[!]Masukan tanggal dengan format yang benar!\n");
-      getch();
       flushKeyBoard();
+      getch();
+      printf("\x1b[u\x1b[0J\x1b[0m");
       continue;
     }
-    if (cekTanggal(*hari, *bulan, *tahun)) {
-      printf("\n\t\t[+] Berhasil Input Tanggal [+]");
+    if (!cekTanggal(*hari, *bulan, *tahun)) {
+      flushKeyBoard();
       getch();
+      printf("\x1b[u\x1b[0J\x1b[0m");
+    }else{
       break;
     }
-    getch();
-    printf("\e[u\e[0J\e[0m");
-  } while (!cekTanggal(*hari, *bulan, *tahun));
-}
+  } while (true);
+  printf("\n\t\t[+] Berhasil Input Tanggal [+]");
+  getch();
+}    
 
 void dataInput(char *nama, long int *nomor, char *alamat, int *kodepos){
   string tempStr;

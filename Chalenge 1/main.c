@@ -72,7 +72,7 @@ int main(){
     while(1){
         system("cls");
         menuDisplay(username,hari,bulan,tahun);
-        pilihan = getche();
+        pilihan = getch();
         switch(pilihan){
             case 49:
                 dataInput(nama, &nomor, alamat, &kodepos);
