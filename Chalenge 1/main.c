@@ -5,9 +5,11 @@ int main(){
     string inputString;
     bool authentication = false;
     int percobaan = 3;
-    string username, password , captcha;
+    string username, password , captcha, nama, alamat;
     int hari, bulan, tahun;
-    
+    int pilihan;
+    int kodepos;
+    long int nomor;
     
     //LOGIN
     do{
@@ -21,50 +23,77 @@ int main(){
         }
     }while(!authentication && percobaan > 0);
     if(!authentication || percobaan <=0){
-        printf("\n\t\e[1;31m[!] Login Gagal [!]");
+        system("color 40");
+        printf("\n\nSalah 3x");
+        printf("\n\nLOGIN GAGAL");
+        printf("\n\nPress Any Key to Continue . . . ");
         getch();
         return 0;
     }
-    printf("\033[1;34m");
-
+    system("color 09");
+    printf("\x1b[0m");
 
 
     
     captchaAttempt = 3;
     printf("\e[s"); //save cursor
     do {
-        
-        if(captchaAttempt == 0){
-            printf("\n\t   [!] Login Gagal [!]");
-            printf("\n\t Silahkan Coba Lagi nanti. ");
-            getch();
-            return 0;
-        }
-        printf("\n\nAttemps \t: %d", captchaAttempt);
-		printf("\nCaptha \t\t: ");
+		printf("\nCaptha\t\t: ");
         delay(500);
         generateCaptcha(captcha);
         printf("%s", captcha);
-        printf("\nMasukan Captha \t: ");
+        printf("\nConfirm Captcha\t: ");
         scanf("%s", inputString);
         if(strcmp(captcha,inputString)!= 0){
-            printf("\n\t[!] Captcha Salah");
+            printf("\n\t\x1b[31m[!] Captcha Salah [!]");
             getch();
+            printf("\x1b[0m");
             captchaAttempt--;
             printf("\e[u"); //back to cursor
             printf("\e[0J"); //delete from cursor to end of screen
         }else{
-            system("cls");
-            printf("\n\t\e[32m[*] Login Berhasil, Selamat Datang!!");
-            printf("\n\n\tPress any keys to continue.");
+            printf("\n\t\x1b[34mLOGIN BERHASIL");
+            printf("\x1b[0m");
+            printf("\n\n\tPress any keys to continue . . . ");
             getch();
+        if(captchaAttempt == 0){
+            printf("\n\t\x1b[31m");
+            printf("\n\n\t   Captcha Salah 3x ");
+            printf("\n\t   [!] Login Gagal [!]");
+            printf("\n\n\t Press Any Key to Continue . . .  ");
+            getch();
+            printf("\x1b[0m");
+            return 0;
+        }
         }
     }while(strcmp(captcha,inputString)!= 0);
     system("cls");
-    inputTanggal(&hari, &bulan, &tahun);
-    system("cls");
-    menuDisplay(username,hari,bulan,tahun);
-
+    inputTanggal(&hari, &bulan, &tahun, username);
+    while(1){
+        system("cls");
+        menuDisplay(username,hari,bulan,tahun);
+        pilihan = getche();
+        switch(pilihan){
+            case 49:
+                dataInput(nama, &nomor, alamat, &kodepos);
+                break;
+            case 50:
+                break;
+            case 51:
+                break;
+            case 52:
+                break;
+            case 53:
+                break;
+            case 54:
+                break;
+            case 56:
+                break;
+            default:
+                break;
+        }
+    }
+    getch();
     return 0;
 }
 

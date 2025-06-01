@@ -65,7 +65,8 @@
     "inputtanggal.h": "c",
     "string.h": "c",
     "stdbool.h": "c",
-    "conio.h": "c"
+    "conio.h": "c",
+    "ctype.h": "c"
   },
   "makefile.makefilePath": ""
 }
