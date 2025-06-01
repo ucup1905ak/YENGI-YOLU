@@ -156,7 +156,7 @@ int main(){
                     getch();
                     break;
                 }
-                if(menu4==0 || accountBalance > 0){
+                if(menu4==0){
                     printf("\n\t\x1b[31m");
                     printf("\n\t[!] Pencarian Belum Bisa Dilakukan, Minimal 50% Pembayaran [!]");
                     getch();

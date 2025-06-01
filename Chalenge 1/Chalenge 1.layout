@@ -1,7 +1,7 @@
 [Editor_0]
-CursorCol=55
-CursorRow=97
-TopLine=130
+CursorCol=21
+CursorRow=134
+TopLine=116
 LeftChar=1
 [Editor_1]
 CursorCol=21
@@ -9,10 +9,10 @@ CursorRow=38
 TopLine=31
 LeftChar=1
 [Editors]
-Order=0,1,2
+Order=1,2,0
 Focused=2
 [Editor_2]
-CursorCol=29
-CursorRow=650
-TopLine=629
+CursorCol=57
+CursorRow=446
+TopLine=435
 LeftChar=1
