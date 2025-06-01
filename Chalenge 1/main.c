@@ -16,10 +16,11 @@ int main(){
     string username, password , captcha, nama, alamat, tempStr;
     int hari, bulan, tahun, i, j;
     int pilihan, indexControl;
-    int kodepos;
+    string kodepos;
     double accountBalance = 0;
     double nominalBayar;
-    unsigned long long int nomor;
+    string nomor;
+    
     bool menu1,menu2,menu3,menu5,menu6,menu8;
     int menu4 = 0; //Menu 4 untuk pembayaran
 
@@ -105,7 +106,7 @@ int main(){
         switch(pilihan){
             case 49: //case1
                 if(!menu1){
-                    dataInput(nama, &nomor, alamat, &kodepos);
+                    dataInput(nama, nomor, alamat, kodepos);
                     randIkan(jenisIkan, namaIkan, &kedalaman);
                     harga = hargaIkan(jenisIkan, randomBerat(), kedalaman);
                     diskon = randomDiskon();
@@ -243,7 +244,7 @@ int main(){
                         Sleep(1000);
                     }
                     menu1 = false;menu2 = false;menu3 = false;menu4 = false;menu5 = false;menu6 = false;menu8 = false;
-                    deleteInit(nama, &nomor, alamat, &kodepos, jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal, &accountBalance);
+                    deleteInit(nama, nomor, alamat, kodepos, jenisIkan, namaIkan, &kedalaman, &berat, &harga, &diskon, &ongkir, &HargaTotal, &accountBalance);
                     printf("\n\t\t[*] Data Berhasil Dihapus [*]");
                 }else if(jawaban == 'N' || jawaban == 'n'){
                     printf("\n\t\x1b[31m");

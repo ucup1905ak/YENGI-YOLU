@@ -28,9 +28,9 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username);
 int stdDate(int hari,int bulan, int tahun);
 
 //Input Data
-void dataInput(char *nama, unsigned long long int *nomor, char *alamat, int *kodepos);
+void dataInput(char *nama, char *nomor, char *alamat, char *kodepos);
 
-void resiDisplay(string nama, unsigned long long int nomor, string alamat, int kodepos , 
+void resiDisplay(string nama, string nomor, string alamat, string kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
                  float harga, float diskon, float ongkir, float HargaTotal, float berat) ;
 
@@ -49,14 +49,14 @@ float hargaIkan(char *jenisIkan, float berat, int kedalaman);
 void generateOrderID(char * orderID);
 void idAuth(char *orderID, int *percobaan);
 //halo bang!!
-void initializeDataPembeli(string nama, unsigned long long int *nomor, string alamat, int *kodepos);
-void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal);
+// void initializeDataPembeli(string nama, unsigned long long int *nomor, string alamat, int *kodepos);
+// void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal);
 //Koneksi Aman kah?
 
 
 //Case 4
 
-void PembayaranDisplay(string nama, unsigned long long int nomor, string alamat, int kodepos , 
+void PembayaranDisplay(string nama, string nomor, string alamat, string kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,float berat,
                  float harga, float diskon, float ongkir, float HargaTotal);
 
@@ -70,6 +70,6 @@ void tampilkanIkan(int kedalaman, char *warna, char *label);
 //case 3
 void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *HargaTotal, float *harga, float *berat, double *accountBalance);
 
-void deleteInit(char *nama, unsigned long long int *nomor, char * alamat, int *kodepos , 
+void deleteInit(char *nama, char * nomor, char * alamat, char * kodepos , 
                  char * jenisIkan, char * namaIkan, int * kedalaman,float * berat,
                  float * harga, float *diskon, float *ongkir, float *HargaTotal, double *accountBalance);

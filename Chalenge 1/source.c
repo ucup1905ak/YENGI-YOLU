@@ -223,7 +223,7 @@ void inputTanggal(int *hari, int *bulan, int *tahun, string username) {
   getch();
 }    
 
-void dataInput(char *nama, unsigned long long int *nomor, char *alamat, int *kodepos){
+void dataInput(char *nama, char *nomor, char *alamat, char *kodepos){
   string tempStr;
   char *endStr;
 
@@ -264,7 +264,7 @@ void dataInput(char *nama, unsigned long long int *nomor, char *alamat, int *kod
       printf("\e[0J");
     }
     else{
-      *nomor = strtoull(tempStr, &endStr, 10);
+      strcpy(nomor, tempStr);
       break;
     }
   }while(1);
@@ -305,7 +305,7 @@ void dataInput(char *nama, unsigned long long int *nomor, char *alamat, int *kod
       printf("\e[0J");
     }
     else{
-      *kodepos = atoi(tempStr);
+      strcpy(kodepos, tempStr);
       break;
     }
   }while(1);
@@ -435,7 +435,7 @@ float totalHarga(float ongkir, float hargaIkan, float diskon) {
 }
 
 //Nampilkan Order ID MASIH ERORRR
-void resiDisplay(string nama, unsigned long long int nomor, string alamat, int kodepos , 
+void resiDisplay(string nama, string nomor, string alamat, string kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,
                  float harga, float diskon, float ongkir, float HargaTotal, float berat) {
   printf("\n\t    _________________________________\n");
@@ -448,8 +448,8 @@ void resiDisplay(string nama, unsigned long long int nomor, string alamat, int k
   printf("\t   _________________________________\n");
   printf("\t   Nama         : %s\n", nama);
   printf("\t   Alamat       : %s\n", alamat);
-  printf("\t   No Telepon   : %llu\n", nomor);
-  printf("\t   Kode Pos     : %d\n", kodepos);
+  printf("\t   No Telepon   : %s\n", nomor);
+  printf("\t   Kode Pos     : %s\n", kodepos);
   printf("\t   _________________________________\n");
   printf("\t   Jenis Ikan   : %s\n", jenisIkan);
   printf("\t   Nama Ikan    : %s\n", namaIkan);
@@ -517,23 +517,23 @@ void idAuth(char *orderID, int *percobaan){
   }
 }
 
-void initializeDataPembeli(string nama, unsigned long long int *nomor, string alamat, int *kodepos){
-  strcpy(nama, "");
-  *nomor = 0;
-  strcpy(alamat, "");
-  *kodepos = 0;
-}
+// void initializeDataPembeli(string nama, unsigned long long int *nomor, string alamat, int *kodepos){
+//   strcpy(nama, "");
+//   *nomor = 0;
+//   strcpy(alamat, "");
+//   *kodepos = 0;
+// }
 
-void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal){
-  strcpy(jenisIkan, "");
-  strcpy(namaIkan, "");
-  *kedalaman = 0;
-  *berat = 0.0;
-  *harga = 0.0;
-  *diskon = 0.0;
-  *ongkir = 0.0;
-  *HargaTotal = 0.0;
-}
+// void initializeIkanData(string jenisIkan, string namaIkan, int *kedalaman, float *berat, float *harga, float *diskon, float *ongkir, float *HargaTotal){
+//   strcpy(jenisIkan, "");
+//   strcpy(namaIkan, "");
+//   *kedalaman = 0;
+//   *berat = 0.0;
+//   *harga = 0.0;
+//   *diskon = 0.0;
+//   *ongkir = 0.0;
+//   *HargaTotal = 0.0;
+// }
 
 void drawDoubleLine(int length) {
     int i;
@@ -578,7 +578,7 @@ void drawVoidLineWithText(int length, string text) {
     }
 }
 
-void PembayaranDisplay(string nama, unsigned long long int nomor, string alamat, int kodepos , 
+void PembayaranDisplay(string nama, string nomor, string alamat, string kodepos , 
                  string jenisIkan, string namaIkan, int kedalaman,float berat,
                  float harga, float diskon, float ongkir, float HargaTotal){
     system("cls");
@@ -591,9 +591,9 @@ void PembayaranDisplay(string nama, unsigned long long int nomor, string alamat,
     printf("\n%c", 186);drawVoid(64); printf("%c", 186);
     printf("\n%c", 204);drawDoubleLine(29);printf("%c", 203);drawDoubleLine(15);printf("%c", 203);drawDoubleLine(18);printf("%c", 185); 
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Nama         %c %15s  ", 186 , nama);printf("%c", 186); 
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %15llu  ", 186 , nomor);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  No.Telp      %c %s  ", 186 , nomor);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Alamat       %c %15s  ", 186 , alamat);printf("%c", 186);
-    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %15d  ", 186 , kodepos);printf("%c", 186);
+    printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Kode Pos     %c %s  ", 186 , kodepos);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Ongkir       %c Rp %12.2f  ", 186 , ongkir);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Harga        %c Rp %12.2f  ", 186 , harga);printf("%c", 186);
     printf("\n%c", 186);drawVoid(29);printf("%c", 186);       printf("  Diskon       %c %13.2f %%  ", 186 , diskon);printf("%c", 186);
@@ -805,15 +805,15 @@ void pencarianIkan(int kedalaman, int *hari, int *bulan, int *tahun, float *Harg
     printf("\n\t[~] Pencarian selesai pada %02d-%02d-%04d [~]", *hari, *bulan, *tahun);
 }
 
-void deleteInit(char *nama, unsigned long long int *nomor, char * alamat, int *kodepos , 
+void deleteInit(char *nama, char *nomor, char * alamat, char *kodepos , 
                  char * jenisIkan, char * namaIkan, int * kedalaman,float * berat,
                  float * harga, float *diskon, float *ongkir, float *HargaTotal, double *accountBalance){
   strcpy(nama, "");
   strcpy(alamat, "");
   strcpy(jenisIkan, "");
   strcpy(namaIkan, "");
-  *nomor = 0;
-  *kodepos = 0;
+  strcpy(nomor, "");
+  strcpy(kodepos, "");
   *kedalaman = 0;
   *berat = 0.00;
   *harga = 0.00;
