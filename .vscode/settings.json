@@ -68,7 +68,8 @@
     "conio.h": "c",
     "ctype.h": "c",
     "compare": "c",
-    "type_traits": "c"
+    "type_traits": "c",
+    "cstdlib": "c"
   },
   "makefile.makefilePath": ""
 }

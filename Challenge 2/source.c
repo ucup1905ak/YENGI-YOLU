@@ -1,16 +1,14 @@
 #include "header.h"
-#ifndef MAX_ENTITY 
-#define MAX_ENTITY 3
-#endif
+
 void delay(int ms){
     time_t time = clock();
     while(clock()< time+ms);
 }
 void menuDisplay(){
     printf("\n\t---== [ HUNGRY FISH ] ==---\n");
-    puts("\n\t[1]. Play Game ");
-    puts("\n\t[2]. How to Play ");
-    puts("\n\t[0]. Exit ");
+    puts("\t[1]. Play Game ");
+    puts("\t[2]. How to Play ");
+    puts("\t[0]. Exit ");
     printf("\n\t>>> ");
 }
 
@@ -40,7 +38,9 @@ void gotoxy(int x, int y) {
 }
 void setFullscreen() {
     HWND consoleWindow = GetConsoleWindow();
-    ShowWindow(consoleWindow, SW_MAXIMIZE);
+    if (consoleWindow != NULL) {
+        ShowWindow(consoleWindow, SW_MAXIMIZE);
+    }
 }
 void removeCursor(){
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -76,25 +76,25 @@ void clearScreen() {
 }
 void renderBorder() {
     int i;
-    printf("%c",201);  // << Atas Kiri
-    for(i = 1; i < 100; i++) printf("%c",205); //Border Atas
-    printf("%c\n",187); //Atas Kanan
-    for(i = 0; i < 20; i++) { //Border Kiri (Vertical)
-        gotoxy(100, i + 1); 
+    printf("%c",201);
+    for(i = 1; i < GAME_WIDTH; i++) printf("%c",205);
+    printf("%c\n",187);
+    for(i = 0; i < GAME_HEIGHT; i++) {
+        gotoxy(GAME_WIDTH, i + 1);
         printf("%c",186);
     }
-    for(i = 0; i < 20; i++) { //Border Kanan (Vertical)
+    for(i = 0; i < GAME_HEIGHT; i++) {
         gotoxy(0, i + 1);
         printf("%c",186);
     }
-    gotoxy(0, 21); 
-    printf("%c",200); //Bawah Kiri
-    for(i = 1; i < 100; i++) printf("%c",205); //Border bawah
-    printf("%c",188);  // Bawah Kanan
+    gotoxy(0, GAME_HEIGHT + 1);
+    printf("%c",200);
+    for(i = 1; i < GAME_WIDTH; i++) printf("%c",205);
+    printf("%c",188);
 }
 
 
-void renderFish(char type, int x , int y){ // type "g" = good, "b" = bad , "p" = player
+void renderFish(char type, int x , int y){ 
     gotoxy(x,y); 
     switch (type)
     {
@@ -120,109 +120,169 @@ void renderFish(char type, int x , int y){ // type "g" = good, "b" = bad , "p" =
 }
 
 
-
-
 int clearFish(int y){
     gotoxy(0,y);
     printf("\e[K");
     gotoxy(0, y);
     printf("%c",186);
-    gotoxy(100, y); 
+    gotoxy(GAME_WIDTH, y);
     printf("%c",186);
 
 }
-
-
-
 
 
 
 int inputHandling(int *hunger, int *player_X, int *player_Y){
     if(kbhit()){
         switch (getch())
-        {
-        case 'W':
+        {        case 'W':
         case 'w':
-            gotoxy(90,22);    
-            printf("Tombol W");
+            if(debugMode){  
+            gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+            if(debugMode)printf("Tombol W");
+            }
             if(*player_Y>1) (*player_Y)--;
             (*hunger)--;
-            break;
-        case 'a':
+            break;        case 'a':
         case 'A':
-            gotoxy(90,22);    
-            printf("Tombol A");
+            if(debugMode){
+                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+                printf("Tombol A");
+            }
             if(*player_X>1)(*player_X)-=2 ;
             (*hunger)--;
             return -1;
-            break;
-        case 's':
+            break;        case 's':
         case 'S':
-            gotoxy(90,22);    
-            printf("Tombol S");
-            if(*player_Y<20)(*player_Y)++;
+            if(debugMode){
+                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+                printf("Tombol S");
+            }
+
+            if(*player_Y<GAME_HEIGHT)(*player_Y)++;
             (*hunger)--;
-            break;
-        case 'd':
+            break;        case 'd':
         case 'D':
-            gotoxy(90,22);    
-            printf("Tombol D");
-            if(*player_X<100)(*player_X)+=2;
+            if(debugMode){
+                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+                printf("Tombol D");
+            }
+            if(*player_X<GAME_WIDTH)(*player_X)+=2;
             (*hunger)--;
             return 1;
             break;      
         }
     }
-    return NULL;
+    return 0;
 }
 
 
 void statusBar(int point, int hunger){
-    gotoxy(5, 23);
+    gotoxy(5, GAME_HEIGHT + 3);
     printf("\e[0J");
-    redCol();printf("><(^)");resetCol();
-    gotoxy(5, 24);
-    greenCol();printf("><(x)");resetCol();
-    gotoxy(50, 23);
+    redCol();printf("><(^) --> Good Food");resetCol();
+    gotoxy(5, GAME_HEIGHT + 4);
+    greenCol();printf("><(x) --> Poison");resetCol();
+    gotoxy(GAME_WIDTH / 2, GAME_HEIGHT + 3);
     printf("Point\t\t: %d", point);
-    gotoxy(50, 24);
+    gotoxy(GAME_WIDTH / 2, GAME_HEIGHT + 4);
     printf("Hunger\t: %d", hunger);
 }
-int isTouching(int x,int y, int p_X, int p_Y){
+
+int isTouchingPlayer(int x,int y, int p_X, int p_Y){
     if( p_Y == y &&
-        (p_X - x >-9)&&
-        (p_X - x) < 5 ) return 1;
+        p_X - x > - (int)strlen(PLAYER) &&
+        p_X - x < (int)strlen(IKAN)
+    ) return 1;
     return 0;
 }
-void spawnFish(int *x, int *y){
-    *y = (rand()%20)+1;
-    *x = 5 - rand()%20;
+int isTouching(int x,int y, int X, int Y){
+    if( Y == y &&
+        X - x    > -((int)strlen(IKAN))+5 &&
+        X - x   < ((int)strlen(IKAN)+5)
+    ) return 1;
+    return 0;
 }
-void initializeFish( int * ikan_x, int * ikan_y){
-    int i;
-    for(i = 0; i < MAX_ENTITY; i++){ //initialize random Entity
-        spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+
+void spawnFish(int *x, int *y){
+    *y = (rand()%GAME_HEIGHT)+1;
+    *x = -2 + rand()%40;
+}
+
+
+int validSpawn(int x[],int y[]){
+    int i, j;
+    for(i=0; i<MAX_ENTITY;i++){
+        for(j=0; j<MAX_ENTITY;j++){
+
+            if(isTouching(x[i], y[i], x[j],y[j]) && i!=j)
+                return 1;
+
+        }
     }
+    return 0;
+}
+
+    
+
+void initializeFish( char * tipe,int * ikan_x, int * ikan_y){
+    int i;
+    while(strlen(tipe)!= MAX_ENTITY){
+        switch (rand()%3)
+        {
+        case 0:
+            strcat(tipe,"g");
+            break;
+        case 1:
+            strcat(tipe,"g");
+            break;
+        case 2:
+            strcat(tipe,"b");
+            break;        
+        }
+    }
+    
+    //Make sure minimal ada 1 ikan beracun
+    if(strchr(tipe, 'b') == NULL){
+        *tipe = 'b';
+    }
+    //Make sure minimal ada 1 ikan baik
+    if(strchr(tipe, 'g') == NULL){
+        *tipe = 'g';
+    }
+    //Initialize ikan_x and ikan_y
+    do{
+        for(i = 0; i < MAX_ENTITY; i++){
+            spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+        }
+    }while(validSpawn(ikan_x, ikan_y));
 }
 int runtime(){
+    time_t start;
+    
     int i, beforeState = 0, afterState = 0;
-    int point = 0, hunger = 200;
+    int point = 0;
+    int hunger = STARTING_HUNGER;
     int player_X = 60, player_Y = 10;
-    char tipe[MAX_ENTITY] = "ggb"; int ikan_x[MAX_ENTITY];int ikan_y[MAX_ENTITY];
-    initializeFish(ikan_x, ikan_y);
+    char tipe[MAX_ENTITY];
+    int ikan_x[MAX_ENTITY];int ikan_y[MAX_ENTITY];
+
+
+
+    initializeFish(tipe , ikan_x , ikan_y);
     clearScreen();
     renderBorder();
     while(1){
-        //REndering
+        start = clock();
         for(i = 0; i < MAX_ENTITY; i++){
-            if(ikan_x[i] >= 2 && ikan_x[i] <= 95)
-                renderFish(tipe[i], ikan_x[i], ikan_y[i]); //render ikan baru
+            if(ikan_x[i] >= 2 && ikan_x[i] <= GAME_WIDTH-(int)strlen(IKAN) )
+                renderFish(tipe[i], ikan_x[i], ikan_y[i]);
             else 
                 clearFish(ikan_y[i]);
         }
         beforeState;
         afterState = inputHandling(&hunger,&player_X,&player_Y);
-        if(afterState != NULL){
+        if(afterState != 0){
             beforeState = afterState;
         }
         if(beforeState>0)
@@ -230,43 +290,45 @@ int runtime(){
         else
             renderFish('l',player_X, player_Y);
         statusBar(point, hunger);
-        delay(75);
-
-
-
-        //AFTER RENDER
-        for(i = 0; i < MAX_ENTITY; i++){ //majuin ikann
+        
+        delay(GAME_DELAY);
+        
+        for(i = 0; i < MAX_ENTITY; i++){
             ikan_x[i]++;
-            clearFish(ikan_y[i]); //clear ikan
+            clearFish(ikan_y[i]);
         }
         clearFish(player_Y);
         
         for(i = 0; i < MAX_ENTITY; i++){
-            if(isTouching(ikan_x[i], ikan_y[i], player_X, player_Y)){
+            if(isTouchingPlayer(ikan_x[i], ikan_y[i], player_X, player_Y)){
                 switch (tipe[i])
                 {
                     case 'g':
-                        hunger += 50;
-                        point += 1000;
-                        spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+                        hunger += ADD_HUNGER;
+                        point += ADD_POINT;
+                        do{
+                            spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+                        }while(validSpawn(ikan_x, ikan_y));
                     break;
                     case 'b':
-                        return -1;
+                        return -2;
                     break;
                 }
             }
-            if(ikan_x[i]>95){
-                spawnFish(&(ikan_x[i]), &(ikan_y[i]));
-            }
+            if(ikan_x[i]>GAME_WIDTH-(int)strlen(IKAN)){
+                do{
+                    spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+                }while(validSpawn(ikan_x, ikan_y));
+            }        }
+        if(debugMode){
+        gotoxy(0, GAME_HEIGHT + 2);
+        printf("[%d ms (%d ms cpu)] [%2d FPS]", (int)(clock() - start),(int)(clock() - start)-GAME_DELAY,(int)(CLOCKS_PER_SEC / (clock() - start)));
         }
-
-        //Check Kondisi  2
-        if(point>=10000){ //POINT Lebih gak?
+        if(point>=WIN_POINT){
             return 1; 
-        }else if(hunger<0){ // LAPER?
+        }else if(hunger<0){
             return -1; 
         }
     }
-
 }
 

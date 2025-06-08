@@ -1,19 +1,10 @@
 #include "header.h"
-#include <time.h>
-
-#define MAX_ENTITY 3
-//global variable
-char tipe[MAX_ENTITY] = "ggb"; int ikan_x[MAX_ENTITY];int ikan_y[MAX_ENTITY];
-int point;
+int debugMode = 0;
 
 
 int main() {
     srand(time(NULL));
-    int i;
-
-    initializeFish(ikan_x, ikan_y);
-    //testing
-    // for(i=0;i< MAX_ENTITY; i++) printf("\n[%c][ %d, %d]", tipe[i], ikan_x[i], ikan_y[i]);
+    int i, game;
 
     removeCursor();
     int pilihan;
@@ -23,10 +14,31 @@ int main() {
         scanf("%d", &pilihan);
         switch(pilihan){
             case 1:
-                runtime(tipe, ikan_x, ikan_y);
+                game = runtime();
+                if(game == 1){
+                    clearScreen();
+                    printf("You Win.");
+                }else if(game == -1){
+                    clearScreen();
+                    printf("KALAHHH.");
+                }else if(game == -2){
+                    clearScreen();
+                    printf("Beracunnnnnnnnnnnnnnn.");
+                }
                 break;
             case 2:
                 help();
+                break;
+            case 999:
+                if(debugMode == 0){
+                    debugMode = 1;
+                    clearScreen();
+                    printf("Debug mode ON");
+                } else {
+                    debugMode = 0;
+                    clearScreen();
+                    printf("Debug mode OFF");
+                }
                 break;
             case 0:
                 break;
