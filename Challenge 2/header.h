@@ -2,3 +2,5 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <conio.h>
+
+void menuDisplay();

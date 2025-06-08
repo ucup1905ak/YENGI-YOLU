@@ -3,9 +3,18 @@
 
 
 int main() {
-    printf("\n\t---== [ HUNGRY FISH ] ==---\n");
-    puts("\n\t[1] ");
-    puts("\n\t[2] ");
-    puts("\n\t[3] ");
+    menuDisplay();
+    int pilihan;
+    switch(pilihan){
+        case 1:
+            
+            break;
+        case 2:
+            break;
+        case 0:
+            break;
+        default:
+            break;
+    }
     return 0;
 }
