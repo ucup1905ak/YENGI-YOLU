@@ -1,9 +1,45 @@
 #include "header.h"
 
+void clearScreen() {
+    system("cls");
+}
 void delay(int ms){
     time_t time = clock();
     while(clock()< time+ms);
 }
+
+void redCol(){ 
+    printf("\033[0;31m");
+}
+void greenCol(){
+    printf("\033[0;32m");
+}
+void resetCol(){
+    printf("\033[0;0m");
+}
+void setColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+void setFullscreen() { // ini rusak di aku
+    HWND consoleWindow = GetConsoleWindow();
+    if (consoleWindow != NULL) {
+        ShowWindow(consoleWindow, SW_MAXIMIZE);
+    }
+}
+void removeCursor(){
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = FALSE;
+    SetConsoleCursorInfo(consoleHandle, &info);
+}
+
 void menuDisplay(){
     printf("\n\t---== [ HUNGRY FISH ] ==---\n");
     puts("\t[1]. Play Game ");
@@ -30,35 +66,8 @@ void help(){
     puts("\n\n\t\t[!] PRESS ESC TO BACK TO MENU [!]");
 }
 
-void gotoxy(int x, int y) {
-    COORD coord;
-    coord.X = x;
-    coord.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-void setFullscreen() {
-    HWND consoleWindow = GetConsoleWindow();
-    if (consoleWindow != NULL) {
-        ShowWindow(consoleWindow, SW_MAXIMIZE);
-    }
-}
-void removeCursor(){
-    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO info;
-    info.dwSize = 100;
-    info.bVisible = FALSE;
-    SetConsoleCursorInfo(consoleHandle, &info);
-}
-void redCol(){
-    printf("\033[0;31m");
-}
-void greenCol(){
-    printf("\033[0;32m");
-}
-void resetCol(){
-    printf("\033[0;0m");
-}
-
+/*
+    sorry, tadi gak sempet pakai ini 🙏🙏
 void turnFishR(int x, int y){
     gotoxy(x, y);
     printf("><(((('>");
@@ -67,13 +76,118 @@ void initFish(int x, int y){
     gotoxy(x, y);
     printf("<'))))><");
 }
-void setColor(int color) {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+    */
+
+int isTouchingPlayer(int x,int y, int p_X, int p_Y){
+    if( p_Y == y &&
+        p_X - x > - (int)strlen(PLAYER) &&
+        p_X - x < (int)strlen(IKAN)
+    ) return 1;
+    return 0;
+}
+int isTouching(int x,int y, int X, int Y){
+    if( Y == y &&
+        X - x    > -((int)strlen(IKAN))+5 &&
+        X - x   < ((int)strlen(IKAN)+5)
+    ) return 1;
+    return 0;
 }
 
-void clearScreen() {
-    system("cls");
+void spawnFish(int *x, int *y){
+    *y = (rand()%GAME_HEIGHT)+1;
+    *x = -2 + rand()%40;
 }
+
+
+int validSpawn(int x[],int y[]){
+    int i, j;
+    for(i=0; i<MAX_ENTITY;i++){
+        for(j=0; j<MAX_ENTITY;j++){
+
+            if(isTouching(x[i], y[i], x[j],y[j]) && i!=j)
+                return 1;
+
+        }
+    }
+    return 0;
+}
+
+void initializeFish( char * tipe,int * ikan_x, int * ikan_y){
+    int i;
+    while(strlen(tipe)!= MAX_ENTITY){
+        switch (rand()%3)
+        {
+        case 0:
+            strcat(tipe,"g");
+            break;
+        case 1:
+            strcat(tipe,"g");
+            break;
+        case 2:
+            strcat(tipe,"b");
+            break;        
+        }
+    }
+    
+    //Make sure minimal ada 1 ikan beracun
+    if(strchr(tipe, 'b') == NULL){
+        *tipe = 'b';
+    }
+    //Make sure minimal ada 1 ikan baik
+    if(strchr(tipe, 'g') == NULL){
+        *tipe = 'g';
+    }
+    //Initialize ikan_x and ikan_y
+    do{
+        for(i = 0; i < MAX_ENTITY; i++){
+            spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+        }
+    }while(validSpawn(ikan_x, ikan_y));
+}
+int inputHandling(int *hunger, int *player_X, int *player_Y){
+    if(kbhit()){
+        switch (getch())
+        {        case 'W':
+        case 'w':
+            if(debugMode){  
+            gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+            if(debugMode)printf("Tombol W");
+            }
+            if(*player_Y>1) (*player_Y)--;
+            (*hunger)--;
+            break;        case 'a':
+        case 'A':
+            if(debugMode){
+                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+                printf("Tombol A");
+            }
+            if(*player_X>1)(*player_X)-=2 ;
+            (*hunger)--;
+            return -1;
+            break;        case 's':
+        case 'S':
+            if(debugMode){
+                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+                printf("Tombol S");
+            }
+
+            if(*player_Y<GAME_HEIGHT)(*player_Y)++;
+            (*hunger)--;
+            break;        case 'd':
+        case 'D':
+            if(debugMode){
+                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
+                printf("Tombol D");
+            }
+            if(*player_X<GAME_WIDTH)(*player_X)+=2;
+            (*hunger)--;
+            return 1;
+            break;      
+        }
+    }
+    return 0;
+}
+
 void renderBorder() {
     int i;
     printf("%c",201);
@@ -131,52 +245,6 @@ int clearFish(int y){
 }
 
 
-
-int inputHandling(int *hunger, int *player_X, int *player_Y){
-    if(kbhit()){
-        switch (getch())
-        {        case 'W':
-        case 'w':
-            if(debugMode){  
-            gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
-            if(debugMode)printf("Tombol W");
-            }
-            if(*player_Y>1) (*player_Y)--;
-            (*hunger)--;
-            break;        case 'a':
-        case 'A':
-            if(debugMode){
-                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
-                printf("Tombol A");
-            }
-            if(*player_X>1)(*player_X)-=2 ;
-            (*hunger)--;
-            return -1;
-            break;        case 's':
-        case 'S':
-            if(debugMode){
-                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
-                printf("Tombol S");
-            }
-
-            if(*player_Y<GAME_HEIGHT)(*player_Y)++;
-            (*hunger)--;
-            break;        case 'd':
-        case 'D':
-            if(debugMode){
-                gotoxy(GAME_WIDTH - 10,GAME_HEIGHT + 2);    
-                printf("Tombol D");
-            }
-            if(*player_X<GAME_WIDTH)(*player_X)+=2;
-            (*hunger)--;
-            return 1;
-            break;      
-        }
-    }
-    return 0;
-}
-
-
 void statusBar(int point, int hunger){
     gotoxy(5, GAME_HEIGHT + 3);
     printf("\e[0J");
@@ -189,74 +257,7 @@ void statusBar(int point, int hunger){
     printf("Hunger\t: %d", hunger);
 }
 
-int isTouchingPlayer(int x,int y, int p_X, int p_Y){
-    if( p_Y == y &&
-        p_X - x > - (int)strlen(PLAYER) &&
-        p_X - x < (int)strlen(IKAN)
-    ) return 1;
-    return 0;
-}
-int isTouching(int x,int y, int X, int Y){
-    if( Y == y &&
-        X - x    > -((int)strlen(IKAN))+5 &&
-        X - x   < ((int)strlen(IKAN)+5)
-    ) return 1;
-    return 0;
-}
 
-void spawnFish(int *x, int *y){
-    *y = (rand()%GAME_HEIGHT)+1;
-    *x = -2 + rand()%40;
-}
-
-
-int validSpawn(int x[],int y[]){
-    int i, j;
-    for(i=0; i<MAX_ENTITY;i++){
-        for(j=0; j<MAX_ENTITY;j++){
-
-            if(isTouching(x[i], y[i], x[j],y[j]) && i!=j)
-                return 1;
-
-        }
-    }
-    return 0;
-}
-
-    
-
-void initializeFish( char * tipe,int * ikan_x, int * ikan_y){
-    int i;
-    while(strlen(tipe)!= MAX_ENTITY){
-        switch (rand()%3)
-        {
-        case 0:
-            strcat(tipe,"g");
-            break;
-        case 1:
-            strcat(tipe,"g");
-            break;
-        case 2:
-            strcat(tipe,"b");
-            break;        
-        }
-    }
-    
-    //Make sure minimal ada 1 ikan beracun
-    if(strchr(tipe, 'b') == NULL){
-        *tipe = 'b';
-    }
-    //Make sure minimal ada 1 ikan baik
-    if(strchr(tipe, 'g') == NULL){
-        *tipe = 'g';
-    }
-    //Initialize ikan_x and ikan_y
-    do{
-        for(i = 0; i < MAX_ENTITY; i++){
-            spawnFish(&(ikan_x[i]), &(ikan_y[i]));
-        }
-    }while(validSpawn(ikan_x, ikan_y));
-}
 int runtime(){
     time_t start;
     //Variable 
