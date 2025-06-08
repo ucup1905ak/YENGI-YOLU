@@ -135,14 +135,7 @@ int clearFish(int y){
 
 
 
-void initializeFish( int * ikan_x, int * ikan_y){
-    
-    int i;
-    for(i = 0; i < MAX_ENTITY; i++){ //initialize random Entity
-        ikan_y[i] = (rand()%20)+1;
-        ikan_x[i] = rand()%40;
-    }
-}
+
 
 int inputHandling(int *hunger, int *player_X, int *player_Y){
     if(kbhit()){
@@ -159,7 +152,7 @@ int inputHandling(int *hunger, int *player_X, int *player_Y){
         case 'A':
             gotoxy(90,22);    
             printf("Tombol A");
-            if(*player_X>1)(*player_X)-- ;
+            if(*player_X>1)(*player_X)-=2 ;
             (*hunger)--;
             return -1;
             break;
@@ -174,7 +167,7 @@ int inputHandling(int *hunger, int *player_X, int *player_Y){
         case 'D':
             gotoxy(90,22);    
             printf("Tombol D");
-            if(*player_X<100)(*player_X)++;
+            if(*player_X<100)(*player_X)+=2;
             (*hunger)--;
             return 1;
             break;      
@@ -195,8 +188,22 @@ void statusBar(int point, int hunger){
     gotoxy(50, 24);
     printf("Hunger\t: %d", hunger);
 }
-
-
+int isTouching(int x,int y, int p_X, int p_Y){
+    if( p_Y == y &&
+        (p_X - x >-9)&&
+        (p_X - x) < 5 ) return 1;
+    return 0;
+}
+void spawnFish(int *x, int *y){
+    *y = (rand()%20)+1;
+    *x = 5 - rand()%20;
+}
+void initializeFish( int * ikan_x, int * ikan_y){
+    int i;
+    for(i = 0; i < MAX_ENTITY; i++){ //initialize random Entity
+        spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+    }
+}
 int runtime(){
     int i, beforeState = 0, afterState = 0;
     int point = 0, hunger = 200;
@@ -206,6 +213,7 @@ int runtime(){
     clearScreen();
     renderBorder();
     while(1){
+        //REndering
         for(i = 0; i < MAX_ENTITY; i++){
             if(ikan_x[i] >= 2 && ikan_x[i] <= 95)
                 renderFish(tipe[i], ikan_x[i], ikan_y[i]); //render ikan baru
@@ -221,8 +229,11 @@ int runtime(){
             renderFish('r',player_X, player_Y);
         else
             renderFish('l',player_X, player_Y);
+        statusBar(point, hunger);
+        delay(75);
 
-        delay(50);
+
+
         //AFTER RENDER
         for(i = 0; i < MAX_ENTITY; i++){ //majuin ikann
             ikan_x[i]++;
@@ -230,22 +241,27 @@ int runtime(){
         }
         clearFish(player_Y);
         
-        
-        //check ada iikan yang diluar gak? Spawn baru
-        
         for(i = 0; i < MAX_ENTITY; i++){
-            if(ikan_x[i]>=95){
-                ikan_y[i] = (rand()%20)+1;
-                ikan_x[i] = 5 - rand()%20;
+            if(isTouching(ikan_x[i], ikan_y[i], player_X, player_Y)){
+                switch (tipe[i])
+                {
+                    case 'g':
+                        hunger += 50;
+                        point += 1000;
+                        spawnFish(&(ikan_x[i]), &(ikan_y[i]));
+                    break;
+                    case 'b':
+                        return -1;
+                    break;
+                }
+            }
+            if(ikan_x[i]>95){
+                spawnFish(&(ikan_x[i]), &(ikan_y[i]));
             }
         }
 
-        statusBar(point, hunger);
-        
-        // Check Kondisi 
-        if(0){//KENA IKAN MERAH?
-            return -1;
-        }else if(point>=10000){ //POINT Lebih gak?
+        //Check Kondisi  2
+        if(point>=10000){ //POINT Lebih gak?
             return 1; 
         }else if(hunger<0){ // LAPER?
             return -1; 
