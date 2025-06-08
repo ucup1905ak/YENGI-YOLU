@@ -55,4 +55,4 @@ debugMode
 7. Clear Ikan & gerakan ikan
 8. Game Logic
 9. Check Condition
-10.looping ke No 3
+10. looping ke No 3
