@@ -26,7 +26,7 @@ void initFish(int x, int y);
 
 void renderBorder();
 void renderFish(char type, int x , int y);
-initializeFish( int * ikan_x, int * ikan_y);
+void initializeFish( int * ikan_x, int * ikan_y);
 int clearFish(int y);
-int runtime(char * tipe,int ikan_x[], int ikan_y[]);
+int runtime();
 void help();

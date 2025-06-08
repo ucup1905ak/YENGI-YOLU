@@ -17,12 +17,12 @@ void menuDisplay(){
 void help(){
     clearScreen();
     puts( "\t\t=== [ Rules and Guide To Play ] ===");
-    puts("\t [W]            : Move Up");
-    puts("\t [S]            : Move Down");
-    puts("\t [A]            : Move Left");
-    puts("\t [D]            : Move Right");
-    puts("\n\n\t><(^) --> Good Food");
-    puts("\t><(x) --> Poison");
+    puts("\t\t [W]            : Move Up");
+    puts("\t\t [S]            : Move Down");
+    puts("\t\t [A]            : Move Left");
+    puts("\t\t [D]            : Move Right");
+    puts("\n\n\t\033[0;32m><(^)\033[0;0m --> Good Food");
+    puts("\t\033[0;31m><(x)\033[0;0m --> Poison");
     puts("\tTips to Play :");
     puts("\t- Eat lot of good fish");
     puts("\t- Stay away from dead fish");
@@ -58,6 +58,7 @@ void greenCol(){
 void resetCol(){
     printf("\033[0;0m");
 }
+
 void turnFishR(int x, int y){
     gotoxy(x, y);
     printf("><(((('>");
@@ -132,7 +133,9 @@ int clearFish(int y){
 }
 
 
-initializeFish( int * ikan_x, int * ikan_y){
+
+
+void initializeFish( int * ikan_x, int * ikan_y){
     
     int i;
     for(i = 0; i < MAX_ENTITY; i++){ //initialize random Entity
@@ -141,40 +144,113 @@ initializeFish( int * ikan_x, int * ikan_y){
     }
 }
 
+int inputHandling(int *hunger, int *player_X, int *player_Y){
+    if(kbhit()){
+        switch (getch())
+        {
+        case 'W':
+        case 'w':
+            gotoxy(90,22);    
+            printf("Tombol W");
+            if(*player_Y>1) (*player_Y)--;
+            (*hunger)--;
+            break;
+        case 'a':
+        case 'A':
+            gotoxy(90,22);    
+            printf("Tombol A");
+            if(*player_X>1)(*player_X)-- ;
+            (*hunger)--;
+            return -1;
+            break;
+        case 's':
+        case 'S':
+            gotoxy(90,22);    
+            printf("Tombol S");
+            if(*player_Y<20)(*player_Y)++;
+            (*hunger)--;
+            break;
+        case 'd':
+        case 'D':
+            gotoxy(90,22);    
+            printf("Tombol D");
+            if(*player_X<100)(*player_X)++;
+            (*hunger)--;
+            return 1;
+            break;      
+        }
+    }
+    return NULL;
+}
 
-int runtime(char * tipe,int ikan_x[], int ikan_y[]){
-    int i;
 
+void statusBar(int point, int hunger){
+    gotoxy(5, 23);
+    printf("\e[0J");
+    redCol();printf("><(^)");resetCol();
+    gotoxy(5, 24);
+    greenCol();printf("><(x)");resetCol();
+    gotoxy(50, 23);
+    printf("Point\t\t: %d", point);
+    gotoxy(50, 24);
+    printf("Hunger\t: %d", hunger);
+}
+
+
+int runtime(){
+    int i, beforeState = 0, afterState = 0;
+    int point = 0, hunger = 200;
+    int player_X = 60, player_Y = 10;
+    char tipe[MAX_ENTITY] = "ggb"; int ikan_x[MAX_ENTITY];int ikan_y[MAX_ENTITY];
+    initializeFish(ikan_x, ikan_y);
     clearScreen();
     renderBorder();
     while(1){
         for(i = 0; i < MAX_ENTITY; i++){
-            if(ikan_x[i] >= 5 && ikan_x[i] <= 95)
+            if(ikan_x[i] >= 2 && ikan_x[i] <= 95)
                 renderFish(tipe[i], ikan_x[i], ikan_y[i]); //render ikan baru
             else 
                 clearFish(ikan_y[i]);
         }
-        delay(300);
+        beforeState;
+        afterState = inputHandling(&hunger,&player_X,&player_Y);
+        if(afterState != NULL){
+            beforeState = afterState;
+        }
+        if(beforeState>0)
+            renderFish('r',player_X, player_Y);
+        else
+            renderFish('l',player_X, player_Y);
+
+        delay(50);
+        //AFTER RENDER
         for(i = 0; i < MAX_ENTITY; i++){ //majuin ikann
             ikan_x[i]++;
             clearFish(ikan_y[i]); //clear ikan
         }
+        clearFish(player_Y);
+        
         
         //check ada iikan yang diluar gak? Spawn baru
         
-          for(i = 0; i < MAX_ENTITY; i++){
-            if(ikan_x[i]>=90){
+        for(i = 0; i < MAX_ENTITY; i++){
+            if(ikan_x[i]>=95){
                 ikan_y[i] = (rand()%20)+1;
                 ikan_x[i] = 5 - rand()%20;
             }
         }
-        /*
-        TESTING
+
+        statusBar(point, hunger);
         
-        gotoxy(0,25);
-        for(i=0;i<MAX_ENTITY;i++){
-            printf("\n%d . [%d][%d]", i , ikan_x[i], ikan_y[i]);
+        // Check Kondisi 
+        if(0){//KENA IKAN MERAH?
+            return -1;
+        }else if(point>=10000){ //POINT Lebih gak?
+            return 1; 
+        }else if(hunger<0){ // LAPER?
+            return -1; 
         }
-        */
     }
+
 }
+
