@@ -5,16 +5,18 @@
 int main() {
     menuDisplay();
     int pilihan;
-    switch(pilihan){
-        case 1:
-            
-            break;
-        case 2:
-            break;
-        case 0:
-            break;
-        default:
-            break;
+    while(1){
+        switch(pilihan){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 0:
+                break;
+            default:
+                break;
+        }
     }
+    
     return 0;
 }
