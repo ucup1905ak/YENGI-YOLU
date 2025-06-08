@@ -40,3 +40,19 @@ debugMode
 
 # Performance Note
 - Jujur gak expect ini kenceng, total total cpu time cuma 2 ms buat process game logic nya. biar gak ngebut banget ikannya dikasi delay(). td dicoba, FPS bisa sampai 300 WKWKWKWKW. ini di target ke 15 FPS / frame time 56 ms.
+
+# Cara Kerja Kode
+- Game Logic semuanya ada di runtime() dalam source.c
+- runtime() ngasih return int untuk status kalah menangnya.
+
+##### int runtime()
+1. Variable Declaration
+2. Initialization
+3. Render Ikan
+4. Input handling
+5. Render Player
+6. Delay 
+7. Clear Ikan & gerakan ikan
+8. Game Logic
+9. Check Condition
+10.looping ke No 3

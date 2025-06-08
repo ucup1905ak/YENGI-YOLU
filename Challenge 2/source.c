@@ -259,7 +259,7 @@ void initializeFish( char * tipe,int * ikan_x, int * ikan_y){
 }
 int runtime(){
     time_t start;
-    
+    //Variable 
     int i, beforeState = 0, afterState = 0;
     int point = 0;
     int hunger = STARTING_HUNGER;
@@ -268,37 +268,45 @@ int runtime(){
     int ikan_x[MAX_ENTITY];int ikan_y[MAX_ENTITY];
 
 
-
+    //Initialize
     initializeFish(tipe , ikan_x , ikan_y);
     clearScreen();
     renderBorder();
+
+
     while(1){
         start = clock();
+        //Render Ikan
         for(i = 0; i < MAX_ENTITY; i++){
             if(ikan_x[i] >= 2 && ikan_x[i] <= GAME_WIDTH-(int)strlen(IKAN) )
                 renderFish(tipe[i], ikan_x[i], ikan_y[i]);
             else 
                 clearFish(ikan_y[i]);
         }
-        beforeState;
+
+
+        //input Handling
         afterState = inputHandling(&hunger,&player_X,&player_Y);
         if(afterState != 0){
             beforeState = afterState;
-        }
+        }//Render Player
         if(beforeState>0)
             renderFish('r',player_X, player_Y);
         else
             renderFish('l',player_X, player_Y);
         statusBar(point, hunger);
         
-        delay(GAME_DELAY);
+        delay(GAME_DELAY); //delay 63 ms
         
+
+        //Clear Fish
         for(i = 0; i < MAX_ENTITY; i++){
             ikan_x[i]++;
             clearFish(ikan_y[i]);
         }
         clearFish(player_Y);
         
+        //Game Logic
         for(i = 0; i < MAX_ENTITY; i++){
             if(isTouchingPlayer(ikan_x[i], ikan_y[i], player_X, player_Y)){
                 switch (tipe[i])
@@ -319,11 +327,15 @@ int runtime(){
                 do{
                     spawnFish(&(ikan_x[i]), &(ikan_y[i]));
                 }while(validSpawn(ikan_x, ikan_y));
-            }        }
+            }
+        }
+        //debugging (if activated)
         if(debugMode){
         gotoxy(0, GAME_HEIGHT + 2);
         printf("[%d ms (%d ms cpu)] [%2d FPS]", (int)(clock() - start),(int)(clock() - start)-GAME_DELAY,(int)(CLOCKS_PER_SEC / (clock() - start)));
         }
+
+        //check Condition
         if(point>=WIN_POINT){
             return 1; 
         }else if(hunger<0){
