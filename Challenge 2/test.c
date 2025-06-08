@@ -105,7 +105,7 @@ int main() {
     switch(choice) {
         case 1:
             do{
-                control = renderGame();
+                // control = renderGame();
             }while(control<0);
             switch (control)
                 {
