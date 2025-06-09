@@ -27,10 +27,12 @@ void gotoxy(int x, int y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 void setFullscreen() { // ini rusak di aku
-    HWND consoleWindow = GetConsoleWindow();
-    if (consoleWindow != NULL) {
-        ShowWindow(consoleWindow, SW_MAXIMIZE);
-    }
+    // Ubah ukuran buffer dan window
+    system("mode con: cols=200 lines=60");
+
+    // Maksimalkan jendela
+    HWND hWnd = GetConsoleWindow();
+    ShowWindow(hWnd, SW_MAXIMIZE);
 }
 void removeCursor(){
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -51,13 +53,13 @@ void menuDisplay(){
 void help(){
     clearScreen();
     puts( "\t\t=== [ Rules and Guide To Play ] ===");
-    puts("\t\t [W]            : Move Up");
-    puts("\t\t [S]            : Move Down");
-    puts("\t\t [A]            : Move Left");
-    puts("\t\t [D]            : Move Right");
+    puts("\n\t[W]              : Move Up");
+    puts("\t[S]              : Move Down");
+    puts("\t[A]              : Move Left");
+    puts("\t[D]              : Move Right");
     puts("\n\n\t\033[0;32m><(^)\033[0;0m --> Good Food");
     puts("\t\033[0;31m><(x)\033[0;0m --> Poison");
-    puts("\tTips to Play :");
+    puts("\n\tTips to Play :");
     puts("\t- Eat lot of good fish");
     puts("\t- Stay away from dead fish");
     puts("\t- If fish doesn't eat for 1 hour, the fish died");
@@ -265,7 +267,7 @@ int runtime(){
     int point = 0;
     int hunger = STARTING_HUNGER;
     int player_X = 60, player_Y = 10;
-    char tipe[MAX_ENTITY];
+    char tipe[MAX_ENTITY] = "";
     int ikan_x[MAX_ENTITY];int ikan_y[MAX_ENTITY];
 
 
@@ -297,12 +299,11 @@ int runtime(){
             renderFish('l',player_X, player_Y);
         statusBar(point, hunger);
         
-        delay(GAME_DELAY); //delay 63 ms
+        delay(GAME_DELAY); //delay 63 ms --> 100 ms
         
 
         //Clear Fish
         for(i = 0; i < MAX_ENTITY; i++){
-            ikan_x[i]++;
             clearFish(ikan_y[i]);
         }
         clearFish(player_Y);
@@ -329,6 +330,7 @@ int runtime(){
                     spawnFish(&(ikan_x[i]), &(ikan_y[i]));
                 }while(validSpawn(ikan_x, ikan_y));
             }
+            ikan_x[i]++;
         }
         //debugging (if activated)
         if(debugMode){
@@ -344,4 +346,129 @@ int runtime(){
         }
     }
 }
+void asciiArt(int choice){
+    switch(choice){
+        case 1:
+            setColor(0x02);
+            printf("\n\n");
+            printf("YYYYYYY       YYYYYYY     OOOOOOOOO     UUUUUUUU     UUUUUUUU       WWWWWWWW                           WWWWWWWWIIIIIIIIIINNNNNNNN        NNNNNNNN       !!! ");
+            printf("\nY:::::Y       Y:::::Y   OO:::::::::OO   U::::::U     U::::::U       W::::::W                           W::::::WI::::::::IN:::::::N       N::::::N      !!:!!");
+            printf("\nY:::::Y       Y:::::Y OO:::::::::::::OO U::::::U     U::::::U       W::::::W                           W::::::WI::::::::IN::::::::N      N::::::N      !:::!");
+            printf("\nY::::::Y     Y::::::YO:::::::OOO:::::::OUU:::::U     U:::::UU       W::::::W                           W::::::WII::::::IIN:::::::::N     N::::::N      !:::!");
+            printf("\nYYY:::::Y   Y:::::YYYO::::::O   O::::::O U:::::U     U:::::U         W:::::W           WWWWW           W:::::W   I::::I  N::::::::::N    N::::::N      !:::!");
+            printf("\n   Y:::::Y Y:::::Y   O:::::O     O:::::O U:::::D     D:::::U          W:::::W         W:::::W         W:::::W    I::::I  N:::::::::::N   N::::::N      !:::!");
+            printf("\n    Y:::::Y:::::Y    O:::::O     O:::::O U:::::D     D:::::U           W:::::W       W:::::::W       W:::::W     I::::I  N:::::::N::::N  N::::::N      !:::!");
+            printf("\n     Y:::::::::Y     O:::::O     O:::::O U:::::D     D:::::U            W:::::W     W:::::::::W     W:::::W      I::::I  N::::::N N::::N N::::::N      !:::!");
+            printf("\n      Y:::::::Y      O:::::O     O:::::O U:::::D     D:::::U             W:::::W   W:::::W:::::W   W:::::W       I::::I  N::::::N  N::::N:::::::N      !:::!");
+            printf("\n       Y:::::Y       O:::::O     O:::::O U:::::D     D:::::U              W:::::W W:::::W W:::::W W:::::W        I::::I  N::::::N   N:::::::::::N      !!:!!");
+            printf("\n       Y:::::Y       O:::::O     O:::::O U:::::D     D:::::U               W:::::W:::::W   W:::::W:::::W         I::::I  N::::::N    N::::::::::N       !!! ");
+            printf("\n       Y:::::Y       O::::::O   O::::::O U::::::U   U::::::U                W:::::::::W     W:::::::::W        II::::::IIN::::::N     N:::::::::N           ");
+            printf("\n       Y:::::Y       O:::::::OOO:::::::O U:::::::UUU:::::::U                 W:::::::W       W:::::::W         I::::::::IN::::::N      N::::::::N           ");
+            printf("\n    YYYY:::::YYYY     OO:::::::::::::OO   UU:::::::::::::UU                  W:::::W         W:::::W          I::::::::IN::::::N       N:::::::N            ");
+            printf("\n    Y:::::::::::Y       OO:::::::::OO       UU:::::::::UU                    W:::W           W:::W           IIIIIIIIIINNNNNNNN         NNNNNNN             ");
+            printf("\n    YYYYYYYYYYYYY         OOOOOOOOO           UUUUUUUUU                                                                                                     ");
+            break;
+        case 2:
+            setColor(0x05);
+            printf("\n\n");
+            printf("\t\t\tBBBBBBBBBBBBBBBBB   YYYYYYY       YYYYYYYEEEEEEEEEEEEEEEEEEEEEE");
+            printf("\n\t\t\tB::::::::::::::::B  Y:::::Y       Y:::::YE::::::::::::::::::::E");
+            printf("\n\t\t\tB::::::::::::::::B  Y:::::Y       Y:::::YE::::::::::::::::::::E");
+            printf("\n\t\t\tB::::::BBBBBB:::::B Y:::::Y       Y:::::YE::::::::::::::::::::E");
+            printf("\n\t\t\tBB:::::B     B:::::BY::::::Y     Y::::::YEE::::::EEEEEEEEE::::E");
+            printf("\n\t\t\t  B::::B     B:::::BYYY:::::Y   Y:::::YYY  E:::::E       EEEEEE");
+            printf("\n\t\t\t  B::::B     B:::::B   Y:::::Y Y:::::Y     E:::::E             ");
+            printf("\n\t\t\t  B::::BBBBBB:::::B     Y:::::Y:::::Y      E::::::EEEEEEEEEE   ");
+            printf("\n\t\t\t  B::::BBBBBB:::::B     Y:::::Y:::::Y      E::::::EEEEEEEEEE   ");
+            printf("\n\t\t\t  B::::BBBBBB:::::B     Y:::::Y:::::Y      E::::::EEEEEEEEEE   ");
+            printf("\n\t\t\t  B:::::::::::::BB       Y:::::::::Y       E:::::::::::::::E   ");
+            printf("\n\t\t\t  B::::BBBBBB:::::B       Y:::::::Y        E:::::::::::::::E   ");
+            printf("\n\t\t\t  B::::B     B:::::B       Y:::::Y         E::::::EEEEEEEEEE   ");
+            printf("\n\t\t\t  B::::B     B:::::B       Y:::::Y         E:::::E             ");
+            printf("\n\t\t\t  B::::B     B:::::B       Y:::::Y         E:::::E       EEEEEE");
+            printf("\n\t\t\tBB:::::BBBBBB::::::B       Y:::::Y       EE::::::EEEEEEEE:::::E");
+            printf("\n\t\t\tB:::::::::::::::::B     YYYY:::::YYYY    E::::::::::::::::::::E");
+            printf("\n\t\t\tB::::::::::::::::B      Y:::::::::::Y    E::::::::::::::::::::E");
+            printf("\n\t\t\tBBBBBBBBBBBBBBBBB       YYYYYYYYYYYYY    EEEEEEEEEEEEEEEEEEEEEE");                                                    
+            break;
+        case 3:
+            setColor(0x07);
+            printf(
+"                                                                                       .-:.\n"
+"                                                                                     ..---..\n"
+"                                          ...                                      ..----:.\n"
+"                           ....:---..     :..   .:     ..                         .:-----..\n"
+"                         ..---:::::-.     -     ::     ..                        .:-----.\n"
+"                      ..----------:-.   .::    .-.     :.    ..                  :------.\n"
+"                  ...-------------:-.   .=:    :-.   .::.   .:.                ..------:.\n"
+"                 .:----------------:.  .:-.  ..=:.   .=..   .:.   ..           .-------.\n"
+"              ..-------------------.   .=-.  .:-..  .:-..  .-:    ..          ..------:.\n"
+"             .------:.---..-------:.  .---  ..=-.   .--    .-.   .:.    ..    .-------.\n"
+"           .---------:XXX:--------..  .=-.  .---.   --:    --.   .-.    :.    :-------.\n"
+"         .:----------:XXX:-------:  ..-=-.  .=--.  .=-.  ..--.  .--.  .::.  .:-----:-..\n"
+"        .-----------:.---..------:  .:=--. .-=-:.  -=-.  .--:.  .-:   .-....------:-.\n"
+"        :---------------------------------==----------::::--....--:...:-.----------.\n"
+"        :------------------------------------------------------------------------...\n"
+"        ..-------------------------==----------:::----...---...:--.  .--.:---------.\n"
+"          ...:-------------------....:--:. .---....=-:. .:=-  ..--.  .:-  ..:-------:\n"
+"               .:----------------.  ..-=:. .:=-..  -=:.  .=-..  .-:   .-..   .-----:-..\n"
+"                 ..--------------.    :=-.  .=-:.  .=-.  .:-:.  .-:   .:..   .:-------.\n"
+"              ..::---------------:    .=-.  .---.  .--.  ..-:.   :-   ....    .:------..\n"
+"             .--------------------     -=.  ..=-.   :=.    :-.   .-           ..------:.\n"
+"              .-------------------..   .=:   .-=.   .-:    .=.   ...           .-------.\n"
+"               ..-----------------:.   .--   ..=.    .:     :.                 ..------:\n"
+"                 ..:-------------:-.    .-     -.    .-     ..                   .------.\n"
+"                   ....----------:-.    .-     ..    ..                          .:-----:\n"
+"                         ..:::--::..    ...    ..                                 ..-----..\n"
+"                                                                                   ..:----..\n"
+"                                                                                      .:--:.\n"
+"                                                                                         .::\n"
+"                                                                                          ...\n");
+            printf("\033[31m\t[!] DIED FROM EATING POISONOUS FISH [!]\033[0m\n");
 
+        default:
+            break;
+    }
+}
+void supriseLoad(){
+    int j;
+    printf("\033[32m"
+        "\t\t\t        __________\n"
+       "\t\t\t       /          \\                                             (\n"
+       "\t\t\t      /____________\\                                           (\\)\n"
+       "\t\t\t       |:_:_:_:_:_|                                             ))\n"
+       "\t\t\t      |_:_,--.:_:|                                          (\\//   )\n"
+       "\t\t\t       |:_:|__|_:_|                         _               ) ))   ((\n"
+       "\t\t\t    _  |_   _  :_:|   _   _   _            (_)             ((((   /)\\`\n"
+       "\t\t\t   | |_| |_| |   _|  | |_| |_| |             o              \\\\)) (( (\n"
+       "\t\t\t    \\_:_:_:_:/|_|_|_|\\:_:_:_:_/             .                ((   ))))\n"
+       "\t\t\t     |_,-._:_:_:_:_:_:_:_.-,_|                                )) ((//\n"
+       "\t\t\t     |:|_|:_:_:,---,:_:_:|_|:|                               ,-.  )/\n"
+       "\t\t\t     |_:_:_:_,'     `,_:_:_:_|           _  o               ,;'))((\n"
+       "\t\t\t     |:_:_:_/  _ | _  \\_:_:_:|          (_O                   ((  ))\n"
+       "\t\t\t_____|_:_:_|  (o)-(o)  |_:_:_|--'`-.     ,--.                (((\\'/\n"
+       "\t\t\t ', ;|:_:_:| -( .-. )- |:_:_:| ', ; `--._\\  /,---.~           \\`))\n"
+       "\t\t\t.  ` |_:_:_|   \\`-'/   |_:_:_|.  ` .  `  /()\\.__( ) .,-----'`-\\((\n"
+       "\t\t\t ', ;|:_:_:|    `-'    |:_:_:| ', ; ', ; `--'|   \\ ', ; ', ; ',')).,--\n"
+       "\t\t\t.  `     ` .  ` .  ` .  ` .  ` .  ` .  ` .    .  ` .  ` .  ` .  ` .  `\n"
+       "\t\t\t ', ; ', ; ', ; ', ; ', ; ', ; ', ; ', ; ', ; ', ; ', ; ', ; ', ; ', ;\n"
+        "\033[0m");
+    printf("\n\n");
+    // for (j = 0; j < 9; j++){
+    //     printf("=");
+    //     Sleep(500);
+    // }
+    // printf(" ]");
+    const int total = 10; 
+    int i;
+
+    for (i = 0; i <= total; i++) {
+        printf("\r\t\t\t\t\t\t[ ");
+        for (int j = 0; j < i; j++) printf("=");
+        printf(" ] %d%%", (i * 100) / total);
+        fflush(stdout);
+        delay(500);
+    }
+
+
+}

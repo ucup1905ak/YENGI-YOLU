@@ -22,7 +22,7 @@
 #define STARTING_HUNGER 100 
 #endif
 #ifndef GAME_DELAY 
-#define GAME_DELAY 63
+#define GAME_DELAY 100
 #endif
 #ifndef GAME_WIDTH
 #define GAME_WIDTH 100
@@ -72,3 +72,7 @@ int isTouching(int x, int y, int p_X, int p_Y);
 void spawnFish(int *x, int *y);
 int isTouchingPlayer(int x, int y, int p_X, int p_Y);
 int validSpawn(int x[], int y[]);
+
+//ASCII ART
+void asciiArt(int choice);
+void supriseLoad();

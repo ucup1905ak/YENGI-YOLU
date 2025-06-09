@@ -5,11 +5,15 @@ int debugMode = 0;
 int main() {
     srand(time(NULL));
     int i, game;
+    supriseLoad();
+    Sleep(1000);
 
     removeCursor();
     int pilihan;
+    
     do{
         clearScreen();
+        setColor(0x07);
         menuDisplay();
         scanf("%d", &pilihan);
         switch(pilihan){
@@ -17,14 +21,14 @@ int main() {
                 game = runtime();
                 if(game == 1){
                     clearScreen();
-                    printf("You Win.");
+                    asciiArt(1);
                 }else if(game == -1){
                     clearScreen();
-                    printf("KALAHHH.");
                 }else if(game == -2){
                     clearScreen();
-                    printf("Beracunnnnnnnnnnnnnnn.");
+                    asciiArt(3);
                 }
+                getch();
                 break;
             case 2:
                 help();
@@ -41,8 +45,13 @@ int main() {
                 }
                 break;
             case 0:
+                clearScreen();
+                asciiArt(2);
+                getch();
+                exit(0);
                 break;
             default:
+                printf("\n\t\033[32m[!] MENU TIDAK DITEMUKAN [!]\033[0m");
                 break;
         }
         getch();
