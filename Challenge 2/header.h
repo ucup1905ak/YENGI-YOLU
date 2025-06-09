@@ -9,20 +9,19 @@
 #define ADD_POINT 1000
 #endif
 #ifndef ADD_HUNGER
-#define ADD_HUNGER 50
+#define ADD_HUNGER 25
 #endif
-
 #ifndef WIN_POINT 
 #define WIN_POINT 10000
 #endif
-#ifndef MAX_ENTITY 
+#ifndef MAX_ENTITY  
 #define MAX_ENTITY 3
 #endif
 #ifndef STARTING_HUNGER 
 #define STARTING_HUNGER 100 
 #endif
 #ifndef GAME_DELAY 
-#define GAME_DELAY 100
+#define GAME_DELAY 65
 #endif
 #ifndef GAME_WIDTH
 #define GAME_WIDTH 100

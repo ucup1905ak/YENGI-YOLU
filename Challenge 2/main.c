@@ -5,10 +5,13 @@ int debugMode = 0;
 int main() {
     srand(time(NULL));
     int i, game;
-    supriseLoad();
-    Sleep(1000);
-
     removeCursor();
+    supriseLoad();
+    greenCol();
+    printf("\n\n\t\t\t\t[*] Press any key to continue. [*]");
+    resetCol();
+    getch();
+    
     int pilihan;
     
     do{
@@ -24,6 +27,7 @@ int main() {
                     asciiArt(1);
                 }else if(game == -1){
                     clearScreen();
+                    asciiArt(4);
                 }else if(game == -2){
                     clearScreen();
                     asciiArt(3);
