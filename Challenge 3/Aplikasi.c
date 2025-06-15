@@ -129,19 +129,17 @@ void hapusItem() {
     system("pause");
 }
 
-void lihatAkun(UserList pengguna) {
+void lihatAkun(UserList pengguna, char *encrypted) {
     system("cls");
-    printf("\n\t\t\tLIST ACCOUNTS\n");
+     printf("\t+----+------------+---------------------------+----------+----------------+\n");
+    printf("\t|\t\tLIST ACCOUNTS                                              |\n");
     printf("\t+----+------------+---------------------------+----------+----------------+\n");
     printf("\t| No | Username   | Email                     | Type     | Password       |\n");
     printf("\t+----+------------+---------------------------+----------+----------------+\n");
-
-    char encrypted[MAX_PASS];
     int i, count = 1;
 
     for (i = 0; i < MAX_USER; i++) {
         if (!isEmptyUser(pengguna[i])) {
-            encryptPassword(encrypted, pengguna[i].password);
             printf("\t| %-2d | %-10s | %-25s | %-8s | %-14s |\n",
                    count++, pengguna[i].username, pengguna[i].email,
                    pengguna[i].tipe, encrypted);

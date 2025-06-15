@@ -1,5 +1,7 @@
 #include "header.h"
 
+char encrypted[MAX_PASS + 1];
+
 void InitializeUser(UserList userList) {
     int i;
     for (i = 0; i < MAX_USER; i++) {
@@ -38,7 +40,8 @@ int isAlreadyExist(char *username, UserList users) {
 
 void encryptPassword(char *output, const char *input) {
     char salt[] = "PNC_2025";
-    int len = strlen(input), i;
+    int len = strlen(input);
+    int i;
 
     for (i = 0; i < len; i++) {
         output[i] = ~(input[i]) ^ salt[i % strlen(salt)];
@@ -129,7 +132,6 @@ void RegisterNewUser(UserList userList) {
 
 void registerMenu(user *currentUser) {
     string name = "", mail = "", pass1 = "", pass2 = "";
-    char encrypted[MAX_PASS + 1];
     int pilihan = 0;
     char ch;
 
@@ -220,6 +222,10 @@ void registerMenu(user *currentUser) {
     break;
     }
 
+    encryptPassword(encrypted, pass1);
+    strcpy(currentUser->password, encrypted);
+
+    printf("\n[*] Pendaftaran berhasil! [*]\n");
 
 
     // konfirmasi penambahan akun
@@ -263,8 +269,8 @@ void loginMenu(UserList users, int * loginIndex) {
                 getch();
                 return;
             } else {
-                printf("\t[!] Captcha salah!\n");
-                printf("\t[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
+                printf("[!] Captcha salah! [!]\n");
+                printf("[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
             }
         } else {
             Beep(750, 200);
@@ -384,7 +390,7 @@ void adminMenu(UserList users) {
                 hapusItem();
                 break;
             case 7:
-                lihatAkun(users);
+                lihatAkun(users, encrypted);
                 getch();
                 break;
             case 0:
