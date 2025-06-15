@@ -216,7 +216,7 @@ void tambahItem() {
     int index = selectRakToko("Pilih rak yang akan ditambahkan item:");
     
     if (countItemInRak(rakToko[index]) >= 2) {
-        printf("Rak ini sudah penuh (maks 2 item).\n");
+        printf("[!] Rak ini sudah penuh [!]\n");
         return;
     }
 
@@ -225,13 +225,14 @@ void tambahItem() {
         bool valid;
         do {
             valid = true;
-            printf("Masukkan kategori rak: ");
+            printf("\n[Tambah Item]");
+            printf("Masukkan kategori rak : ");
             fflush(stdin);
             fgets(kategori, sizeof(kategori), stdin);
             kategori[strcspn(kategori, "\n")] = '\0';
 
             if (strlen(kategori) == 0 || strcmp(kategori, "-") == 0) {
-                printf("Kategori tidak boleh kosong atau '-'\n");
+                printf("[!] Kategori tidak boleh kosong atau '-'[!]\n");
                 valid = false;
                 continue;
             }
@@ -293,14 +294,108 @@ void tambahItem() {
 }
 
 void updateItem() {
-    printf("\n[INFO] Fitur Update Item belum diimplementasikan.\n");
-    system("pause");
+    int index = selectRakToko("Pilih rak untuk update item:");
+    int row = index / 4;
+    int col = index % 4;
+
+    rak *r = &rakToko[index];
+    if (r->itemCount == 0) {
+        printf("Rak kosong!\n");
+        return;
+    }
+
+    if (r->itemCount == 2) {
+        printf("Terdapat 2 item:\n");
+        for (int i = 0; i < 2; i++) {
+            char hargaRupiah[30];
+            formatRupiah(r->items[i].harga, hargaRupiah);
+            printf("%d. %s (Stok: %d, Harga: %s)\n", i + 1, r->items[i].nama, r->items[i].stok, hargaRupiah);
+        }
+        int pilih;
+        do {
+            printf("Pilih item yang ingin diubah (1/2): ");
+            scanf("%d", &pilih);
+            pilih--;
+        } while (pilih < 0 || pilih >= r->itemCount);
+
+        item *it = &r->items[pilih];
+
+        printf("Masukkan nama baru: ");
+        scanf(" %[^\n]", it->nama);
+        while (strlen(it->nama) == 0 || strcmp(it->nama, "-") == 0) {
+            printf("Nama tidak valid. Ulangi: ");
+            scanf(" %[^\n]", it->nama);
+        }
+
+        printf("Masukkan stok baru: ");
+        scanf("%d", &it->stok);
+        while (it->stok <= 0) {
+            printf("Stok tidak valid. Ulangi: ");
+            scanf("%d", &it->stok);
+        }
+
+        printf("Masukkan harga baru: ");
+        scanf("%lf", &it->harga);
+        while (it->harga <= 0 || it->harga > 999999999) {
+            printf("Harga tidak valid. Ulangi: ");
+            scanf("%lf", &it->harga);
+        }
+
+        printf("Item berhasil diperbarui!\n");
+        }
 }
 
 void hapusItem() {
-    printf("\n[INFO] Fitur Hapus Item belum diimplementasikan.\n");
-    system("pause");
+    int index = selectRakToko("Pilih rak untuk menghapus item:");
+    int row = index / 4;
+    int col = index % 4;
+
+rak *r = &rakToko[index];
+
+if (r->itemCount == 0) {
+    printf("Rak kosong!\n");
+    return;
 }
+
+printf("Terdapat %d item:\n", r->itemCount);
+for (int i = 0; i < r->itemCount; i++) {
+    char hargaRupiah[30];
+    formatRupiah(r->items[i].harga, hargaRupiah);
+    printf("%d. %s (Stok: %d, Harga: %s)\n", i + 1, r->items[i].nama, r->items[i].stok, hargaRupiah);
+}
+
+int pilih;
+do {
+    printf("Pilih item yang ingin dihapus (1-%d): ", r->itemCount);
+    scanf("%d", &pilih);
+    pilih--;
+} while (pilih < 0 || pilih >= r->itemCount);
+
+printf("Apakah Anda yakin ingin menghapus item '%s'? (Y/N): ", r->items[pilih].nama);
+char konfirmasi;
+scanf(" %c", &konfirmasi);
+
+if (konfirmasi == 'Y' || konfirmasi == 'y') {
+    if (r->itemCount == 2 && pilih == 0) {
+        r->items[0] = r->items[1];
+    }
+
+    strcpy(r->items[r->itemCount - 1].nama, "-");
+    r->items[r->itemCount - 1].stok = 0;
+    r->items[r->itemCount - 1].harga = 0;
+    r->itemCount--;
+
+    if (r->itemCount == 0) {
+        strcpy(r->kategori, "-");
+    }
+
+    printf("Item berhasil dihapus.\n");
+} else {
+    printf("Penghapusan dibatalkan.\n");
+}
+
+}
+
 
 void lihatAkun(UserList pengguna, char *encrypted) {
     system("cls");
