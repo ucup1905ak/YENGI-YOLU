@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
         do {
             system("cls");
             loginDisplay();
+            fflush(stdin);
             scanf("%c", &pilLogin);
 
             switch (pilLogin) {
@@ -83,7 +84,7 @@ int main(int argc, char *argv[]) {
         do{ 
             system("cls"); 
             if(strcmpi(currentUser->tipe, "admin") == 0) {
-                adminMenu();
+                adminMenu(users);
             }else {
                 employeeMenu();
             }

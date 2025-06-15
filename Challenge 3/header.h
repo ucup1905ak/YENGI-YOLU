@@ -74,7 +74,8 @@ void jualItem();
 void tambahItem();
 void updateItem();
 void hapusItem();
-void lihatAkun();
+void lihatAkun(UserList users);
 void formatRupiah(double amount, char *result);
+void adminMenu(UserList users);
 
 #endif

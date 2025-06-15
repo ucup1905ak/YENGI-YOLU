@@ -36,15 +36,14 @@ int isAlreadyExist(char *username, UserList users) {
 }
 
 
-void encryptPassword(char *dest, const char *src) {
-    char salt[] = SALT;
-    int len = strlen(src);
-    int i;
+void encryptPassword(char *output, const char *input) {
+    char salt[] = "PNC_2025";
+    int len = strlen(input), i;
+
     for (i = 0; i < len; i++) {
-        char notChar = ~src[i];
-        dest[i] = notChar ^ salt[i % strlen(salt)];
+        output[i] = ~(input[i]) ^ salt[i % strlen(salt)];
     }
-    dest[len] = '\0';
+    output[len] = '\0';
 }
 
 
@@ -238,6 +237,7 @@ void loginMenu(UserList users, int * loginIndex) {
     int i;
     for (i = 0; i < attempts; i++) {
         system("cls");
+        puts("\n===== [ LOGIN ] =====");
         printf("\n\nUsername        : "); fflush(stdin); gets(name);
         printf("\nPassword        : "); fflush(stdin);
         inputPassword(pass);
@@ -246,9 +246,9 @@ void loginMenu(UserList users, int * loginIndex) {
         if (NewUser != NULL) {
             
             if (captcha()) {
-                printf("\n[✓] Login berhasil!\n");
-                showMenuBasedOnRole(NewUser);
+                printf("\n[+] Login berhasil! [+]\n");
                 *loginIndex = searchLoginIndex(users, name, pass);
+                getch();
                 return;
             } else {
                 printf("[!] Captcha salah!\n");
@@ -315,18 +315,17 @@ bool captcha() {
     }
 
     if (strcmp(jawaban, jawaban_benar) == 0) {
-        printf("[✓] Captcha benar!\n");
+        printf("[+] Captcha benar! [+]\n");
         return true;
     } else {
         Beep(750, 200);
-        printf("[!] Captcha salah! Jawaban benar: %s\n", hari[indexJawaban]);
+        printf("[!] Captcha salah [!]\n");
         return false;
     }
 }
 
-void adminMenu() {
+void adminMenu(UserList users) {
     int choice;
-    
     while(1) {
         system("cls");
         printf("\n");
@@ -368,12 +367,11 @@ void adminMenu() {
                 updateItem();
                 break;
             case 6:
-                
                 hapusItem();
                 break;
             case 7:
-                
-                lihatAkun();
+                lihatAkun(users);
+                getch();
                 break;
             case 0:
                 printf("\nKembali ke menu utama...\n");
@@ -423,7 +421,6 @@ void employeeMenu() {
 
 void showMenuBasedOnRole(user *currentUser) {
     if (strcmp(currentUser->tipe, "Admin") == 0) {
-        adminMenu();
     } else if (strcmp(currentUser->tipe, "Karyawan") == 0) {
         employeeMenu();
     } else {
