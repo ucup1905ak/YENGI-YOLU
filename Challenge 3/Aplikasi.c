@@ -104,11 +104,6 @@ void lihatItem() {
 }
 
 
-void cariItem() {
-    printf("\n[INFO] Fitur Cari Item belum diimplementasikan.\n");
-    system("pause");
-}
-
 void jualItem() {
     printf("\n[INFO] Fitur Jual Item belum diimplementasikan.\n");
     system("pause");
@@ -150,6 +145,57 @@ void lihatAkun(UserList pengguna, char *encrypted) {
     printf("\nPress any key to continue...");
     getch();
 }
+void cariItem() {
+    char keyword[100], keywordLower[100], namaItemLower[100];
+    char rakLabel[4];
+    bool ditemukan = false;
 
+    // Tampilkan tampilan rak toko seperti menu navigasi
+    int dummyIndex = 0; // Tidak digunakan untuk navigasi
+    system("cls");
+    printRakToko(dummyIndex); // Gunakan fungsi dari rakToko.c
+
+    printf("\n\nMasukkan nama item yang ingin dicari: ");
+    fflush(stdin);
+    fgets(keyword, sizeof(keyword), stdin);
+    keyword[strcspn(keyword, "\n")] = '\0';
+
+    // Konversi keyword ke huruf kecil (lowercase)
+    strcpy(keywordLower, keyword);
+    for (int i = 0; keywordLower[i]; i++) {
+        keywordLower[i] = tolower(keywordLower[i]);
+    }
+
+    printf("\nMencari \"%s\" di seluruh rak...\n\n", keyword);
+
+    for (int index = 0; index < 16; index++) {
+        if (rakToko[index].itemCount == 0 || strlen(rakToko[index].kategori) == 0) {
+            continue; // Lewati rak kosong
+        }
+
+        int row = index / 4 + 1;
+        char col = 'A' + (index % 4);
+        sprintf(rakLabel, "%c%d", col, row);
+
+        for (int i = 0; i < rakToko[index].itemCount; i++) {
+            strcpy(namaItemLower, rakToko[index].items[i].nama);
+            for (int j = 0; namaItemLower[j]; j++) {
+                namaItemLower[j] = tolower(namaItemLower[j]);
+            }
+
+            if (strstr(namaItemLower, keywordLower)) {
+                printf("[ %s ] => '%s'\n", rakLabel, rakToko[index].items[i].nama);
+                ditemukan = true;
+            }
+        }
+    }
+
+    if (!ditemukan) {
+        printf("[!] Tidak ditemukan item dengan nama mengandung \"%s\".\n", keyword);
+    }
+
+    printf("\nTekan Enter untuk kembali ke menu...");
+    getch();
+}
 
 

@@ -77,5 +77,6 @@ void hapusItem();
 void lihatAkun(UserList users, char *encrypted);
 void formatRupiah(double amount, char *result);
 void adminMenu(UserList users);
+void cariItem();
 
 #endif
