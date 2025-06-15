@@ -92,11 +92,13 @@ void lihatItem() {
     printf("Kategori : %s\n\n", rakToko[selectedIndex].kategori);
     
     for (i = 0; i < rakToko[selectedIndex].itemCount; i++) {
+        if(rakToko[selectedIndex].items[i].stok > 0) {
         formatRupiah(rakToko[selectedIndex].items[i].harga, hargaStr);
         
         printf("> %s\n", rakToko[selectedIndex].items[i].nama);
         printf("  Stok  : %d\n", rakToko[selectedIndex].items[i].stok);
         printf("  Harga : %s\n\n", hargaStr);
+        }
     }
     
     printf("Tekan Enter untuk kembali...");
@@ -139,12 +141,14 @@ void jualItem() {
     
     printf("\n=== DAFTAR ITEM ===\n");
     for (i = 0; i < rakToko[selectedIndex].itemCount; i++) {
+        if(rakToko[selectedIndex].items[i].stok > 0){
         formatRupiah(rakToko[selectedIndex].items[i].harga, hargaStr);
         printf("[%d] %s - Stok: %d - Harga: %s\n", 
                i + 1, 
                rakToko[selectedIndex].items[i].nama,
                rakToko[selectedIndex].items[i].stok,
                hargaStr);
+        }
     }
     
     printf("\nPilih item (1-%d): ", rakToko[selectedIndex].itemCount);
