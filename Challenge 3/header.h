@@ -22,12 +22,15 @@ typedef struct {
     char username[50];
     char password[50];
     char email[50];
-    char tipe[10];
-} user;
+    char tipe[10]; //Admin & Karyawan
+}user;
 
-typedef user* UserList;
 
-void InitializeUser(UserList users);
+
+
+typedef user *UserList;
+void InitializeUser(user * userList);
+void RegisterNewUser(user * userList);
 int isEmptyUser(user u);
 user* searchEmptyUser(UserList userList);
 int isAlreadyExist(char *username, UserList users);
