@@ -1,7 +1,7 @@
 [Editor_0]
 CursorCol=1
 CursorRow=44
-TopLine=34
+TopLine=74
 LeftChar=1
 [Editors]
 Order=0,1,2,4,3
@@ -17,9 +17,9 @@ CursorRow=280
 TopLine=270
 LeftChar=1
 [Editor_3]
-CursorCol=38
-CursorRow=185
-TopLine=183
+CursorCol=25
+CursorRow=65
+TopLine=60
 LeftChar=1
 [Editor_4]
 CursorCol=1

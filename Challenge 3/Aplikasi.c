@@ -1,5 +1,10 @@
 #include "header.h"
-
+#ifndef ROW
+#define ROW 4
+#endif
+#ifndef COL
+#define COL 4
+#endif
 rak rakToko[16];
 
 void initializeRakToko(){
@@ -62,7 +67,7 @@ void formatRupiah(double amount, char *result) {
 }
 
 void lihatItem() {
-    int selectedIndex = selectRakToko("Pilih rak untuk melihat item:");;
+    int selectedIndex = selectRakToko("");
     char shelfName[4];
     int row, i;
     char col;
@@ -120,7 +125,7 @@ void jualItem() {
     
     
     
-    selectedIndex = selectRakToko("Pilih rak untuk melihat item:");;
+    selectedIndex = selectRakToko("");
     
     if (selectedIndex == -1) {
         return;
@@ -236,10 +241,10 @@ void tambahItem() {
                 valid = false;
                 continue;
             }
-
-            for (int i = 0; i < ROW * COL; i++) {
+			int i;
+            for (i = 0; i < ROW * COL; i++) {
                 if (i != index && strcasecmp(rakToko[i].kategori, kategori) == 0) {
-                    printf("Kategori sudah digunakan oleh rak lain.\n");
+                    printf("\nKategori sudah digunakan oleh rak lain.\n");
                     valid = false;
                     break;
                 }
@@ -249,11 +254,11 @@ void tambahItem() {
     }
 
     int pos = rakToko[index].itemCount;
-    printf("Input item ke-%d:\n", pos + 1);
+    printf("\nInput item ke-%d:\n", pos + 1);
 
     // Nama
     do {
-        printf("Nama Item: ");
+        printf("\nNama Item: ");
         fflush(stdin);
         fgets(rakToko[index].items[pos].nama, sizeof(rakToko[index].items[pos].nama), stdin);
         rakToko[index].items[pos].nama[strcspn(rakToko[index].items[pos].nama, "\n")] = '\0';
@@ -261,7 +266,7 @@ void tambahItem() {
 
     // Stok
     do {
-        printf("Stok: ");
+        printf("\nStok: ");
         if (scanf("%d", &rakToko[index].items[pos].stok) != 1 || rakToko[index].items[pos].stok <= 0) {
             printf("Stok harus bilangan bulat positif!\n");
             while (getchar() != '\n');
@@ -271,10 +276,11 @@ void tambahItem() {
     // Harga
     char hargaInput[20];
     do {
-        printf("Harga (maks 9 digit): ");
+        printf("\nHarga (maks 9 digit): ");
         scanf("%s", hargaInput);
         bool valid = true;
-        for (int i = 0; i < strlen(hargaInput); i++) {
+        int i;
+        for (i = 0; i < strlen(hargaInput); i++) {
             if (!isdigit(hargaInput[i])) {
                 valid = false;
                 break;
@@ -287,10 +293,9 @@ void tambahItem() {
         rakToko[index].items[pos].harga = atoi(hargaInput);
         break;
     } while (1);
-    
+
     rakToko[index].itemCount++;
-    
-    printf("Item berhasil ditambahkan ke rak!\n");
+    printf("\nItem berhasil ditambahkan ke rak!\n");
 }
 
 void updateItem() {
