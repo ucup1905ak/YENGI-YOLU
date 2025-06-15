@@ -1,8 +1,5 @@
 #include "header.h"
-#define GREEN "\033[32m"
-#define NORMAL "\033[0m"
-#define CYAN "\033[36m"
-#define YELLOW "\033[33m"
+
 void printRakToko(int index){
         /*
         ┌─────────────────────┐

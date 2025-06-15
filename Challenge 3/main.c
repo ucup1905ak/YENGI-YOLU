@@ -38,8 +38,8 @@ int main(int argc, char *argv[]) {
                             getch();
                         } else {
                             loginMenu(users, &indexUser, &auth);
-        
-                            getch();
+                            loading();
+                            // getch();
                         }
                     }
                     break;

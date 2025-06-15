@@ -223,7 +223,7 @@ void registerMenu(user *currentUser) {
     }
     break;
     }
-
+    printf("\033[u\033[0J"); // Clear the line after input
     // konfirmasi penambahan akun
     printf("\n\tSimpan akun baru? (Y/N): ");
     switch (getchar())

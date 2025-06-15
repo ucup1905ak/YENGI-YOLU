@@ -9,7 +9,10 @@
 #include <time.h>
 #include <ctype.h>
 
-
+#define GREEN "\033[32m"
+#define NORMAL "\033[0m"
+#define CYAN "\033[36m"
+#define YELLOW "\033[33m"
 // extern void __stdcall alert(unsigned long, unsigned long);
 void alert();
 
@@ -79,5 +82,9 @@ void lihatAkun(UserList users, char *encrypted);
 void formatRupiah(double amount, char *result);
 void adminMenu(UserList users);
 void cariItem();
+
+
+void loading();
+
 
 #endif
