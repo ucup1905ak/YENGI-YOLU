@@ -43,3 +43,6 @@ int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
 void encryptPassword(char *dest, const char *src);
 int isValidEmail(const char *email);
+
+
+void printRakToko(int index);
