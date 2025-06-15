@@ -1,6 +1,7 @@
 #include "header.h"
 
 int main(int argc, char *argv[]) {
+    int i;
     char pilLogin;
     user userData[MAX_USER];
     UserList users = userData;
@@ -19,7 +20,7 @@ int main(int argc, char *argv[]) {
             case '1':
                 {
                     bool isKosong = true;
-                    for (int i = 0; i < MAX_USER; i++) {
+                    for (i = 0; i < MAX_USER; i++) {
                         if (strlen(users[i].username) != 0) {
                             isKosong = false;
                             break;
@@ -40,7 +41,7 @@ int main(int argc, char *argv[]) {
             case '2':
                 {
                     bool isPenuh = true;
-                    for (int i = 0; i < MAX_USER; i++) {
+                    for (i = 0; i < MAX_USER; i++) {
                         if (strlen(users[i].username) == 0) {
                             isPenuh = false;
                             break;
@@ -65,9 +66,19 @@ int main(int argc, char *argv[]) {
         }
 
     } while (!auth);
-    do{
+    
+    
+    if()
+    do{ //LOOP PROGRAM
+            // PROGRAM SETELAH LOGIN BERHASIL
+        system("cls"); 
+
         
     }while(1);
+
+
+
+
 
     return 0;
 }

@@ -129,7 +129,7 @@ void RegisterNewUser(UserList userList) {
 
 // Fungsi input & validasi data user baru
 void registerMenu(UserList user) {
-    string name = "", mail = "", pass1 = "", pass2 = "", encrypted[MAX_PASS];
+    string name = "", mail = "", pass1 = "", pass2 = "", encrypted[MAX_PASS + 1];
     int pilihan = 0;
     char ch;
 
@@ -213,7 +213,7 @@ void registerMenu(UserList user) {
     strcpy(user->password, encrypted);
 }
 
-void loginMenu(user users) {
+void loginMenu(UserList users) { // Change parameter type from 'user users' to 'UserList users'
     username name;
     password pass;
 
@@ -300,5 +300,118 @@ bool captcha() {
         Beep(750, 200);
         printf("[!] Captcha salah! Jawaban benar: %s\n", hari[indexJawaban]);
         return false;
+    }
+}
+
+void adminMenu() {
+    int choice;
+    
+    while(1) {
+        system("cls");
+        printf("\n");
+        printf("===== [ MENU SHELF ] =====\n");
+        printf("[1] Lihat Item\n");
+        printf("[2] Cari Item\n");
+        printf("[3] Jual Item\n");
+        printf("\n");
+        printf("===== [ MENU ADMIN ] =====\n");
+        printf("[4] Tambah Item\n");
+        printf("[5] Update Item\n");
+        printf("[6] Hapus Item\n");
+        printf("[7] Lihat Akun\n");
+        printf("\n");
+        printf("[0] Kembali\n");
+        printf(">> ");
+        
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1:
+                // Call function to display items
+                lihatItem();
+                break;
+            case 2:
+                // Call function to search items
+                cariItem();
+                break;
+            case 3:
+                // Call function to sell items
+                jualItem();
+                break;
+            case 4:
+                // Call function to add items
+                tambahItem();
+                break;
+            case 5:
+                // Call function to update items
+                updateItem();
+                break;
+            case 6:
+                // Call function to delete items
+                hapusItem();
+                break;
+            case 7:
+                // Call function to view accounts
+                lihatAkun();
+                break;
+            case 0:
+                printf("\nKembali ke menu utama...\n");
+                return;
+            default:
+                printf("\n[!] Pilihan tidak valid!\n");
+                system("pause");
+                break;
+        }
+    }
+}
+
+void employeeMenu() {
+    int choice;
+    
+    while(1) {
+        system("cls");
+        printf("\n");
+        printf("===== [ MENU SHELF ] =====\n");
+        printf("[1] Lihat Item\n");
+        printf("[2] Cari Item\n");
+        printf("[3] Jual Item\n");
+        printf("\n");
+        printf("[0] Kembali\n");
+        printf(">> ");
+        
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1:
+                // Call function to display items
+                lihatItem();
+                break;
+            case 2:
+                // Call function to search items
+                cariItem();
+                break;
+            case 3:
+                // Call function to sell items
+                jualItem();
+                break;
+            case 0:
+                printf("\nKembali ke menu utama...\n");
+                return;
+            default:
+                printf("\n[!] Pilihan tidak valid!\n");
+                system("pause");
+                break;
+        }
+    }
+}
+
+void showMenuBasedOnRole(user *currentUser) {
+    if (strcmp(currentUser->role, "admin") == 0) {
+        adminMenu();
+    } else if (strcmp(currentUser->role, "karyawan") == 0) {
+        employeeMenu();
+    } else {
+        printf("\n[!] Role tidak dikenali!\n");
+        system("pause");
     }
 }

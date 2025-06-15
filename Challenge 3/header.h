@@ -41,13 +41,26 @@ void encryptPassword(char *dest, const char *src);
 int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
 int isValidEmail(const char *email);
-void loginMenu(user * users);
+void loginMenu(UserList users); // Change from 'user * users' to 'UserList users'
 int isLoginFound(user u, string name, string pass);
 user* searchLoginData(UserList userList, string name, string pass);
 bool captcha();
 
 int selectRakToko();
 void printRakToko(int index);
+
+void adminMenu();
+void employeeMenu();
+void showMenuBasedOnRole(user *currentUser);
+
+// Function prototypes for menu actions
+void lihatItem();
+void cariItem();
+void jualItem();
+void tambahItem();
+void updateItem();
+void hapusItem();
+void lihatAkun();
 
 
 #endif

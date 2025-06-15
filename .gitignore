@@ -17,3 +17,5 @@ Chalenge 1/Makefile.win
 .vscode/settings.json
 Challenge 3/Makefile.win
 Challenge 3/main.o
+Challenge 3/build/Debug/main.o
+.gitignore
