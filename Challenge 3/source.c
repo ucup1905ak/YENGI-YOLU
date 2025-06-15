@@ -373,14 +373,17 @@ void adminMenu(UserList users) {
             case 2:
                 
                 cariItem();
+                getch();
                 break;
             case 3:
                 
                 jualItem();
+                getch();
                 break;
             case 4:
                 
                 tambahItem();
+                getch();
                 break;
             case 5:
                 
@@ -456,4 +459,7 @@ int searchLoginIndex(UserList userList, string name, string pass) {
         }
     }
     return -1; 
+}
+int countItemInRak(rak r) {
+    return r.itemCount;;
 }
