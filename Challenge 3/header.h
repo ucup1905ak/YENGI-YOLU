@@ -43,7 +43,7 @@ void initializeRakToko();
 
 typedef user *UserList;
 void InitializeUser(user * userList);
-void RegisterNewUser(user * userList);
+// void RegisterNewUser(user * userList);
 int isEmptyUser(user u);
 user* searchEmptyUser(UserList userList);
 int isAlreadyExist(char *username, UserList users);

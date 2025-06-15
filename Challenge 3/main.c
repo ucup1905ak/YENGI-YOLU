@@ -5,6 +5,9 @@ int main(int argc, char *argv[]) {
     char pilLogin;
     user userData[MAX_USER];
     UserList users = userData;
+
+    user * currentUser = NULL;
+
     bool auth = false;
     int indexUser;
     
@@ -56,7 +59,14 @@ int main(int argc, char *argv[]) {
                         printf("\n[!] Jumlah akun maksimal telah tercapai. Tidak dapat register akun baru.\n");
                         getch();
                     } else {
-                        RegisterNewUser(users);
+                        currentUser = searchEmptyUser(users);
+                        if (currentUser == NULL) {
+                            Beep(750, 200);
+                            printf("\n[!] Tidak dapat menambah user baru. [!]\n");
+                            getch();
+                            break;
+                        }
+                        RegisterNewUser(currentUser);
                         getch();
                     }
                 }

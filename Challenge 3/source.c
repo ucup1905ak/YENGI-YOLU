@@ -62,29 +62,32 @@ int isStrongPassword(const char *pass) {
 
 
 void inputPassword(char *dest) {
-    int i = 0;
-    char ch;
-
-    while (1) {
+    char ch = 0;
+    int idx = 0;
+    int show = 0;
+    while (ch != 13) {
         ch = getch();
-
-        // ENTER: selesai
-        if (ch == 13) {
-            dest[i] = '\0';
-            printf("\n");
-            break;
+        if (ch == 13 && idx >= 8) break;
+        if (ch == 27) { 
+            show = !show;
+            printf("\n[!] Tampilan password %saktif.\n", show ? "" : "non-");
+            continue;
         }
-        // BACKSPACE
-        else if (ch == 8 && i > 0) {
-            i--;
+        if (ch == 8 && idx > 0) {
+            idx--;
+            dest[idx] = '\0';
             printf("\b \b");
+            continue;
         }
-        // Karakter valid dan belum mencapai batas
-        else if (isprint(ch) && i < MAX_PASS) {
-            dest[i++] = ch;
-            printf("*");
+        if (idx < MAX_PASS - 1 && isprint(ch)) {
+            dest[idx++] = ch;
+            dest[idx] = '\0';
+            if (show) printf("%c", ch);
+            else printf("*");
+            fflush(stdout);  
         }
     }
+    printf("\n");
 }
 
 
@@ -134,32 +137,29 @@ void registerMenu(user *currentUser) {
     system("cls");
     puts("===== [ REGISTER ] =====");
 
-    // Username
+    
+    printf("Username          : ");
     while (1) {
-        printf("Username          : ");
-        fflush(stdout);
+        printf("\033[s"); // Save cursor position]")
+        fflush(stdin);
         gets(name);
-        name[strcspn(name, "\n")] = 0;  // remove newline
-
-        if (strlen(name) < 6 && strlen(name) > 15) {
+        if (strlen(name) < 6 || strlen(name) > 15) {
             Beep(750, 200);
-            printf("\n[!] USERNAME MINIMAL 6 DAN MAKSIMAL 15 KARAKTER [!]");
-            printf("\033[F\033[K"); // hapus pesan error
-            printf("\033[F\033[K"); // hapus input sebelumnya
+            printf("[!] USERNAME MINIMAL 6 DAN MAKSIMAL 15 KARAKTER [!]\n");
+            getch();
+            printf("\033[u\033[0J"); // Restore cursor position
             continue;
         }
-
         strcpy(currentUser->username, name);
         break;
     }
 
-    // Email
+    
+    printf("Email             : ");
     while (1) {
-        printf("Email             : ");
-        fflush(stdout);
-        gets(name);
-        mail[strcspn(mail, "\n")] = 0;
-
+        printf("\033[s");
+        fflush(stdin);
+        gets(mail);
         int status = isValidEmail(mail);
         if (status == 1) {
             strcpy(currentUser->email, mail);
@@ -167,64 +167,68 @@ void registerMenu(user *currentUser) {
         } else {
             Beep(750, 200);
             switch (status) {
-                case -1: printf("\n[!] Email harus mengandung '@' [!]"); break;
-                case -2: printf("\n[!] Username email harus 3-13 karakter [!]"); break;
-                case -3: printf("\n[!] Username email hanya huruf, angka, titik, atau underscore [!]"); break;
-                case -4: printf("\n[!] Domain email harus 'uajy.ac.id' [!]"); break;
+                case -1: printf("[!] Email harus mengandung '@' [!]                      \n"); break;
+                case -2: printf("[!] Username email harus 3-13 karakter [!]              \n"); break;
+                case -3: printf("[!] Username email hanya huruf, angka, titik, atau underscore [!] \n"); break;
+                case -4: printf("[!] Domain email harus 'uajy.ac.id' [!]                 \n"); break;
             }
-            printf("\033[F\033[K"); // hapus pesan error
-            printf("\033[F\033[K"); // hapus input sebelumnya
+            getch();
+            printf("\033[u\033[0J");
         }
     }
 
-    // Tipe Akun
+    
     do {
-        printf("Tipe              : [%s]\r", pilihan == 0 ? "Admin    " : "Karyawan");
-        fflush(stdout);
+        printf("\rTipe              : [%-8s]", pilihan == 0 ? "Admin" : "Karyawan");
         ch = getch();
+        
         if (ch == 0 || ch == 224) {
             ch = getch();
             if (ch == 75) pilihan = 0;
             else if (ch == 77) pilihan = 1;
         } else if (ch == 'a' || ch == 'A') pilihan = 0;
+        
         else if (ch == 'd' || ch == 'D') pilihan = 1;
+    
     } while (ch != 13);
+
+    printf("\n");
     strcpy(currentUser->tipe, pilihan == 0 ? "Admin" : "Karyawan");
+    
     printf("\n");
 
-    // Password
+    
     while (1) {
-        printf("Password          : ");
-        inputPassword(pass1);
+    printf("\033[s");
+    fflush(stdin);
+    printf("Password          : ");
+    inputPassword(pass1);
+    if (strlen(pass1) < 8 || strlen(pass1) > 15 || !isStrongPassword(pass1)) {
+        Beep(750, 200);
+        printf("[!] Password harus 8-15 karakter dan mengandung huruf kapital, huruf kecil, angka, dan simbol [!]\n");
+        getch();
+        printf("\033[u\033[0J"); 
+        continue;
+    }
 
-        if (strlen(pass1) < 8 && strlen(pass1) > 15 && !isStrongPassword(pass1)) {
-            Beep(750, 200);
-            printf("\n[!] Password harus 8-15 karakter dan mengandung huruf kapital, huruf kecil, angka, dan simbol [!]");
-            printf("\033[F\033[K"); // hapus pesan error
-            printf("\033[F\033[K"); // hapus input sebelumnya
-            continue;
-        }
-
-        // Konfirmasi Password
-        while (1) {
-            printf("Konfirmasi Pass   : ");
-            inputPassword(pass2);
-            if (strcmp(pass1, pass2) != 0) {
-                Beep(750, 200);
-                printf("\n[!] Password tidak cocok, ulangi konfirmasi! [!]");
-                printf("\033[F\033[K");
-                printf("\033[F\033[K");
-                continue;
-            }
-            break;
-        }
-        break;
+    fflush(stdin);
+    printf("Konfirmasi Pass   : ");
+    inputPassword(pass2);
+    if (strcmp(pass1, pass2) != 0) {
+        Beep(750, 200);
+        printf("[!] Password tidak cocok, ulangi konfirmasi! [!]\n");
+        getch();
+        printf("\033[u\033[0J");
+        continue;
+    }
+    break;
     }
 
     encryptPassword(encrypted, pass1);
     strcpy(currentUser->password, encrypted);
-}
 
+    printf("\n[*] Pendaftaran berhasil!\n");
+}
 
 void loginMenu(UserList users, int * loginIndex) {
     username name;
