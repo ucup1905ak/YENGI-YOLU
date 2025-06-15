@@ -2,7 +2,8 @@
 
 // Inisialisasi array user
 void InitializeUser(UserList userList) {
-    for (int i = 0; i < MAX_USER; i++) {
+    int i;
+    for (i = 0; i < MAX_USER; i++) {
         strcpy(userList[i].username, "");
         strcpy(userList[i].password, "");
         strcpy(userList[i].email, "");
@@ -17,7 +18,8 @@ int isEmptyUser(user u) {
 
 // Cari user kosong
 user* searchEmptyUser(UserList userList) {
-    for (int i = 0; i < MAX_USER; i++) {
+    int i;
+    for (i = 0; i < MAX_USER; i++) {
         if (isEmptyUser(userList[i])) {
             return &userList[i];
         }
@@ -27,7 +29,8 @@ user* searchEmptyUser(UserList userList) {
 
 // Validasi apakah username sudah ada
 int isAlreadyExist(char *username, UserList users) {
-    for (int i = 0; i < MAX_USER; i++) {
+    int i;
+    for (i = 0; i < MAX_USER; i++) {
         if (strcmp(users[i].username, username) == 0) return 1;
     }
     return 0;
@@ -37,7 +40,8 @@ int isAlreadyExist(char *username, UserList users) {
 void encryptPassword(char *dest, const char *src) {
     char salt[] = SALT;
     int len = strlen(src);
-    for (int i = 0; i < len; i++) {
+    int i;
+    for (i = 0; i < len; i++) {
         char notChar = ~src[i];
         dest[i] = notChar ^ salt[i % strlen(salt)];
     }
@@ -47,7 +51,8 @@ void encryptPassword(char *dest, const char *src) {
 // Cek kekuatan password
 int isStrongPassword(const char *pass) {
     int hasUpper = 0, hasLower = 0, hasDigit = 0, hasSpecial = 0;
-    for (int i = 0; pass[i]; i++) {
+    int i;
+    for (i = 0; pass[i]; i++) {
         if (isupper(pass[i])) hasUpper = 1;
         else if (islower(pass[i])) hasLower = 1;
         else if (isdigit(pass[i])) hasDigit = 1;
@@ -92,8 +97,8 @@ int isValidEmail(const char *email) {
 
     int usernameLen = at - email;
     if (usernameLen < 3 || usernameLen > 13) return -2;
-
-    for (int i = 0; i < usernameLen; i++) {
+    int i;
+    for (i = 0; i < usernameLen; i++) {
         if (!(isalnum(email[i]) || email[i] == '.' || email[i] == '_')) return -3;
     }
 
@@ -213,8 +218,8 @@ void loginMenu(user users) {
     password pass;
 
     int attempts = 3;
-
-    for (int i = 0; i < attempts; i++) {
+    int i;
+    for (i = 0; i < attempts; i++) {
         system("cls");
         printf("\n\nUsername        : "); fflush(stdin); gets(name);
         printf("\nPassword        : "); fflush(stdin); gets(pass);
@@ -238,7 +243,6 @@ void loginMenu(user users) {
     }
 
     printf("\n[!] Anda gagal login 3 kali. Program dihentikan!\n");
-    exit(0);
 }
 
 int isLoginFound(user u, string name, string pass) {
@@ -247,7 +251,8 @@ int isLoginFound(user u, string name, string pass) {
 
 // Cari user kosong
 user* searchLoginData(UserList userList, string name, string pass) {
-    for (int i = 0; i < MAX_USER; i++) {
+    int i;
+    for (i = 0; i < MAX_USER; i++) {
         if (isLoginFound(userList[i], name, pass)) {
             return &userList[i];
         }
@@ -273,7 +278,7 @@ bool captcha() {
     fflush(stdin);
     gets(jawaban);
 
-    int indexJawaban;
+    int indexJawaban, i;
     if (randomizedConj == 0) {
         indexJawaban = (randomizedDay + randomizedNum) % 7;
     } else {
@@ -281,10 +286,10 @@ bool captcha() {
     }
     strcpy(jawaban_benar, hari[indexJawaban]);
 
-    for (int i = 0; jawaban[i]; i++) {
+    for (i = 0; jawaban[i]; i++) {
         jawaban[i] = tolower(jawaban[i]);
     }
-    for (int i = 0; jawaban_benar[i]; i++) {
+    for (i = 0; jawaban_benar[i]; i++) {
         jawaban_benar[i] = tolower(jawaban_benar[i]);
     }
 
