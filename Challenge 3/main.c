@@ -45,8 +45,7 @@ int main(int argc, char *argv[]) {
                         printf("\n[!] Belum ada akun terdaftar. Silakan register terlebih dahulu.\n");
                         getch();
                     } else {
-                        loginMenu(users, &indexUser);
-                        auth = true;
+                        loginMenu(users, &indexUser, auth);               
                         getch();
                     }
                 }
@@ -88,15 +87,15 @@ int main(int argc, char *argv[]) {
         }
 
     } while (!auth);
-    
-    
 
+
+    currentUser = &users[indexUser];
     do{ 
         system("cls"); 
-        if(strcmpi(users[indexUser].tipe, "admin") == 0) {
+        if(strcmpi(currentUser->tipe, "admin") == 0) {
             adminMenu();
         }else {
-        employeeMenu();
+            employeeMenu();
         }
     }while(1);
 

@@ -230,7 +230,7 @@ void registerMenu(user *currentUser) {
     printf("\n[*] Pendaftaran berhasil!\n");
 }
 
-void loginMenu(UserList users, int * loginIndex) {
+void loginMenu(UserList users, int * loginIndex, bool auth) {
     username name;
     password pass;
 
