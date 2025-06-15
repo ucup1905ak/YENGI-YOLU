@@ -63,7 +63,7 @@ int selectRakToko();
 void printRakToko(int index);
 int searchLoginIndex(UserList userList, string name, string pass);
 
-void adminMenu();
+void adminMenu(UserList users);
 void employeeMenu();
 void showMenuBasedOnRole(user *currentUser);
 

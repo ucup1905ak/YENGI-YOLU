@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
         currentUser = &users[indexUser];
         system("cls"); 
         if(strcmpi(currentUser->tipe, "admin") == 0) {
-            adminMenu();
+            adminMenu(users);
         }else {
             employeeMenu();
         }
