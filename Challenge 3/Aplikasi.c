@@ -308,10 +308,10 @@ void updateItem() {
         printf("Rak kosong!\n");
         return;
     }
-
+		int i;
     if (r->itemCount == 2) {
         printf("Terdapat 2 item:\n");
-        for (int i = 0; i < 2; i++) {
+        for (i = 0; i < 2; i++) {
             char hargaRupiah[30];
             formatRupiah(r->items[i].harga, hargaRupiah);
             printf("%d. %s (Stok: %d, Harga: %s)\n", i + 1, r->items[i].nama, r->items[i].stok, hargaRupiah);
@@ -361,9 +361,9 @@ if (r->itemCount == 0) {
     printf("Rak kosong!\n");
     return;
 }
-
+int i;
 printf("Terdapat %d item:\n", r->itemCount);
-for (int i = 0; i < r->itemCount; i++) {
+for (i = 0; i < r->itemCount; i++) {
     char hargaRupiah[30];
     formatRupiah(r->items[i].harga, hargaRupiah);
     printf("%d. %s (Stok: %d, Harga: %s)\n", i + 1, r->items[i].nama, r->items[i].stok, hargaRupiah);
