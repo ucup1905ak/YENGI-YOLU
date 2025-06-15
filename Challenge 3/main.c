@@ -1,6 +1,9 @@
 #include "header.h"
 int main(int argc, char *argv[]){
     //initialize
+    int i;
+//    for(i = 0 ; i < 255 ; i++)printf("\n[%d] >> %c", i ,i);
+    printRakToko(1);
     char pilLogin;
     user userData[MAX_USER];
     UserList users = userData;
@@ -11,6 +14,7 @@ int main(int argc, char *argv[]){
     printf("%s", userData[0].password);
 
     //Landing Page
+    /*
     do{
         loginMenu();scanf("%c", &pilLogin);
         while(1){
@@ -24,5 +28,6 @@ int main(int argc, char *argv[]){
         
     }while(true);
     //Main APp
+		*/
     return 0;
 }

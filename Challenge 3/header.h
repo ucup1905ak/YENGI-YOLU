@@ -29,7 +29,7 @@ typedef struct {
     double harga;
 }item;
 
-typedef RakToko item[16];
+typedef item RakToko[16];
 
 typedef user *UserList;
 void InitializeUser(user * userList);

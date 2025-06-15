@@ -70,8 +70,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit4]
+FileName=rakToko.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
 [Unit3]
-FileName=source.c
+FileName=rakToko.c
 CompileCpp=0
 Folder=
 Compile=1
