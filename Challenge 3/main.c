@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 
     } while (!auth);
 
-
+    
     currentUser = &users[indexUser];
     do{ 
         system("cls"); 
