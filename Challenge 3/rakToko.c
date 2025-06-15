@@ -78,3 +78,37 @@ void printRakToko(int index){
     printf("\t+------------------------------------------+" NORMAL);
 
 }
+
+
+int selectRakToko(){
+    int index = 0;
+    char input;
+    do{
+        system("cls");
+        printRakToko(index);
+        input = getch();
+        switch(input){
+            case 'w':
+            case 'W':
+                if(index > 3) index -= 4;
+                break;
+            case 's':
+            case 'S':
+                if(index < 12) index += 4;
+                break;
+            case 'a':
+            case 'A':
+                if(index % 4 != 0) index--;
+                break;
+            case 'd':
+            case 'D':
+                if(index % 4 != 3) index++;
+                break;
+            case 13: 
+                return index;
+            case 'q':
+            case 'Q':
+                return -1; 
+        }
+    }while(1);
+}

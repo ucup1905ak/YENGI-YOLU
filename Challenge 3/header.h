@@ -44,5 +44,5 @@ void inputPassword(char *dest);
 void encryptPassword(char *dest, const char *src);
 int isValidEmail(const char *email);
 
-
+int selectRakToko();
 void printRakToko(int index);
