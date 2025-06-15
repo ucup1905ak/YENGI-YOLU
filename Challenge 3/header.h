@@ -38,5 +38,5 @@ void encryptPassword(char *dest, const char *src);
 int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
 int isValidEmail(const char *email);
-
+void loginMenu(user users);
 #endif
