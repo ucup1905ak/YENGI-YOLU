@@ -82,7 +82,10 @@ void lihatAkun(UserList users, char *encrypted);
 void formatRupiah(double amount, char *result);
 void adminMenu(UserList users);
 void cariItem();
-
+int countItemInRak(rak r);
+int selectRakToko(const char *pesan);
+int navigasiItem(rak r);
+void formatRupiah(double amount, char *result);
 
 void loading();
 
