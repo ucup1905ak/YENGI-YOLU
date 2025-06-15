@@ -77,7 +77,7 @@ void printRakToko(int index){
 }
 
 
-int selectRakToko(){
+int selectRakToko(const char *pesan){
     int index = 0;
     char input;
     do{

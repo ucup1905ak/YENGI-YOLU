@@ -62,7 +62,7 @@ void formatRupiah(double amount, char *result) {
 }
 
 void lihatItem() {
-    int selectedIndex = selectRakToko();
+    int selectedIndex = selectRakToko("Pilih rak untuk melihat item:");;
     char shelfName[4];
     int row, i;
     char col;
@@ -118,7 +118,7 @@ void jualItem() {
     
     
     
-    selectedIndex = selectRakToko();
+    selectedIndex = selectRakToko("Pilih rak untuk melihat item:");;
     
     if (selectedIndex == -1) {
         return;
@@ -243,7 +243,7 @@ void tambahItem() {
         strcpy(rakToko[index].kategori, kategori);
     }
 
-    int pos = rakToko[index].jumlahItem;
+    int pos = rakToko[index].itemCount;
     printf("Input item ke-%d:\n", pos + 1);
 
     // Nama
@@ -282,8 +282,9 @@ void tambahItem() {
         rakToko[index].items[pos].harga = atoi(hargaInput);
         break;
     } while (1);
-
-    rakToko[index].jumlahItem++;
+    
+    rakToko[index].itemCount++;
+    
     printf("Item berhasil ditambahkan ke rak!\n");
 }
 
