@@ -45,4 +45,9 @@ void loginMenu(user users);
 int isLoginFound(user u, string name, string pass);
 user* searchLoginData(UserList userList, string name, string pass);
 bool captcha();
+
+int selectRakToko();
+void printRakToko(int index);
+
+
 #endif
