@@ -230,7 +230,7 @@ void registerMenu(user *currentUser) {
     printf("\n[*] Pendaftaran berhasil!\n");
 }
 
-void loginMenu(UserList users, int * loginIndex, bool auth) {
+void loginMenu(UserList users, int * loginIndex) {
     username name;
     password pass;
 
@@ -248,6 +248,7 @@ void loginMenu(UserList users, int * loginIndex, bool auth) {
             if (captcha()) {
                 printf("\n[✓] Login berhasil!\n");
                 showMenuBasedOnRole(NewUser);
+                *loginIndex = searchLoginIndex(users, name, pass);
                 return;
             } else {
                 printf("[!] Captcha salah!\n");
@@ -261,7 +262,8 @@ void loginMenu(UserList users, int * loginIndex, bool auth) {
     }
 
     printf("\n[!] Anda gagal login 3 kali. Program dihentikan!\n");
-    *loginIndex = searchLoginIndex(users, name, pass);
+    getch();
+    exit(0);
 }
 
 int isLoginFound(user u, string name, string pass) {
