@@ -239,7 +239,10 @@ void loginMenu(UserList users, int * loginIndex) {
     for (i = 0; i < attempts; i++) {
         system("cls");
         printf("\n\nUsername        : "); fflush(stdin); gets(name);
-        printf("\nPassword        : "); fflush(stdin); gets(pass);        user *NewUser = searchLoginData(users, name, pass);
+        printf("\nPassword        : "); fflush(stdin);
+        inputPassword(pass);
+        encryptPassword(pass, pass); // Encrypt password before searching
+        user *NewUser = searchLoginData(users, name, pass);
         if (NewUser != NULL) {
             
             if (captcha()) {

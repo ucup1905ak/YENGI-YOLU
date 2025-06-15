@@ -18,6 +18,13 @@ int main(int argc, char *argv[]) {
 
     do {
         system("cls");
+        //print all user
+                            printf("\nDaftar User:\n");
+                            for (i = 0; i < MAX_USER; i++) {
+                                if (strlen(users[i].username) > 0) {
+                                    printf("Username: %s, Tipe: %s\n", users[i].username, users[i].tipe);
+                                }
+                            }
         loginDisplay();
         printf("\nPilih menu (1/2): ");
         fflush(stdin);
@@ -63,13 +70,7 @@ int main(int argc, char *argv[]) {
                         if (currentUser == NULL) {
                             Beep(750, 200);
                             printf("\n[!] Tidak dapat menambah user baru. [!]\n");
-                            //print all user
-                            printf("\nDaftar User:\n");
-                            for (i = 0; i < MAX_USER; i++) {
-                                if (strlen(users[i].username) > 0) {
-                                    printf("Username: %s, Tipe: %s\n", users[i].username, users[i].tipe);
-                                }
-                            }
+                            
                             getch();
                             break;
                         }
