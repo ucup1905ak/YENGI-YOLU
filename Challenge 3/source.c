@@ -213,7 +213,7 @@ void registerMenu(UserList user) {
     strcpy(user->password, encrypted);
 }
 
-void loginMenu(user users) {
+void loginMenu(UserList users, int * loginIndex) {
     username name;
     password pass;
 
@@ -243,6 +243,7 @@ void loginMenu(user users) {
     }
 
     printf("\n[!] Anda gagal login 3 kali. Program dihentikan!\n");
+    *loginIndex = searchLoginIndex(users, name, pass);
 }
 
 int isLoginFound(user u, string name, string pass) {
@@ -301,4 +302,13 @@ bool captcha() {
         printf("[!] Captcha salah! Jawaban benar: %s\n", hari[indexJawaban]);
         return false;
     }
+}
+
+int searchLoginIndex(UserList userList, string name, string pass) {
+    for (int i = 0; i < MAX_USER; i++) {
+        if (strcmp(userList[i].username, name) == 0 && strcmp(userList[i].password, pass) == 0) {
+            return i;
+        }
+    }
+    return -1; 
 }

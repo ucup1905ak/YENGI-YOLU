@@ -5,7 +5,7 @@ int main(int argc, char *argv[]) {
     user userData[MAX_USER];
     UserList users = userData;
     bool auth = false;
-
+    int indexUser;
     InitializeUser(users);
 
     do {
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
                         printf("\n[!] Belum ada akun terdaftar. Silakan register terlebih dahulu.\n");
                         getch();
                     } else {
-                        loginMenu(users);
+                        loginMenu(users, &indexUser);
                         auth = true;
                         getch();
                     }
@@ -65,8 +65,9 @@ int main(int argc, char *argv[]) {
         }
 
     } while (!auth);
+    
     do{
-        
+        if()
     }while(1);
 
     return 0;

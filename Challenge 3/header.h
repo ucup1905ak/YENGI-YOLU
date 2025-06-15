@@ -41,13 +41,13 @@ void encryptPassword(char *dest, const char *src);
 int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
 int isValidEmail(const char *email);
-void loginMenu(user * users);
+void loginMenu(UserList users, int * loginIndex);
 int isLoginFound(user u, string name, string pass);
 user* searchLoginData(UserList userList, string name, string pass);
 bool captcha();
 
 int selectRakToko();
 void printRakToko(int index);
-
+int searchLoginIndex(UserList userList, string name, string pass);
 
 #endif
