@@ -117,7 +117,7 @@ void RegisterNewUser(UserList userList) {
         registerMenu(NewUser);
     } else {
         Beep(750, 200);
-        printf("\n[!] Slot user penuh. Tidak dapat menambah user baru. [!]");
+        printf("\n[!] Tidak dapat menambah user baru. [!]");
         getch();
     }
 }
@@ -128,31 +128,27 @@ void registerMenu(UserList user) {
     int pilihan = 0;
     char ch;
 
-    void registerMenu(UserList user) {
-    string name = "", mail = "", pass1 = "", pass2 = "", encrypted[MAX_PASS];
-    int pilihan = 0;
-    char ch;
-
     system("cls");
     puts("===== [ REGISTER ] =====");
 
-    // === Username ===
+    // === USERNAME ===
+    printf("Username          : ");
     while (1) {
-        printf("\nUsername          : ");
         fflush(stdin);
         gets(name);
         if (strlen(name) < 6 || strlen(name) > 15) {
             Beep(750, 200);
             printf("[!] USERNAME MINIMAL 6 DAN MAKSIMAL 15 KARAKTER [!]\n");
+            printf("                    \r"); // reset cursor
             continue;
         }
         strcpy(user->username, name);
         break;
     }
 
-    // === Email ===
+    // === EMAIL ===
+    printf("Email             : ");
     while (1) {
-        printf("Email             : ");
         fflush(stdin);
         gets(mail);
         int status = isValidEmail(mail);
@@ -162,17 +158,16 @@ void registerMenu(UserList user) {
         } else {
             Beep(750, 200);
             switch (status) {
-                case -1: printf("[!] Email harus mengandung '@' [!]\n"); break;
-                case -2: printf("[!] Username email harus 3-13 karakter [!]\n"); break;
-                case -3: printf("[!] Username email hanya huruf, angka, titik, atau underscore [!]\n"); break;
-                case -4: printf("[!] Domain email harus 'uajy.ac.id' [!]\n"); break;
+                case -1: printf("[!] Email harus mengandung '@' [!]                      \n"); break;
+                case -2: printf("[!] Username email harus 3-13 karakter [!]              \n"); break;
+                case -3: printf("[!] Username email hanya huruf, angka, titik, atau underscore [!] \n"); break;
+                case -4: printf("[!] Domain email harus 'uajy.ac.id' [!]                 \n"); break;
             }
-            continue;
+            printf("                    \r");
         }
     }
 
-    // === Tipe Akun ===
-    printf("Gunakan ←/→ atau A/D untuk memilih tipe, Enter untuk konfirmasi\n");
+    // === TIPE AKUN ===
     do {
         printf("Tipe              : [%s]\r", pilihan == 0 ? "Admin    " : "Karyawan");
         ch = getch();
@@ -186,7 +181,7 @@ void registerMenu(UserList user) {
     strcpy(user->tipe, pilihan == 0 ? "Admin" : "Karyawan");
     printf("\n");
 
-    // === Password & Konfirmasi ===
+    // === PASSWORD ===
     while (1) {
         printf("Password          : ");
         inputPassword(pass1);
@@ -196,28 +191,109 @@ void registerMenu(UserList user) {
             continue;
         }
 
-        printf("Konfirmasi Pass   : ");
-        inputPassword(pass2);
-        if (strcmp(pass1, pass2) != 0) {
-            Beep(750, 200);
-            printf("[!] Password tidak cocok, ulangi! [!]\n");
-            continue;
+        while (1) {
+            printf("Konfirmasi Pass   : ");
+            inputPassword(pass2);
+            if (strcmp(pass1, pass2) != 0) {
+                Beep(750, 200);
+                printf("[!] Password tidak cocok, ulangi konfirmasi! [!]\n");
+                continue;
+            }
+            break;
         }
         break;
     }
 
-        // Enkripsi dan simpan
-        encryptPassword(encrypted, pass1);
-        strcpy(user->password, encrypted);
-
-        break; // keluar dari loop register
-    } while (1);
+    encryptPassword(encrypted, pass1);
+    strcpy(user->password, encrypted);
 }
 
-void loginMenu(user users){
+void loginMenu(user users) {
     username name;
     password pass;
-    
-    system("cls");
-    printf("\n\nUsername        : ");fflush(stdin);gets(name);
+
+    int attempts = 3;
+
+    for (int i = 0; i < attempts; i++) {
+        system("cls");
+        printf("\n\nUsername        : "); fflush(stdin); gets(name);
+        printf("\nPassword        : "); fflush(stdin); gets(pass);
+
+        user *NewUser = searchLoginData(users, name, pass);
+        if (NewUser != NULL) {
+            // Verifikasi captcha
+            if (captcha()) {
+                printf("\n[✓] Login berhasil!\n");
+                registerMenu(NewUser);
+                return;
+            } else {
+                printf("[!] Captcha salah!\n");
+                printf("[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
+            }
+        } else {
+            Beep(750, 200);
+            printf("\n[!] Username atau Password salah!\n");
+            printf("[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
+        }
+    }
+
+    printf("\n[!] Anda gagal login 3 kali. Program dihentikan!\n");
+    exit(0);
+}
+
+int isLoginFound(user u, string name, string pass) {
+    return strcmp(u.username, name) == 0 && strcmp(u.password, pass) == 0;
+}
+
+// Cari user kosong
+user* searchLoginData(UserList userList, string name, string pass) {
+    for (int i = 0; i < MAX_USER; i++) {
+        if (isLoginFound(userList[i], name, pass)) {
+            return &userList[i];
+        }
+    }
+    return NULL;
+}
+
+bool captcha() {
+    string jawaban, jawaban_benar;
+    string hari[7] = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"};
+    string arahWaktu[2] = {"kemudian", "lalu"};
+
+    srand(time(NULL));
+    int randomizedDay = rand() % 7;         // Indeks hari: 0-6
+    int randomizedNum = (rand() % 7) + 1;   // Jarak hari: 1-7
+    int randomizedConj = rand() % 2;        // 0 untuk 'kemudian', 1 untuk 'lalu'
+
+    puts("\n\n===== [ CAPTCHA ] =====");
+    printf("\nJika hari ini %s, %d hari %s adalah hari apa?\n",
+           hari[randomizedDay], randomizedNum, arahWaktu[randomizedConj]);
+
+    printf("Jawaban Anda : ");
+    fflush(stdin);
+    gets(jawaban);
+
+    int indexJawaban;
+    if (randomizedConj == 0) {
+        indexJawaban = (randomizedDay + randomizedNum) % 7;
+    } else {
+        indexJawaban = (randomizedDay - randomizedNum + 7) % 7;
+    }
+    strcpy(jawaban_benar, hari[indexJawaban]);
+
+    for (int i = 0; jawaban[i]; i++) {
+        jawaban[i] = tolower(jawaban[i]);
+    }
+    for (int i = 0; jawaban_benar[i]; i++) {
+        jawaban_benar[i] = tolower(jawaban_benar[i]);
+    }
+
+    if (strcmp(jawaban, jawaban_benar) == 0) {
+        printf("[✓] Captcha benar!\n");
+        return true;
+    } else {
+        Beep(750, 200);
+        printf("[!] Captcha salah! Jawaban benar: %s\n", hari[indexJawaban]);
+        return false;
+    }
 }

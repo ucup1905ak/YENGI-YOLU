@@ -42,4 +42,7 @@ int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
 int isValidEmail(const char *email);
 void loginMenu(user users);
+int isLoginFound(user u, string name, string pass);
+user* searchLoginData(UserList userList, string name, string pass);
+bool captcha();
 #endif
