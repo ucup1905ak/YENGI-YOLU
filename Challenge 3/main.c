@@ -1,16 +1,16 @@
 #include "header.h"
 
 int main(int argc, char *argv[]) {
-
-    // Inisialisasi rak toko
-    initializeRakToko();
-
     int i;
     char pilLogin;
     user userData[MAX_USER];
     UserList users = userData;
     bool auth = false;
     int indexUser;
+    
+    /* Inisialisasi rak toko */
+    initializeRakToko();
+
     InitializeUser(users);
 
     do {

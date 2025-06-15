@@ -1,6 +1,5 @@
 #include "header.h"
 
-// Inisialisasi array user
 void InitializeUser(UserList userList) {
     int i;
     for (i = 0; i < MAX_USER; i++) {
@@ -11,12 +10,12 @@ void InitializeUser(UserList userList) {
     }
 }
 
-// Cek apakah user kosong (record belum terisi)
+
 int isEmptyUser(user u) {
     return strcmp(u.username, "") == 0 && strcmp(u.password, "") == 0;
 }
 
-// Cari user kosong
+
 user* searchEmptyUser(UserList userList) {
     int i;
     for (i = 0; i < MAX_USER; i++) {
@@ -27,7 +26,7 @@ user* searchEmptyUser(UserList userList) {
     return NULL;
 }
 
-// Validasi apakah username sudah ada
+
 int isAlreadyExist(char *username, UserList users) {
     int i;
     for (i = 0; i < MAX_USER; i++) {
@@ -36,7 +35,7 @@ int isAlreadyExist(char *username, UserList users) {
     return 0;
 }
 
-// Enkripsi password
+
 void encryptPassword(char *dest, const char *src) {
     char salt[] = SALT;
     int len = strlen(src);
@@ -48,7 +47,7 @@ void encryptPassword(char *dest, const char *src) {
     dest[len] = '\0';
 }
 
-// Cek kekuatan password
+
 int isStrongPassword(const char *pass) {
     int hasUpper = 0, hasLower = 0, hasDigit = 0, hasSpecial = 0;
     int i;
@@ -61,7 +60,7 @@ int isStrongPassword(const char *pass) {
     return hasUpper && hasLower && hasDigit && hasSpecial;
 }
 
-// Input password dengan masking dan toggle ESC
+
 void inputPassword(char *dest) {
     char ch;
     int idx = 0;
@@ -69,7 +68,7 @@ void inputPassword(char *dest) {
     while (1) {
         ch = getch();
         if (ch == 13 && idx >= 8) break;
-        if (ch == 27) { // ESC toggle
+        if (ch == 27) { 
             show = !show;
             printf("\n[!] Tampilan password %saktif.\n", show ? "" : "non-");
             continue;
@@ -90,7 +89,7 @@ void inputPassword(char *dest) {
     printf("\n");
 }
 
-// Validasi email
+
 int isValidEmail(const char *email) {
     char *at = strchr(email, '@');
     if (!at) return -1;
@@ -107,7 +106,7 @@ int isValidEmail(const char *email) {
     return 1;
 }
 
-// Tampilan menu login
+
 void loginDisplay() {
     puts("===== [ TOKO MAKMUR ] =====");
     puts("[1] LOGIN ");
@@ -115,7 +114,7 @@ void loginDisplay() {
     printf(">> ");
 }
 
-// Fungsi utama register: cari slot kosong dan daftarkan user baru
+
 void RegisterNewUser(UserList userList) {
     user *NewUser = searchEmptyUser(userList);
     if (NewUser != NULL) {
@@ -127,7 +126,7 @@ void RegisterNewUser(UserList userList) {
     }
 }
 
-// Fungsi input & validasi data user baru
+
 void registerMenu(user *currentUser) {
     string name = "", mail = "", pass1 = "", pass2 = "";
     char encrypted[MAX_PASS + 1];
@@ -137,7 +136,7 @@ void registerMenu(user *currentUser) {
     system("cls");
     puts("===== [ REGISTER ] =====");
 
-    // === USERNAME ===
+    
     printf("Username          : ");
     while (1) {
         fflush(stdin);
@@ -145,14 +144,14 @@ void registerMenu(user *currentUser) {
         if (strlen(name) < 6 || strlen(name) > 15) {
             Beep(750, 200);
             printf("[!] USERNAME MINIMAL 6 DAN MAKSIMAL 15 KARAKTER [!]\n");
-            printf("                    \r"); // reset cursor
+            printf("                    \r"); 
             continue;
         }
         strcpy(currentUser->username, name);
         break;
     }
 
-    // === EMAIL ===
+    
     printf("Email             : ");
     while (1) {
         fflush(stdin);
@@ -173,7 +172,7 @@ void registerMenu(user *currentUser) {
         }
     }
 
-    // === TIPE AKUN ===
+    
     do {
         printf("Tipe              : [%s]\r", pilihan == 0 ? "Admin    " : "Karyawan");
         ch = getch();
@@ -187,7 +186,7 @@ void registerMenu(user *currentUser) {
     strcpy(currentUser->tipe, pilihan == 0 ? "Admin" : "Karyawan");
     printf("\n");
 
-    // === PASSWORD ===
+    
     while (1) {
         printf("Password          : ");
         inputPassword(pass1);
@@ -225,7 +224,7 @@ void loginMenu(UserList users, int * loginIndex) {
         printf("\n\nUsername        : "); fflush(stdin); gets(name);
         printf("\nPassword        : "); fflush(stdin); gets(pass);        user *NewUser = searchLoginData(users, name, pass);
         if (NewUser != NULL) {
-            // Verifikasi captcha
+            
             if (captcha()) {
                 printf("\n[✓] Login berhasil!\n");
                 showMenuBasedOnRole(NewUser);
@@ -249,7 +248,7 @@ int isLoginFound(user u, string name, string pass) {
     return strcmp(u.username, name) == 0 && strcmp(u.password, pass) == 0;
 }
 
-// Cari user kosong
+
 user* searchLoginData(UserList userList, string name, string pass) {
     int i;
     for (i = 0; i < MAX_USER; i++) {
@@ -266,9 +265,9 @@ bool captcha() {
     string arahWaktu[2] = {"kemudian", "lalu"};
 
     srand(time(NULL));
-    int randomizedDay = rand() % 7;         // Indeks hari: 0-6
-    int randomizedNum = (rand() % 7) + 1;   // Jarak hari: 1-7
-    int randomizedConj = rand() % 2;        // 0 untuk 'kemudian', 1 untuk 'lalu'
+    int randomizedDay = rand() % 7;         
+    int randomizedNum = (rand() % 7) + 1;   
+    int randomizedConj = rand() % 2;        
 
     puts("\n\n===== [ CAPTCHA ] =====");
     printf("\nJika hari ini %s, %d hari %s adalah hari apa?\n",
@@ -327,31 +326,31 @@ void adminMenu() {
         
         switch(choice) {
             case 1:
-                // Call function to display items
+                
                 lihatItem();
                 break;
             case 2:
-                // Call function to search items
+                
                 cariItem();
                 break;
             case 3:
-                // Call function to sell items
+                
                 jualItem();
                 break;
             case 4:
-                // Call function to add items
+                
                 tambahItem();
                 break;
             case 5:
-                // Call function to update items
+                
                 updateItem();
                 break;
             case 6:
-                // Call function to delete items
+                
                 hapusItem();
                 break;
             case 7:
-                // Call function to view accounts
+                
                 lihatAkun();
                 break;
             case 0:
@@ -380,23 +379,17 @@ void employeeMenu() {
         printf(">> ");
         
         scanf("%d", &choice);
-        
-        switch(choice) {
+          switch(choice) {
             case 1:
-                // Call function to display items
-                item = selectRakToko();
-                lihatItem(item);
+                lihatItem();
                 break;
             case 2:
-                // Call function to search items
                 cariItem();
                 break;
             case 3:
-                // Call function to sell items
                 jualItem();
                 break;
             case 0:
-                printf("\nKembali ke menu utama...\n");
                 return;
             default:
                 printf("\n[!] Pilihan tidak valid!\n");
@@ -424,40 +417,4 @@ int searchLoginIndex(UserList userList, string name, string pass) {
         }
     }
     return -1; 
-}
-
-// Placeholder implementations for menu functions
-void lihatItem() {
-    printf("\n[INFO] Fitur Lihat Item belum diimplementasikan.\n");
-    system("pause");
-}
-
-void cariItem() {
-    printf("\n[INFO] Fitur Cari Item belum diimplementasikan.\n");
-    system("pause");
-}
-
-void jualItem() {
-    printf("\n[INFO] Fitur Jual Item belum diimplementasikan.\n");
-    system("pause");
-}
-
-void tambahItem() {
-    printf("\n[INFO] Fitur Tambah Item belum diimplementasikan.\n");
-    system("pause");
-}
-
-void updateItem() {
-    printf("\n[INFO] Fitur Update Item belum diimplementasikan.\n");
-    system("pause");
-}
-
-void hapusItem() {
-    printf("\n[INFO] Fitur Hapus Item belum diimplementasikan.\n");
-    system("pause");
-}
-
-void lihatAkun() {
-    printf("\n[INFO] Fitur Lihat Akun belum diimplementasikan.\n");
-    system("pause");
 }

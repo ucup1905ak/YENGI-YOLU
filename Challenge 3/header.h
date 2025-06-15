@@ -5,10 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <windows.h>
 #include <conio.h>
 #include <time.h>
 #include <ctype.h>
+
+
+extern void __stdcall Beep(unsigned long, unsigned long);
 
 #define MAX_USER 3
 #define SALT "PNC_2025"
@@ -32,7 +34,7 @@ typedef struct{
 }item;
 typedef struct{
     string kategori;
-    item items[10]; // Maximum 10 items per rak
+    item items[10];
     int itemCount;
 }rak;
 
@@ -66,13 +68,13 @@ void employeeMenu();
 void showMenuBasedOnRole(user *currentUser);
 
 // Function prototypes for menu actions
-void lihatItem(item i);
+void lihatItem();
 void cariItem();
 void jualItem();
 void tambahItem();
 void updateItem();
 void hapusItem();
 void lihatAkun();
-
+void formatRupiah(double amount, char *result);
 
 #endif
