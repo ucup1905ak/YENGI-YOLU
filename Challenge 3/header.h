@@ -22,7 +22,7 @@ typedef struct {
     char username[50];
     char password[50];
     char email[50];
-    char tipe[10]; //Admin & Karyawan
+    string tipe; //Admin & Karyawan
 }user;
 
 typedef struct{
@@ -35,6 +35,7 @@ typedef struct{
     item items[10]; // Maximum 10 items per rak
     int itemCount;
 }rak;
+
 extern rak rakToko[16]; // 16 rak (A1-D4)
 void initializeRakToko();
 

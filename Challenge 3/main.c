@@ -75,9 +75,9 @@ int main(int argc, char *argv[]) {
 
     do{ 
         system("cls"); 
-            if(users[indexUser].tipe[0] == 'A' || users[indexUser].tipe[0] == 'a') {
-        adminMenu();
-        }else if(users[indexUser].tipe[0] == 'K' || users[indexUser].tipe[0] == 'k') {
+        if(strcmpi(users[indexUser].tipe, "admin") == 0) {
+            adminMenu();
+        }else {
         employeeMenu();
         }
     }while(1);
