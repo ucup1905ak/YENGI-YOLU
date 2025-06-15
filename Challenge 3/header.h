@@ -8,7 +8,6 @@
 #include <conio.h>
 #include <time.h>
 #include <ctype.h>
-#include <windows.h>
 
 #define GREEN "\033[32m"
 #define NORMAL "\033[0m"
@@ -20,8 +19,6 @@ void alert();
 #define MAX_USER 3
 #define SALT "PNC_2025"
 #define MAX_PASS 16
-#define ROW 4
-#define COL 4
 
 typedef char string[50];
 typedef char username[50];
@@ -66,7 +63,7 @@ int isLoginFound(user u, string name, string pass);
 user* searchLoginData(UserList userList, string name, string pass);
 bool captcha();
 
-int selectRakToko();
+//int selectRakToko();
 void printRakToko(int index);
 int searchLoginIndex(UserList userList, string name, string pass);
 
