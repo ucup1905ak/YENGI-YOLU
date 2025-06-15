@@ -13,7 +13,6 @@ int main(int argc, char *argv[]) {
     
     /* Inisialisasi rak toko */
     initializeRakToko();
-
     InitializeUser(users);
     while(1){
         do {
