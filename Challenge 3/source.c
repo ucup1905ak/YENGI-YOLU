@@ -282,10 +282,10 @@ bool captcha() {
     strcpy(jawaban_benar, hari[indexJawaban]);
 
     for (int i = 0; jawaban[i]; i++) {
-        jawaban[i] = tolower(jawaban[i]);
+        jawaban[i] = (char)tolower(jawaban[i]);
     }
     for (int i = 0; jawaban_benar[i]; i++) {
-        jawaban_benar[i] = tolower(jawaban_benar[i]);
+        jawaban_benar[i] = (char)tolower(jawaban_benar[i]);
     }
 
     if (strcmp(jawaban, jawaban_benar) == 0) {
