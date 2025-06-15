@@ -182,14 +182,11 @@ void registerMenu(user *currentUser) {
         
         ch = getch();
         printf("\033[u\033[0J");
-        /*
-        if (ch == 0 || ch == 224) {
-            ch = getch();
-            if (ch == 75) pilihan = 0;
-            else if (ch == 77) pilihan = 1;
-        } else */
-        if (ch == 'a' || ch == 'A') pilihan = 0;
-        else if (ch == 'd' || ch == 'D') pilihan = 1;
+    
+        if ( ch == 0 || ch == 224 )ch = 256 + getch();
+
+        if (ch == 'a' || ch == 'A'|| ch == 256 + 72 || ch == 256 + 75) pilihan = 0;
+        else if (ch == 'd' || ch == 'D' || ch == 256 + 80 || ch == 256 + 77) pilihan = 1;
         printf("\r\tTipe              : %-8s", pilihan == 0 ? "Admin" : "Karyawan");
     } while (ch != 13);
 
@@ -198,7 +195,7 @@ void registerMenu(user *currentUser) {
 
     
     while (1) {
-    printf("\033[s");
+    printf("\033[s%c",7);
     fflush(stdin);
     printf("\tPassword          : ");
     inputPassword(pass1);
