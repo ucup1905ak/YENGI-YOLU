@@ -288,13 +288,14 @@ void cariItem() {
 
     // Konversi keyword ke huruf kecil (lowercase)
     strcpy(keywordLower, keyword);
-    for (int i = 0; keywordLower[i]; i++) {
+    int i, j;
+    for (i = 0; keywordLower[i]; i++) {
         keywordLower[i] = tolower(keywordLower[i]);
     }
 
     printf("\nMencari \"%s\" di seluruh rak...\n\n", keyword);
-
-    for (int index = 0; index < 16; index++) {
+    int index;
+    for (index = 0; index < 16; index++) {
         if (rakToko[index].itemCount == 0 || strlen(rakToko[index].kategori) == 0) {
             continue; // Lewati rak kosong
         }
@@ -303,9 +304,9 @@ void cariItem() {
         char col = 'A' + (index % 4);
         sprintf(rakLabel, "%c%d", col, row);
 
-        for (int i = 0; i < rakToko[index].itemCount; i++) {
+        for (i = 0; i < rakToko[index].itemCount; i++) {
             strcpy(namaItemLower, rakToko[index].items[i].nama);
-            for (int j = 0; namaItemLower[j]; j++) {
+            for (j = 0; namaItemLower[j]; j++) {
                 namaItemLower[j] = tolower(namaItemLower[j]);
             }
 
