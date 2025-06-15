@@ -25,6 +25,11 @@ typedef struct {
     char tipe[10]; //Admin & Karyawan
 }user;
 
+typedef struct{
+    string nama;
+    int stok;
+    double harga;
+}item;
 
 
 
