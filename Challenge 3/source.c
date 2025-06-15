@@ -213,7 +213,7 @@ void registerMenu(UserList user) {
     strcpy(user->password, encrypted);
 }
 
-void loginMenu(UserList users) { // Change parameter type from 'user users' to 'UserList users'
+void loginMenu(UserList users, int * loginIndex) {
     username name;
     password pass;
 
@@ -243,6 +243,7 @@ void loginMenu(UserList users) { // Change parameter type from 'user users' to '
     }
 
     printf("\n[!] Anda gagal login 3 kali. Program dihentikan!\n");
+    *loginIndex = searchLoginIndex(users, name, pass);
 }
 
 int isLoginFound(user u, string name, string pass) {
@@ -414,4 +415,12 @@ void showMenuBasedOnRole(user *currentUser) {
         printf("\n[!] Role tidak dikenali!\n");
         system("pause");
     }
+}
+int searchLoginIndex(UserList userList, string name, string pass) {
+    for (int i = 0; i < MAX_USER; i++) {
+        if (strcmp(userList[i].username, name) == 0 && strcmp(userList[i].password, pass) == 0) {
+            return i;
+        }
+    }
+    return -1; 
 }
