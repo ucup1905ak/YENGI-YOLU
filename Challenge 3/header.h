@@ -22,14 +22,13 @@ typedef struct{
     char tipe[10]; //Admin & Karyawan
 }user;
 typedef user *UserList;
-
-void InitializeUser(UserList users);
-void RegisterNewUser(UserList users);
+void InitializeUser(user * userList);
+void RegisterNewUser(user * userList);
 int isEmptyUser(user u);
 int isAlreadyExist(char * username, UserList users);
 void loginMenu();
 void registerMenu(UserList users);
-int isValidEmail(char email[]);
+int isValidEmail(const char *email);
 int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
 void encryptPassword(char *dest, const char *src);
