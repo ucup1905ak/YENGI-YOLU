@@ -33,12 +33,12 @@ int main(int argc, char *argv[]) {
                             }
                         }
                         if (isKosong) {
-                            Beep(750, 200);
+                            alert();
                             printf("\n\t[!] Anda Tidak Memiliki Akun\n");
                             getch();
                         } else {
-                            loginMenu(users, &indexUser);
-                            auth = true;              
+                            loginMenu(users, &indexUser, &auth);
+        
                             getch();
                         }
                     }
@@ -54,13 +54,13 @@ int main(int argc, char *argv[]) {
                             }
                         }
                         if (isPenuh) {
-                            Beep(750, 200);
+                            alert();
                             printf("\n[!] Jumlah akun maksimal telah tercapai. Tidak dapat register akun baru.\n");
                             getch();
                         } else {
                             currentUser = searchEmptyUser(users);
                             if (currentUser == NULL) {
-                                Beep(750, 200);
+                                alert();
                                 printf("\n[!] Tidak dapat menambah user baru. [!]\n");
                                 
                                 getch();
@@ -73,8 +73,8 @@ int main(int argc, char *argv[]) {
                     break;
 
                 default:
-                    Beep(750, 200);
-                    printf("\n[!] Pilihan tidak valid! Silakan pilih menu 1 atau 2.\n");
+                    alert();
+                    printf("\n\t[!] Pilihan tidak valid! Silakan pilih menu 1 atau 2.\n");
                     getch();
                     break;
             }

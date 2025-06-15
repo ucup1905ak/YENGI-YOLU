@@ -117,13 +117,15 @@ void loginDisplay() {
     printf("\t>> ");
 }
 
-
+void alert(){
+    printf("%c", 7); // Simulate alert with a sound character
+}
 void RegisterNewUser(UserList userList) {
     user *NewUser = searchEmptyUser(userList);
     if (NewUser != NULL) {
         registerMenu(NewUser);
     } else {
-        Beep(750, 200);
+        alert();
         printf("\n[!] Tidak dapat menambah user baru. [!]");
         getch();
     }
@@ -145,7 +147,7 @@ void registerMenu(user *currentUser) {
         fflush(stdin);
         gets(name);
         if (strlen(name) < 6 || strlen(name) > 15) {
-            Beep(750, 200);
+            alert();
             printf("\t[!] USERNAME MINIMAL 6 DAN MAKSIMAL 15 KARAKTER [!]\n");
             getch();
             printf("\033[u\033[0J"); 
@@ -166,7 +168,7 @@ void registerMenu(user *currentUser) {
             strcpy(currentUser->email, mail);
             break;
         } else {
-            Beep(750, 200);
+            alert();
             switch (status) {
                 case -1: printf("\t[!] Email harus mengandung '@' [!]                      \n"); break;
                 case -2: printf("\t[!] Username email harus 3-13 karakter [!]              \n"); break;
@@ -202,7 +204,7 @@ void registerMenu(user *currentUser) {
     printf("\tPassword          : ");
     inputPassword(pass1);
     if (strlen(pass1) < 8 || strlen(pass1) > 15 || !isStrongPassword(pass1)) {
-        Beep(750, 200);
+        alert();
         printf("\t[!] Password harus 8-15 karakter dan mengandung huruf kapital, huruf kecil, angka, dan simbol [!]\n");
         getch();
         printf("\033[u\033[0J"); 
@@ -213,7 +215,7 @@ void registerMenu(user *currentUser) {
     printf("\tKonfirmasi Pass   : ");
     inputPassword(pass2);
     if (strcmp(pass1, pass2) != 0) {
-        Beep(750, 200);
+        alert();
         printf("\t[!] Password tidak cocok, ulangi konfirmasi! [!]\n");
         getch();
         printf("\033[u\033[0J");
@@ -221,12 +223,6 @@ void registerMenu(user *currentUser) {
     }
     break;
     }
-
-    encryptPassword(encrypted, pass1);
-    strcpy(currentUser->password, encrypted);
-
-    printf("\n[*] Pendaftaran berhasil! [*]\n");
-
 
     // konfirmasi penambahan akun
     printf("\n\tSimpan akun baru? (Y/N): ");
@@ -239,14 +235,14 @@ void registerMenu(user *currentUser) {
         printf("\n\t[+] AKUN BERHASIL DIBUAT [+]\n");
         break;
     default:
-        Beep(750, 200);
+        alert();
         printf("\n\t[!] Pendaftaran dibatalkan [!]\n");
         break;
     }
     
 }
 
-void loginMenu(UserList users, int * loginIndex) {
+void loginMenu(UserList users, int * loginIndex, bool *auth) {
     username name;
     password pass;
 
@@ -266,20 +262,23 @@ void loginMenu(UserList users, int * loginIndex) {
                 printf("\n\t[✓] Login berhasil!\n");
                 showMenuBasedOnRole(NewUser);
                 *loginIndex = searchLoginIndex(users, name, pass);
+                *auth = true;
                 getch();
                 return;
             } else {
-                printf("[!] Captcha salah! [!]\n");
-                printf("[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
+                // printf("[!] Captcha salah! [!]\n");
+                printf("\n\t[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
             }
         } else {
-            Beep(750, 200);
+            alert();
             printf("\n\t[!] Username atau Password salah!\n");
             printf("\t[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
         }
+        getch();
     }
 
     printf("\n\t[!] Anda gagal login 3 kali. Program dihentikan!\n");
+    *auth = false;
     getch();
     exit(0);
 }
@@ -337,7 +336,7 @@ bool captcha() {
         getch();
         return true;
     } else {
-        Beep(750, 200);
+        alert();
         printf("\t[!] Captcha salah! Jawaban benar: %s\n", hari[indexJawaban]);
         getch();
         return false;
