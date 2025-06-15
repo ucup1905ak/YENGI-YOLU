@@ -346,6 +346,7 @@ bool captcha() {
 void adminMenu(UserList users) {
     int choice;
     while(1) {
+        // int runtimeCheck();
         system("cls");
         printf("\t\n");
         printf("\t===== [ MENU SHELF ] =====\n");
