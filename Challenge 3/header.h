@@ -10,7 +10,8 @@
 #include <ctype.h>
 
 
-extern void __stdcall Beep(unsigned long, unsigned long);
+// extern void __stdcall alert(unsigned long, unsigned long);
+void alert();
 
 #define MAX_USER 3
 #define SALT "PNC_2025"
@@ -54,7 +55,7 @@ void encryptPassword(char *dest, const char *src);
 int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
 int isValidEmail(const char *email);
-void loginMenu(UserList users, int * loginIndex);
+void loginMenu(UserList users, int * loginIndex, bool *auth);
 int isLoginFound(user u, string name, string pass);
 user* searchLoginData(UserList userList, string name, string pass);
 bool captcha();
