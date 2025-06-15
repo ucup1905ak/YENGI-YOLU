@@ -128,8 +128,9 @@ void RegisterNewUser(UserList userList) {
 }
 
 // Fungsi input & validasi data user baru
-void registerMenu(UserList user) {
-    string name = "", mail = "", pass1 = "", pass2 = "", encrypted[MAX_PASS + 1];
+void registerMenu(user *currentUser) {
+    string name = "", mail = "", pass1 = "", pass2 = "";
+    char encrypted[MAX_PASS + 1];
     int pilihan = 0;
     char ch;
 
@@ -147,7 +148,7 @@ void registerMenu(UserList user) {
             printf("                    \r"); // reset cursor
             continue;
         }
-        strcpy(user->username, name);
+        strcpy(currentUser->username, name);
         break;
     }
 
@@ -158,7 +159,7 @@ void registerMenu(UserList user) {
         gets(mail);
         int status = isValidEmail(mail);
         if (status == 1) {
-            strcpy(user->email, mail);
+            strcpy(currentUser->email, mail);
             break;
         } else {
             Beep(750, 200);
@@ -183,7 +184,7 @@ void registerMenu(UserList user) {
         } else if (ch == 'a' || ch == 'A') pilihan = 0;
         else if (ch == 'd' || ch == 'D') pilihan = 1;
     } while (ch != 13);
-    strcpy(user->tipe, pilihan == 0 ? "Admin" : "Karyawan");
+    strcpy(currentUser->tipe, pilihan == 0 ? "Admin" : "Karyawan");
     printf("\n");
 
     // === PASSWORD ===
@@ -210,7 +211,7 @@ void registerMenu(UserList user) {
     }
 
     encryptPassword(encrypted, pass1);
-    strcpy(user->password, encrypted);
+    strcpy(currentUser->password, encrypted);
 }
 
 void loginMenu(UserList users, int * loginIndex) {
@@ -222,14 +223,12 @@ void loginMenu(UserList users, int * loginIndex) {
     for (i = 0; i < attempts; i++) {
         system("cls");
         printf("\n\nUsername        : "); fflush(stdin); gets(name);
-        printf("\nPassword        : "); fflush(stdin); gets(pass);
-
-        user *NewUser = searchLoginData(users, name, pass);
+        printf("\nPassword        : "); fflush(stdin); gets(pass);        user *NewUser = searchLoginData(users, name, pass);
         if (NewUser != NULL) {
             // Verifikasi captcha
             if (captcha()) {
                 printf("\n[✓] Login berhasil!\n");
-                registerMenu(NewUser);
+                showMenuBasedOnRole(NewUser);
                 return;
             } else {
                 printf("[!] Captcha salah!\n");
@@ -407,9 +406,9 @@ void employeeMenu() {
 }
 
 void showMenuBasedOnRole(user *currentUser) {
-    if (strcmp(currentUser->role, "admin") == 0) {
+    if (strcmp(currentUser->tipe, "Admin") == 0) {
         adminMenu();
-    } else if (strcmp(currentUser->role, "karyawan") == 0) {
+    } else if (strcmp(currentUser->tipe, "Karyawan") == 0) {
         employeeMenu();
     } else {
         printf("\n[!] Role tidak dikenali!\n");
@@ -417,10 +416,47 @@ void showMenuBasedOnRole(user *currentUser) {
     }
 }
 int searchLoginIndex(UserList userList, string name, string pass) {
-    for (int i = 0; i < MAX_USER; i++) {
+    int i;
+    for (i = 0; i < MAX_USER; i++) {
         if (strcmp(userList[i].username, name) == 0 && strcmp(userList[i].password, pass) == 0) {
             return i;
         }
     }
     return -1; 
+}
+
+// Placeholder implementations for menu functions
+void lihatItem() {
+    printf("\n[INFO] Fitur Lihat Item belum diimplementasikan.\n");
+    system("pause");
+}
+
+void cariItem() {
+    printf("\n[INFO] Fitur Cari Item belum diimplementasikan.\n");
+    system("pause");
+}
+
+void jualItem() {
+    printf("\n[INFO] Fitur Jual Item belum diimplementasikan.\n");
+    system("pause");
+}
+
+void tambahItem() {
+    printf("\n[INFO] Fitur Tambah Item belum diimplementasikan.\n");
+    system("pause");
+}
+
+void updateItem() {
+    printf("\n[INFO] Fitur Update Item belum diimplementasikan.\n");
+    system("pause");
+}
+
+void hapusItem() {
+    printf("\n[INFO] Fitur Hapus Item belum diimplementasikan.\n");
+    system("pause");
+}
+
+void lihatAkun() {
+    printf("\n[INFO] Fitur Lihat Akun belum diimplementasikan.\n");
+    system("pause");
 }

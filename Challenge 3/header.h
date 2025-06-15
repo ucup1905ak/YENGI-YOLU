@@ -35,7 +35,7 @@ int isEmptyUser(user u);
 user* searchEmptyUser(UserList userList);
 int isAlreadyExist(char *username, UserList users);
 void RegisterNewUser(UserList users);
-void registerMenu(UserList user);
+void registerMenu(user *currentUser);
 void loginDisplay();
 void encryptPassword(char *dest, const char *src);
 int isStrongPassword(const char *pass);

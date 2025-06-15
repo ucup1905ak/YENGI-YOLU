@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
     } while (!auth);
     
     
-    if()
+
     do{ //LOOP PROGRAM
             // PROGRAM SETELAH LOGIN BERHASIL
         system("cls"); 
