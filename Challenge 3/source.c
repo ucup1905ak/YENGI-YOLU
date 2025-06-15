@@ -111,10 +111,10 @@ int isValidEmail(const char *email) {
 
 
 void loginDisplay() {
-    puts("===== [ TOKO MAKMUR ] =====");
-    puts("[1] LOGIN ");
-    puts("[2] REGISTER ");
-    printf(">> ");
+    puts("\n\t===== [ TOKO MAKMUR ] =====");
+    puts("\t[1] LOGIN ");
+    puts("\t[2] REGISTER ");
+    printf("\t>> ");
 }
 
 
@@ -136,27 +136,27 @@ void registerMenu(user *currentUser) {
     char ch;
 
     system("cls");
-    puts("===== [ REGISTER ] =====");
+    puts("\n\t===== [ REGISTER ] =====");
 
     
-    printf("Username          : ");
+    printf("\n\tUsername          : ");
     while (1) {
-        printf("\033[s"); // Save cursor position]")
+        printf("\033[s"); 
         fflush(stdin);
         gets(name);
         if (strlen(name) < 6 || strlen(name) > 15) {
             Beep(750, 200);
-            printf("[!] USERNAME MINIMAL 6 DAN MAKSIMAL 15 KARAKTER [!]\n");
+            printf("\t[!] USERNAME MINIMAL 6 DAN MAKSIMAL 15 KARAKTER [!]\n");
             getch();
-            printf("\033[u\033[0J"); // Restore cursor position
+            printf("\033[u\033[0J"); 
             continue;
         }
         strcpy(currentUser->username, name);
         break;
     }
 
-    
-    printf("Email             : ");
+
+    printf("\tEmail             : ");
     while (1) {
         printf("\033[s");
         fflush(stdin);
@@ -168,56 +168,56 @@ void registerMenu(user *currentUser) {
         } else {
             Beep(750, 200);
             switch (status) {
-                case -1: printf("[!] Email harus mengandung '@' [!]                      \n"); break;
-                case -2: printf("[!] Username email harus 3-13 karakter [!]              \n"); break;
-                case -3: printf("[!] Username email hanya huruf, angka, titik, atau underscore [!] \n"); break;
-                case -4: printf("[!] Domain email harus 'uajy.ac.id' [!]                 \n"); break;
+                case -1: printf("\t[!] Email harus mengandung '@' [!]                      \n"); break;
+                case -2: printf("\t[!] Username email harus 3-13 karakter [!]              \n"); break;
+                case -3: printf("\t[!] Username email hanya huruf, angka, titik, atau underscore [!] \n"); break;
+                case -4: printf("\t[!] Domain email harus 'uajy.ac.id' [!]                 \n"); break;
             }
             getch();
             printf("\033[u\033[0J");
         }
     }
 
-    
+    printf("\033[s"); 
+    printf("\r\tTipe              : << select >>\n\n\t[*] Gunakan tombol A/D/Arrow untuk memilih tipe akun, dan Enter untuk konfirmasi. [*]");
     do {
-        printf("\rTipe              : [%-8s]", pilihan == 0 ? "Admin" : "Karyawan");
-        ch = getch();
         
+        ch = getch();
+        printf("\033[u\033[0J");
+        /*
         if (ch == 0 || ch == 224) {
             ch = getch();
             if (ch == 75) pilihan = 0;
             else if (ch == 77) pilihan = 1;
-        } else if (ch == 'a' || ch == 'A') pilihan = 0;
-        
+        } else */
+        if (ch == 'a' || ch == 'A') pilihan = 0;
         else if (ch == 'd' || ch == 'D') pilihan = 1;
-    
+        printf("\r\tTipe              : %-8s", pilihan == 0 ? "Admin" : "Karyawan");
     } while (ch != 13);
 
     printf("\n");
     strcpy(currentUser->tipe, pilihan == 0 ? "Admin" : "Karyawan");
-    
-    printf("\n");
 
     
     while (1) {
     printf("\033[s");
     fflush(stdin);
-    printf("Password          : ");
+    printf("\tPassword          : ");
     inputPassword(pass1);
     if (strlen(pass1) < 8 || strlen(pass1) > 15 || !isStrongPassword(pass1)) {
         Beep(750, 200);
-        printf("[!] Password harus 8-15 karakter dan mengandung huruf kapital, huruf kecil, angka, dan simbol [!]\n");
+        printf("\t[!] Password harus 8-15 karakter dan mengandung huruf kapital, huruf kecil, angka, dan simbol [!]\n");
         getch();
         printf("\033[u\033[0J"); 
         continue;
     }
 
     fflush(stdin);
-    printf("Konfirmasi Pass   : ");
+    printf("\tKonfirmasi Pass   : ");
     inputPassword(pass2);
     if (strcmp(pass1, pass2) != 0) {
         Beep(750, 200);
-        printf("[!] Password tidak cocok, ulangi konfirmasi! [!]\n");
+        printf("\t[!] Password tidak cocok, ulangi konfirmasi! [!]\n");
         getch();
         printf("\033[u\033[0J");
         continue;
@@ -229,6 +229,24 @@ void registerMenu(user *currentUser) {
     strcpy(currentUser->password, encrypted);
 
     printf("\n[*] Pendaftaran berhasil! [*]\n");
+
+
+    // konfirmasi penambahan akun
+    printf("\n\tSimpan akun baru? (Y/N): ");
+    switch (getchar())
+    {
+    case 'Y':
+    case 'y':
+        encryptPassword(encrypted, pass1);
+        strcpy(currentUser->password, encrypted);
+        printf("\n\t[+] AKUN BERHASIL DIBUAT [+]\n");
+        break;
+    default:
+        Beep(750, 200);
+        printf("\n\t[!] Pendaftaran dibatalkan [!]\n");
+        break;
+    }
+    
 }
 
 void loginMenu(UserList users, int * loginIndex) {
@@ -239,16 +257,17 @@ void loginMenu(UserList users, int * loginIndex) {
     int i;
     for (i = 0; i < attempts; i++) {
         system("cls");
-        puts("\n===== [ LOGIN ] =====");
-        printf("\n\nUsername        : "); fflush(stdin); gets(name);
-        printf("\nPassword        : "); fflush(stdin);
+        printf("\n\t===== [ LOGIN ] =====");
+        printf("\n\n\tUsername        : "); fflush(stdin); gets(name);
+        printf("\n\tPassword        : "); fflush(stdin);
         inputPassword(pass);
         encryptPassword(pass, pass); // Encrypt password before searching
         user *NewUser = searchLoginData(users, name, pass);
         if (NewUser != NULL) {
             
             if (captcha()) {
-                printf("\n[+] Login berhasil! [+]\n");
+                printf("\n\t[✓] Login berhasil!\n");
+                showMenuBasedOnRole(NewUser);
                 *loginIndex = searchLoginIndex(users, name, pass);
                 getch();
                 return;
@@ -258,12 +277,12 @@ void loginMenu(UserList users, int * loginIndex) {
             }
         } else {
             Beep(750, 200);
-            printf("\n[!] Username atau Password salah!\n");
-            printf("[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
+            printf("\n\t[!] Username atau Password salah!\n");
+            printf("\t[!] Kesempatan login tersisa: %d\n", attempts - i - 1);
         }
     }
 
-    printf("\n[!] Anda gagal login 3 kali. Program dihentikan!\n");
+    printf("\n\t[!] Anda gagal login 3 kali. Program dihentikan!\n");
     getch();
     exit(0);
 }
@@ -293,11 +312,11 @@ bool captcha() {
     int randomizedNum = (rand() % 7) + 1;   
     int randomizedConj = rand() % 2;        
 
-    puts("\n\n===== [ CAPTCHA ] =====");
-    printf("\nJika hari ini %s, %d hari %s adalah hari apa?\n",
+    puts("\n\n\t===== [ CAPTCHA ] =====");
+    printf("\n\tJika hari ini %s, %d hari %s adalah hari apa?\n",
            hari[randomizedDay], randomizedNum, arahWaktu[randomizedConj]);
 
-    printf("Jawaban Anda : ");
+    printf("\tJawaban Anda : ");
     fflush(stdin);
     gets(jawaban);
 
@@ -317,11 +336,13 @@ bool captcha() {
     }
 
     if (strcmp(jawaban, jawaban_benar) == 0) {
-        printf("[+] Captcha benar! [+]\n");
+        printf("\t[✓] Captcha benar!\n");
+        getch();
         return true;
     } else {
         Beep(750, 200);
-        printf("[!] Captcha salah [!]\n");
+        printf("\t[!] Captcha salah! Jawaban benar: %s\n", hari[indexJawaban]);
+        getch();
         return false;
     }
 }
@@ -330,20 +351,20 @@ void adminMenu(UserList users) {
     int choice;
     while(1) {
         system("cls");
-        printf("\n");
-        printf("===== [ MENU SHELF ] =====\n");
-        printf("[1] Lihat Item\n");
-        printf("[2] Cari Item\n");
-        printf("[3] Jual Item\n");
-        printf("\n");
-        printf("===== [ MENU ADMIN ] =====\n");
-        printf("[4] Tambah Item\n");
-        printf("[5] Update Item\n");
-        printf("[6] Hapus Item\n");
-        printf("[7] Lihat Akun\n");
-        printf("\n");
-        printf("[0] Kembali\n");
-        printf(">> ");
+        printf("\t\n");
+        printf("\t===== [ MENU SHELF ] =====\n");
+        printf("\t[1] Lihat Item\n");
+        printf("\t[2] Cari Item\n");
+        printf("\t[3] Jual Item\n");
+        printf("\t\n");
+        printf("\t===== [ MENU ADMIN ] =====\n");
+        printf("\t[4] Tambah Item\n");
+        printf("\t[5] Update Item\n");
+        printf("\t[6] Hapus Item\n");
+        printf("\t[7] Lihat Akun\n");
+        printf("\t\n");
+        printf("\t[0] Kembali\n");
+        printf("\t>> ");
         
         scanf("%d", &choice);
         
@@ -376,10 +397,10 @@ void adminMenu(UserList users) {
                 getch();
                 break;
             case 0:
-                printf("\nKembali ke menu utama...\n");
+                printf("\n\tKembali ke menu utama...\n");
                 return;
             default:
-                printf("\n[!] Pilihan tidak valid!\n");
+                printf("\n\t[!] Pilihan tidak valid!\n");
                 system("pause");
                 break;
         }
@@ -391,14 +412,14 @@ void employeeMenu() {
     int item;    
     while(1) {
         system("cls");
-        printf("\n");
-        printf("===== [ MENU SHELF ] =====\n");
-        printf("[1] Lihat Item\n");
-        printf("[2] Cari Item\n");
-        printf("[3] Jual Item\n");
-        printf("\n");
-        printf("[0] Kembali\n");
-        printf(">> ");
+        printf("\t\n");
+        printf("\t===== [ MENU SHELF ] =====\n");
+        printf("\t[1] Lihat Item\n");
+        printf("\t[2] Cari Item\n");
+        printf("\t[3] Jual Item\n");
+        printf("\t\n");
+        printf("\t[0] Kembali\n");
+        printf("\t>> ");
         
         scanf("%d", &choice);
           switch(choice) {
@@ -414,7 +435,7 @@ void employeeMenu() {
             case 0:
                 return;
             default:
-                printf("\n[!] Pilihan tidak valid!\n");
+                printf("\n\t[!] Pilihan tidak valid!\n");
                 system("pause");
                 break;
         }
@@ -426,7 +447,7 @@ void showMenuBasedOnRole(user *currentUser) {
     } else if (strcmp(currentUser->tipe, "Karyawan") == 0) {
         employeeMenu();
     } else {
-        printf("\n[!] Role tidak dikenali!\n");
+        printf("\n\t[!] Role tidak dikenali!\n");
         system("pause");
     }
 }
