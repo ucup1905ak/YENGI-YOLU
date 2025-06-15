@@ -166,10 +166,7 @@ void registerMenu(UserList user) {
         }
 
         // Input Tipe Akun
-        printf("Gunakan ←/→ atau A/D untuk memilih tipe akun, tekan Enter untuk konfirmasi\n");
         do {
-            system("cls");
-            puts("===== [ PILIH TIPE AKUN ] =====");
             printf("Tipe            : [%s]\n", pilihan == 0 ? "Admin" : "Karyawan");
             ch = getch();
             if (ch == 0 || ch == 224) {
