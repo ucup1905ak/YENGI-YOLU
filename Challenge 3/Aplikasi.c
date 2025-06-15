@@ -105,6 +105,11 @@ void lihatItem() {
 
 
 void jualItem() {
+    char hargaStr[50];
+    char totalStr[50];
+    char bayarStr[50];
+    char kembaliStr[50];
+
     int index = selectRakToko();
     if (index == -1) return;
 
@@ -119,20 +124,19 @@ void jualItem() {
     }
 
     int selectedItem = 0;
-    char input;
+    char input,i;
 
     // Jika item lebih dari 1, navigasi pemilihan item
     if (rakToko[index].itemCount > 1) {
         do {
             system("cls");
-            printf("Pilih Item yang Ingin Dijual:\n\n");
-            for (int i = 0; i < rakToko[index].itemCount; i++) {
-                if (i == selectedItem) printf("> ");
-                else printf("  ");
-                printf("%s (Stok: %d)\n", rakToko[index].items[i].nama, rakToko[index].items[i].stok);
+            printf("\nPilih item untuk dijual : \n");
+            for (i = 0; i < rakToko[index].itemCount; i++) {
+                if (i == selectedItem) printf("\t> ");
+                else printf("\t  ");
+                printf("Slot %d: %s (Stok: %d)\n", i, rakToko[index].items[i].nama, rakToko[index].items[i].stok);
             }
-            printf("\nGunakan W/S atau panah atas/bawah untuk memilih, ENTER untuk konfirmasi.");
-
+            printf("\nGunakan W/S/Arrow (UP/DOWN) untuk memilih, ENTER untuk konfirmasi. . .");
             input = getch();
             if (input == 'w' || input == 'W' || input == 72) {
                 if (selectedItem > 0) selectedItem--;
@@ -141,16 +145,17 @@ void jualItem() {
             }
         } while (input != 13); // ENTER
     }
-
-    system("cls");
+    
+   
     item *itemDipilih = &rakToko[index].items[selectedItem];
     printf("Item: %s\nStok Tersedia: %d\n", itemDipilih->nama, itemDipilih->stok);  
 
     // Input jumlah beli
     int jumlah;
+    printf("\nHarga Satuan : Rp.%s", hargaStr);
     do {
-        printf("\nMasukkan jumlah item yang ingin dibeli: ");
-        if (scanf("%d", &jumlah) != 1 || jumlah <= 0 || jumlah > item->stok) {
+        printf("\nJumlah       : ");
+        if (scanf("%d", &jumlah) != 1 || jumlah <= 0 || jumlah > itemDipilih->stok) {
             printf("[!] Jumlah tidak valid atau melebihi stok. Coba lagi.\n");
             while(getchar() != '\n'); // clear buffer
         } else break;
@@ -158,15 +163,11 @@ void jualItem() {
 
     int totalHarga = itemDipilih->harga * jumlah;
     formatRupiah(itemDipilih->harga, hargaStr);
-    formatRupiah(item->harga, hargaStr);
     formatRupiah(totalHarga, totalStr);
-
-    printf("\n> Harga Satuan : %s", hargaStr);
-    printf("\n> Jumlah Beli  : %d", jumlah);
-    printf("\n> Total Harga  : %s\n", totalStr);
+    printf("\nTotal        : %s\n", totalStr);
 
     // Konfirmasi lanjut
-    printf("\nLanjutkan ke pembayaran? (Y/N): ");
+    printf("\nLanjutkan pembelian? (Y/N): ");
     char confirm;
     do {
         confirm = getch();
@@ -176,7 +177,8 @@ void jualItem() {
     // Input uang dibayar
     int uang;
     do {
-        printf("\nMasukkan jumlah uang dibayar (angka, max 9 digit): ");
+        printf("\nTotal        : %s\n", totalStr);
+        printf("\nUang         : ");
         char temp[20];
         scanf("%s", temp);
 
@@ -191,13 +193,13 @@ void jualItem() {
         }
 
         if (!valid) {
-            printf("\a[!] Input tidak valid!\n");
+            printf("\a[!] Input tidak valid! [!]\n");
             continue;
         }
 
         uang = atoi(temp);
         if (uang < totalHarga) {
-            printf("[!] Uang tidak cukup, transaksi dibatalkan.\n");
+            printf("[!] Uang tidak cukup, transaksi dibatalkan. [!]\n");
             printf("\nTekan Enter untuk kembali...");
             getch();
             return;
