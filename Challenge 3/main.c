@@ -19,7 +19,8 @@ int main(int argc, char *argv[]) {
         do {
             system("cls");
             loginDisplay();
-            scanf("%c", &pilLogin);
+            fflush(stdin);
+            pilLogin = getchar();
 
             switch (pilLogin) {
                 case '1':
@@ -33,7 +34,7 @@ int main(int argc, char *argv[]) {
                         }
                         if (isKosong) {
                             Beep(750, 200);
-                            printf("\n[!] Belum ada akun terdaftar. Silakan register terlebih dahulu.\n");
+                            printf("\n\t[!] Anda Tidak Memiliki Akun\n");
                             getch();
                         } else {
                             loginMenu(users, &indexUser);
@@ -79,17 +80,14 @@ int main(int argc, char *argv[]) {
             }
 
         } while (!auth);
-            currentUser = &users[indexUser];
-        do{ 
-            system("cls"); 
-            if(strcmpi(currentUser->tipe, "admin") == 0) {
-                adminMenu();
-            }else {
-                employeeMenu();
-            }
-            auth = false;
-            break;
-        }while(1);
+        currentUser = &users[indexUser];
+        system("cls"); 
+        if(strcmpi(currentUser->tipe, "admin") == 0) {
+            adminMenu();
+        }else {
+            employeeMenu();
+        }
+        auth = false;
     }
     
     return 0;
