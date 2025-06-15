@@ -21,6 +21,10 @@ typedef struct{
     char email[50];
     char tipe[10]; //Admin & Karyawan
 }user;
+
+
+
+
 typedef user *UserList;
 void InitializeUser(user * userList);
 void RegisterNewUser(user * userList);
