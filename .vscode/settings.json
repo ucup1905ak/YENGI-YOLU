@@ -71,5 +71,6 @@
     "type_traits": "c",
     "cstdlib": "c"
   },
-  "makefile.makefilePath": ""
+  "makefile.makefilePath": "",
+  "C_Cpp.errorSquiggles": "disabled"
 }
