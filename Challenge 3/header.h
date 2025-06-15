@@ -1,3 +1,6 @@
+#ifndef HEADER_H
+#define HEADER_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,11 +14,11 @@
 #define SALT "PNC_2025"
 #define MAX_PASS 16
 
+typedef char string[50];
 typedef char username[50];
 typedef char password[50];
-typedef char string[50];
 
-typedef struct{
+typedef struct {
     char username[50];
     char password[50];
     char email[50];
@@ -35,14 +38,20 @@ typedef user *UserList;
 void InitializeUser(user * userList);
 void RegisterNewUser(user * userList);
 int isEmptyUser(user u);
-int isAlreadyExist(char * username, UserList users);
-void loginMenu();
-void registerMenu(UserList users);
-int isValidEmail(const char *email);
+user* searchEmptyUser(UserList userList);
+int isAlreadyExist(char *username, UserList users);
+void RegisterNewUser(UserList users);
+void registerMenu(UserList user);
+void loginDisplay();
+void encryptPassword(char *dest, const char *src);
 int isStrongPassword(const char *pass);
 void inputPassword(char *dest);
-void encryptPassword(char *dest, const char *src);
 int isValidEmail(const char *email);
 
 int selectRakToko();
 void printRakToko(int index);
+void loginMenu(user users);
+int isLoginFound(user u, string name, string pass);
+user* searchLoginData(UserList userList, string name, string pass);
+bool captcha();
+#endif
