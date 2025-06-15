@@ -1,6 +1,10 @@
 #include "header.h"
 
 int main(int argc, char *argv[]) {
+
+    // Inisialisasi rak toko
+    initializeRakToko();
+
     int i;
     char pilLogin;
     user userData[MAX_USER];
@@ -69,11 +73,13 @@ int main(int argc, char *argv[]) {
     
     
 
-    do{ //LOOP PROGRAM
-            // PROGRAM SETELAH LOGIN BERHASIL
+    do{ 
         system("cls"); 
-
-        
+            if(users[indexUser].tipe[0] == 'A' || users[indexUser].tipe[0] == 'a') {
+        adminMenu();
+        }else if(users[indexUser].tipe[0] == 'K' || users[indexUser].tipe[0] == 'k') {
+        employeeMenu();
+        }
     }while(1);
 
 

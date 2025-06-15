@@ -30,8 +30,13 @@ typedef struct{
     int stok;
     double harga;
 }item;
-
-
+typedef struct{
+    string kategori;
+    item items[10]; // Maximum 10 items per rak
+    int itemCount;
+}rak;
+extern rak rakToko[16]; // 16 rak (A1-D4)
+void initializeRakToko();
 
 typedef user *UserList;
 void InitializeUser(user * userList);
@@ -60,7 +65,7 @@ void employeeMenu();
 void showMenuBasedOnRole(user *currentUser);
 
 // Function prototypes for menu actions
-void lihatItem();
+void lihatItem(item i);
 void cariItem();
 void jualItem();
 void tambahItem();

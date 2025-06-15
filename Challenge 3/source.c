@@ -367,7 +367,7 @@ void adminMenu() {
 
 void employeeMenu() {
     int choice;
-    
+    int item;    
     while(1) {
         system("cls");
         printf("\n");
@@ -384,7 +384,8 @@ void employeeMenu() {
         switch(choice) {
             case 1:
                 // Call function to display items
-                lihatItem();
+                item = selectRakToko();
+                lihatItem(item);
                 break;
             case 2:
                 // Call function to search items
