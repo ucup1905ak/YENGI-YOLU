@@ -23,7 +23,13 @@ typedef struct{
 }user;
 
 
+typedef struct {
+    char nama[20];
+    int stok;
+    double harga;
+}item;
 
+typedef RakToko item[16];
 
 typedef user *UserList;
 void InitializeUser(user * userList);
