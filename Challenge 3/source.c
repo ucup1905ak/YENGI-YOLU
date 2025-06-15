@@ -36,15 +36,14 @@ int isAlreadyExist(char *username, UserList users) {
 }
 
 
-void encryptPassword(char *dest, const char *src) {
-    char salt[] = SALT;
-    int len = strlen(src);
-    int i;
+void encryptPassword(char *output, const char *input) {
+    char salt[] = "PNC_2025";
+    int len = strlen(input), i;
+
     for (i = 0; i < len; i++) {
-        char notChar = ~src[i];
-        dest[i] = notChar ^ salt[i % strlen(salt)];
+        output[i] = ~(input[i]) ^ salt[i % strlen(salt)];
     }
-    dest[len] = '\0';
+    output[len] = '\0';
 }
 
 
@@ -264,6 +263,7 @@ void loginMenu(UserList users, int * loginIndex) {
                 printf("\n\t[✓] Login berhasil!\n");
                 showMenuBasedOnRole(NewUser);
                 *loginIndex = searchLoginIndex(users, name, pass);
+                getch();
                 return;
             } else {
                 printf("\t[!] Captcha salah!\n");
@@ -341,9 +341,8 @@ bool captcha() {
     }
 }
 
-void adminMenu() {
+void adminMenu(UserList users) {
     int choice;
-    
     while(1) {
         system("cls");
         printf("\t\n");
@@ -385,12 +384,11 @@ void adminMenu() {
                 updateItem();
                 break;
             case 6:
-                
                 hapusItem();
                 break;
             case 7:
-                
-                lihatAkun();
+                lihatAkun(users);
+                getch();
                 break;
             case 0:
                 printf("\n\tKembali ke menu utama...\n");
@@ -440,7 +438,6 @@ void employeeMenu() {
 
 void showMenuBasedOnRole(user *currentUser) {
     if (strcmp(currentUser->tipe, "Admin") == 0) {
-        adminMenu();
     } else if (strcmp(currentUser->tipe, "Karyawan") == 0) {
         employeeMenu();
     } else {
