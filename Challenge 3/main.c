@@ -1,29 +1,31 @@
-#include <header.h>
+#include "header.h"
 
-int main(int argc, char *argv[]){
-    //initialize
+int main(int argc, char *argv[]) {
     char pilLogin;
     user userData[MAX_USER];
     UserList users = userData;
-    InitializeUser (users);
 
-    RegisterNewUser(users);
+    InitializeUser(users);
 
-    printf("%s", userData[0].password);
+    do {
+        loginDisplay();
+        fflush(stdin);
+        scanf("%c", &pilLogin);
 
-    //Landing Page
-    do{
-        loginMenu();scanf("%c", &pilLogin);
-        while(1){
-            switch(pilLogin){
-                case '1':
-                    registerMenu();
-                case '2':
-                default:
-            }
+        switch (pilLogin) {
+            case '1':
+                break;
+            case '2':
+                RegisterNewUser(users);
+                getch();
+                break;
+            default:
+                Beep(750, 200);
+                printf("[!] Pilihan tidak valid!\n");
+                getch();
+                break;
         }
-        
-    }while(true);
-    //Main APp
+    } while (true);
+
     return 0;
 }

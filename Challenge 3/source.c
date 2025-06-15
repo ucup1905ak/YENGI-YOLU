@@ -1,57 +1,91 @@
-#include <header.h>
+#include "header.h"
 
-void InitializeUser(user * userList){
-    int i;
-    for(i = 0 ; i < MAX_USER ; i++){
+// Inisialisasi array user
+void InitializeUser(UserList userList) {
+    for (int i = 0; i < MAX_USER; i++) {
         strcpy(userList[i].username, "");
         strcpy(userList[i].password, "");
+        strcpy(userList[i].email, "");
+        strcpy(userList[i].tipe, "");
     }
 }
 
-
-int isAlreadyExist(char * username, UserList users){
-    int i;
-    for(i = 0 ; i < MAX_USER ; i++){
-        if(strcmp(users[i].username, username)==0)return i;
-    }
-    return 0;
-}
-int isEmptyUser(user u){
-    if(strcmp(u.password, "") == 0 && strcmp(u.username, "") == 0){
-        return 1;
-    }else return 0;
+// Cek apakah user kosong (record belum terisi)
+int isEmptyUser(user u) {
+    return strcmp(u.username, "") == 0 && strcmp(u.password, "") == 0;
 }
 
-
-user * searchEmptyUser(user * userList){
-    int i;
-    for(i = 0 ; i < MAX_USER ; i++){
-        if(isEmptyUser(userList[i]))   
+// Cari user kosong
+user* searchEmptyUser(UserList userList) {
+    for (int i = 0; i < MAX_USER; i++) {
+        if (isEmptyUser(userList[i])) {
             return &userList[i];
+        }
     }
     return NULL;
 }
-void RegisterNewUser(user * userList){
-    int i, emptyUser;
-    user * NewUser = NULL;
-    emptyUser = searchEmptyUser(userList);
-    if(emptyUser!=NULL) NewUser = emptyUser;
-    username Username;
-    username Password;
-    
-    
-    if(NewUser != NULL){
 
-        strcpy(NewUser->password,"");
+// Validasi apakah username sudah ada
+int isAlreadyExist(char *username, UserList users) {
+    for (int i = 0; i < MAX_USER; i++) {
+        if (strcmp(users[i].username, username) == 0) return 1;
     }
+    return 0;
 }
 
-void loginMenu(){
-    puts("===== [ TOKO MAKMUR ] =====");
-    puts("[1] LOGIN ");
-    puts("[2] REGISTER ");
-    printf(">> ");
+// Enkripsi password
+void encryptPassword(char *dest, const char *src) {
+    char salt[] = SALT;
+    int len = strlen(src);
+    for (int i = 0; i < len; i++) {
+        char notChar = ~src[i];
+        dest[i] = notChar ^ salt[i % strlen(salt)];
+    }
+    dest[len] = '\0';
 }
+
+// Cek kekuatan password
+int isStrongPassword(const char *pass) {
+    int hasUpper = 0, hasLower = 0, hasDigit = 0, hasSpecial = 0;
+    for (int i = 0; pass[i]; i++) {
+        if (isupper(pass[i])) hasUpper = 1;
+        else if (islower(pass[i])) hasLower = 1;
+        else if (isdigit(pass[i])) hasDigit = 1;
+        else hasSpecial = 1;
+    }
+    return hasUpper && hasLower && hasDigit && hasSpecial;
+}
+
+// Input password dengan masking dan toggle ESC
+void inputPassword(char *dest) {
+    char ch;
+    int idx = 0;
+    int show = 0;
+    while (1) {
+        ch = getch();
+        if (ch == 13 && idx >= 8) break;
+        if (ch == 27) { // ESC toggle
+            show = !show;
+            printf("\n[!] Tampilan password %saktif.\n", show ? "" : "non-");
+            continue;
+        }
+        if (ch == 8 && idx > 0) {
+            idx--;
+            dest[idx] = '\0';
+            printf("\b \b");
+            continue;
+        }
+        if (idx < MAX_PASS - 1 && isprint(ch)) {
+            dest[idx++] = ch;
+            dest[idx] = '\0';
+            if (show) printf("%c", ch);
+            else printf("*");
+        }
+    }
+    printf("\n");
+}
+
+// Validasi email
 int isValidEmail(const char *email) {
     char *at = strchr(email, '@');
     if (!at) return -1;
@@ -68,59 +102,27 @@ int isValidEmail(const char *email) {
     return 1;
 }
 
-// Fungsi enkripsi password
-void encryptPassword(char *dest, const char *src) {
-    char salt[] = SALT;
-    int len = strlen(src);
-    for (int i = 0; i < len; i++) {
-        char notChar = ~src[i];
-        dest[i] = notChar ^ salt[i % strlen(salt)];
-    }
-    dest[len] = '\0';
+// Tampilan menu login
+void loginDisplay() {
+    puts("===== [ TOKO MAKMUR ] =====");
+    puts("[1] LOGIN ");
+    puts("[2] REGISTER ");
+    printf(">> ");
 }
 
-// Fungsi validasi kekuatan password
-int isStrongPassword(const char *pass) {
-    int hasUpper = 0, hasLower = 0, hasDigit = 0, hasSpecial = 0;
-    for (int i = 0; pass[i]; i++) {
-        if (isupper(pass[i])) hasUpper = 1;
-        else if (islower(pass[i])) hasLower = 1;
-        else if (isdigit(pass[i])) hasDigit = 1;
-        else hasSpecial = 1;
+// Fungsi utama register: cari slot kosong dan daftarkan user baru
+void RegisterNewUser(UserList userList) {
+    user *NewUser = searchEmptyUser(userList);
+    if (NewUser != NULL) {
+        registerMenu(NewUser);
+    } else {
+        Beep(750, 200);
+        printf("\n[!] Slot user penuh. Tidak dapat menambah user baru. [!]");
+        getch();
     }
-    return hasUpper && hasLower && hasDigit && hasSpecial;
 }
 
-// Fungsi input password dengan masking '*'
-void inputPassword(char *dest) {
-    char ch;
-    int idx = 0;
-    int show = 0;
-    while (1) {
-        ch = getch();
-        if (ch == 13 && idx >= 8) break; // Enter
-        if (ch == 27) { // ESC toggle visibility
-            show = !show;
-            printf("\n[!] Tampilan password %saktif.\n", show ? "" : "non-");
-            continue;
-        }
-        if (ch == 8 && idx > 0) { // Backspace
-            idx--;
-            dest[idx] = '\0';
-            printf("\b \b");
-            continue;
-        }
-        if (idx < MAX_PASS - 1 && isprint(ch)) {
-            dest[idx++] = ch;
-            dest[idx] = '\0';
-            if (show) printf("%c", ch);
-            else printf("*");
-        }
-    }
-    printf("\n");
-}
-
-// Fungsi utama register
+// Fungsi input & validasi data user baru
 void registerMenu(UserList user) {
     string name = "", mail = "", pass1 = "", pass2 = "", encrypted[MAX_PASS];
     int pilihan = 0;
@@ -132,7 +134,7 @@ void registerMenu(UserList user) {
 
         // Input Username
         if (strcmp(name, "") == 0) {
-            printf("\nUsername (6–15 karakter): ");
+            printf("\nUsername          : ");
             fflush(stdin); gets(name);
             if (!(strlen(name) >= 6 && strlen(name) <= 15)) {
                 Beep(750, 200);
@@ -146,7 +148,7 @@ void registerMenu(UserList user) {
 
         // Input Email
         if (strcmp(mail, "") == 0) {
-            printf("Email            : ");
+            printf("Email             : ");
             fflush(stdin); gets(mail);
             int status = isValidEmail(mail);
             if (status == 1) {
@@ -167,12 +169,12 @@ void registerMenu(UserList user) {
 
         // Input Tipe Akun
         do {
-            printf("Tipe            : [%s]\n", pilihan == 0 ? "Admin" : "Karyawan");
+            printf("Tipe              : [%s]\r", pilihan == 0 ? "Admin    " : "Karyawan");
             ch = getch();
             if (ch == 0 || ch == 224) {
                 ch = getch();
-                if (ch == 75) pilihan = 0; // Arrow Left
-                else if (ch == 77) pilihan = 1; // Arrow Right
+                if (ch == 75) pilihan = 0;
+                else if (ch == 77) pilihan = 1;
             } else if (ch == 'a' || ch == 'A') pilihan = 0;
             else if (ch == 'd' || ch == 'D') pilihan = 1;
         } while (ch != 13);
@@ -180,16 +182,16 @@ void registerMenu(UserList user) {
 
         // Input Password
         while (1) {
-            printf("Password (8–15 karakter): ");
+            printf("Password          : ");
             inputPassword(pass1);
             if (!(strlen(pass1) >= 8 && strlen(pass1) <= 15) || !isStrongPassword(pass1)) {
                 Beep(750, 200);
-                printf("[!] Password harus 8-15 karakter dan mengandung huruf kapital, kecil, angka, dan karakter spesial [!]\n");
+                printf("[!] Password harus 8-15 karakter dan mengandung huruf kapital, huruf kecil, angka, dan simbol [!]\n");
                 getch();
                 continue;
             }
 
-            printf("Konfirmasi Password     : ");
+            printf("Konfirmasi Pass   : ");
             inputPassword(pass2);
             if (strcmp(pass1, pass2) != 0) {
                 Beep(750, 200);
@@ -200,9 +202,10 @@ void registerMenu(UserList user) {
             break;
         }
 
-        // Enkripsi dan simpan password
+        // Enkripsi dan simpan
         encryptPassword(encrypted, pass1);
         strcpy(user->password, encrypted);
 
+        break; // keluar dari loop register
     } while (1);
 }
