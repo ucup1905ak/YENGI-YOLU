@@ -73,7 +73,10 @@
     "cstdlib": "c",
     "unistd.h": "c",
     "logic.h": "c",
-    "windows.h": "c"
+    "windows.h": "c",
+    "string": "c",
+    "format": "c",
+    "ui.h": "c"
   },
   "makefile.makefilePath": "",
   "C_Cpp.errorSquiggles": "disabled"

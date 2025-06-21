@@ -24,7 +24,7 @@ HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
-Folders=
+Folders=src
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
@@ -63,7 +63,7 @@ BuildCmd=
 [Unit2]
 FileName=src\logic.c
 CompileCpp=0
-Folder=
+Folder=src
 Compile=1
 Link=1
 Priority=1000
@@ -73,7 +73,7 @@ BuildCmd=
 [Unit3]
 FileName=src\logic.h
 CompileCpp=0
-Folder=
+Folder=src
 Compile=1
 Link=1
 Priority=1000
@@ -83,7 +83,7 @@ BuildCmd=
 [Unit4]
 FileName=src\ui.c
 CompileCpp=0
-Folder=
+Folder=src
 Compile=1
 Link=1
 Priority=1000
@@ -93,7 +93,7 @@ BuildCmd=
 [Unit5]
 FileName=src\ui.h
 CompileCpp=0
-Folder=
+Folder=src
 Compile=1
 Link=1
 Priority=1000
