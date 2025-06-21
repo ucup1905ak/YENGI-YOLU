@@ -1,2 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <windows.h>
+#include <unistd.h>
+#include <string.h>
+#include <time.h>
+#include <conio.h>
+#include <ctype.h>

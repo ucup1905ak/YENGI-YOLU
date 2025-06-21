@@ -1,10 +1,5 @@
 #include "logic.h"
-#include <stdio.h>
-#include <windows.h>
-#include <unistd.h>
-#include <string.h>
 
-#include <conio.h>
 #define NORMAL "\033[0m"
 
 //Forground
@@ -23,3 +18,8 @@
 #define BG_MAGENTA  "\033[45m"
 #define BG_CYAN     "\033[46m"
 #define BG_WHITE    "\033[47m"
+
+
+void alert();
+void gotoxy(int x, int y);
+void removeCursor();
