@@ -330,7 +330,7 @@ printf("   |_|   \n");
 printf(NORMAL);
 }
 void printToko(){
-    
+s
 printf(CYAN);
 printf("\t   ___                   ___             __ _                     \n");
 printf("\t  / __\\ __ _ ___ ___    / _ \\_ __ ___   / _\\ |__   ___  _ __  ___ \n");
