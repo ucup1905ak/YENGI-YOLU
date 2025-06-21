@@ -71,7 +71,9 @@
     "compare": "c",
     "type_traits": "c",
     "cstdlib": "c",
-    "unistd.h": "c"
+    "unistd.h": "c",
+    "logic.h": "c",
+    "windows.h": "c"
   },
   "makefile.makefilePath": "",
   "C_Cpp.errorSquiggles": "disabled"
