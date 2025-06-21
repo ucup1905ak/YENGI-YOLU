@@ -57,6 +57,7 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
+    "*.dbclient-js": "javascript",
     "header.h": "c",
     "stdio.h": "c",
     "stdlib.h": "c",
@@ -69,7 +70,8 @@
     "ctype.h": "c",
     "compare": "c",
     "type_traits": "c",
-    "cstdlib": "c"
+    "cstdlib": "c",
+    "unistd.h": "c"
   },
   "makefile.makefilePath": "",
   "C_Cpp.errorSquiggles": "disabled"

@@ -6,13 +6,68 @@
 #include <string.h>
 #include <stdbool.h>
 #include <conio.h>
+/*
+Name	Description
+kbhit	Determines if a keyboard key was pressed as well
+cgets	Reads a string directly from the console
+cscanf	Reads formatted values directly from the console
+putch	Writes a character directly to the console
+cputs	Writes a string directly to the console
+cprintf	Formats values and writes them directly to the console
+clrscr	Clears the screen
+getch	Get char entry from the console
+getche	Get char entry from the console with echo
+*/
 #include <time.h>
-#include <ctype.h>
+/*
+time_t ucup;
+ucup = time(NULL);
+tm iniStruct;
 
-#define GREEN "\033[32m"
+iniStruct = *localtime(&ucup);
+
+*/
+#include <ctype.h>
+/*
+isalnum()	Checks whether a character is alphanumeric
+isalpha()	Checks whether a character is a letter
+isblank()	Checks whether a character is a space or tab
+iscntrl()	Checks whether a character is a control character
+isdigit()	Checks whether a character is a decimal digit
+isgraph()	Checks whether a character has a graphical representation
+islower()	Checks whether a character is a lowercase letter
+isprint()	Checks whether a character is a printable character
+ispunct()	Checks whether a character is a punctuation character
+isspace()	Checks whether a character is a whitespace character
+isupper()	Checks whether a character is an uppercase letter
+isxdigit()	Checks whether a character is a hexadecimal digit
+tolower()	Returns a lowercase version of a character
+toupper()	Returns an uppercase version of a character
+*/
+
+
 #define NORMAL "\033[0m"
-#define CYAN "\033[36m"
+
+//Forground
+#define RED "\033[31m"
+#define GREEN "\033[32m"
 #define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN "\033[36m"
+#define WHITE "\033[37m"
+//background
+#define BG_RED      "\033[41m"
+#define BG_GREEN    "\033[42m"
+#define BG_YELLOW   "\033[43m"
+#define BG_BLUE     "\033[44m"
+#define BG_MAGENTA  "\033[45m"
+#define BG_CYAN     "\033[46m"
+#define BG_WHITE    "\033[47m"
+
+
+
+
 // extern void __stdcall alert(unsigned long, unsigned long);
 void alert();
 
